@@ -63,3 +63,53 @@ Just describe what you want and I'll generate fresh ones with Grok Imagine and u
 All visuals are now 100% Grok Imagine generated for this version.
 
 Let me know the next edits!
+
+## Deployment
+
+This is a pure static site (single `index.html` + assets).
+
+### Railway (current)
+
+Configured with a minimal `Dockerfile` (nginx:alpine) for reliable static serving.
+
+**Deploy from GitHub (recommended):**
+
+1. Make sure everything is pushed (see command below).
+2. Go to [railway.app](https://railway.app) → New Project → "Deploy from GitHub repo".
+3. Choose the `Airmets` repository.
+4. Railway detects the `Dockerfile` and builds/serves the site automatically.
+5. You'll get a public URL (e.g. `https://airmets-xxx.up.railway.app`) with automatic HTTPS.
+
+**Custom domain (airmets.com) + SSL:**
+
+1. In your Railway project/service → **Settings → Domains**.
+2. Add `airmets.com` and `www.airmets.com`.
+3. Railway will give you the exact DNS record(s) to set at your registrar.
+4. Set the records (usually a CNAME).
+5. Railway automatically provisions a Let's Encrypt certificate. No manual SSL configuration needed.
+
+**Using Railway CLI (optional, for logs / quick deploys):**
+
+```bash
+# One-time setup
+railway login
+
+# Link this folder to your Railway project
+railway link
+
+# Deploy current code directly (alternative to GitHub deploys)
+railway up
+```
+
+### Push the latest code
+
+```bash
+cd ~/airmets-website
+git push origin main --force-with-lease
+```
+
+After pushing, trigger a new deploy on Railway (or enable "Deploy on push" in the repo settings).
+
+### Switching providers later
+
+Because this is a standard static site + Dockerfile, you can easily move it to Vercel, Netlify, Cloudflare Pages, GitHub Pages, etc. with minimal changes. The `Dockerfile` makes Railway (and any Docker-based host) straightforward.

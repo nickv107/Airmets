@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Deployment / config files for other platforms
+netlify.toml
+vercel.json
+railway.json
+
+# Docs
+*.md
+LICENSE
+
+# OS / temp
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
