@@ -1,0 +1,14 @@
+# OS / editor
+.DS_Store
+*.swp
+*~
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Temp
+*.tmp
+*.log

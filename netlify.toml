@@ -1,0 +1,26 @@
+[build]
+  publish = "."
+  # No build command needed — pure static site
+
+[build.environment]
+  # Optional: ensure correct node if added later, but not needed now
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+# SPA-style fallback (harmless for this site, helps if you add client routing later)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
