@@ -64,51 +64,59 @@ All visuals are now 100% Grok Imagine generated for this version.
 
 Let me know the next edits!
 
-## Deployment
+## Deployment (Railway)
 
-This is a pure static site (single `index.html` + assets).
+This is a pure static site (single `index.html` + assets). We use a `Dockerfile` (nginx:alpine) + custom `nginx.conf` for production (security headers, gzip, long-term asset caching for images/videos).
 
-### Railway (current)
-
-Configured with a minimal `Dockerfile` (nginx:alpine) for reliable static serving.
-
-**Deploy from GitHub (recommended):**
-
-1. Make sure everything is pushed (see command below).
-2. Go to [railway.app](https://railway.app) → New Project → "Deploy from GitHub repo".
-3. Choose the `Airmets` repository.
-4. Railway detects the `Dockerfile` and builds/serves the site automatically.
-5. You'll get a public URL (e.g. `https://airmets-xxx.up.railway.app`) with automatic HTTPS.
-
-**Custom domain (airmets.com) + SSL:**
-
-1. In your Railway project/service → **Settings → Domains**.
-2. Add `airmets.com` and `www.airmets.com`.
-3. Railway will give you the exact DNS record(s) to set at your registrar.
-4. Set the records (usually a CNAME).
-5. Railway automatically provisions a Let's Encrypt certificate. No manual SSL configuration needed.
-
-**Using Railway CLI (optional, for logs / quick deploys):**
-
-```bash
-# One-time setup
-railway login
-
-# Link this folder to your Railway project
-railway link
-
-# Deploy current code directly (alternative to GitHub deploys)
-railway up
-```
-
-### Push the latest code
+### 1. Quick local test (recommended first)
 
 ```bash
 cd ~/airmets-website
-git push origin main --force-with-lease
+railway login          # one-time, opens browser
+railway whoami         # verify auth
+railway up             # builds & deploys from local (uses Dockerfile)
 ```
 
-After pushing, trigger a new deploy on Railway (or enable "Deploy on push" in the repo settings).
+After `railway up`, you'll get a URL like `https://airmets-xxx.up.railway.app` with automatic HTTPS.
+
+### 2. Connect GitHub for auto-deploys (best for ongoing)
+
+1. Push everything (including images/videos):
+   ```bash
+   cd ~/airmets-website
+   git push origin main --force-with-lease   # first time may need force
+   ```
+2. In [railway.app](https://railway.app) → New Project → "Deploy from GitHub repo".
+3. Select `nickv107/Airmets`.
+4. Railway will auto-detect `Dockerfile` and deploy on every push to `main`.
+
+### 3. Add custom domain (airmets.com) + SSL
+
+1. Deploy the service first (step 1 or 2 above).
+2. In Railway dashboard for the service:
+   - Go to **Settings → Domains**
+   - Click **Add Domain**
+   - Enter `airmets.com` (and `www.airmets.com`)
+3. Railway will show the required DNS records (usually a **CNAME** record pointing to your Railway service hostname, e.g. `airmets-xxx.up.railway.app`).
+4. Go to your domain registrar (currently Automattic/WordPress.com nameservers for airmets.com) and add the exact records Railway provides.
+5. Wait for DNS propagation (use whatsmydns.net or `dig airmets.com`).
+6. Back in Railway, the domain should verify and Railway will automatically provision a Let's Encrypt cert (free, auto-renewing). No manual SSL setup needed.
+
+**Troubleshooting custom domain:**
+- If DNS is still on WordPress nameservers, you may need to add the CNAME there (or switch nameservers to Cloudflare for easier management).
+- Common record: `CNAME @` or `CNAME www` → your Railway target.
+- After adding, it can take 5-60 mins for Railway to detect and issue cert.
+- Check status in Railway Domains tab.
+
+### 4. Verify & monitor
+
+```bash
+railway logs          # live logs
+railway status
+railway open          # open dashboard
+```
+
+The `railway.json` in the repo configures the Docker build + basic deploy settings.
 
 ### Switching providers later
 
