@@ -12,7 +12,7 @@ export const SERVICES = [
     title: "Drone Aerial Photography & Videography",
     description:
       "Cinematic 4K aerial capture with precision flight planning, color-graded delivery, and web-optimized assets for marketing campaigns.",
-    image: "/images/service-drone.jpg",
+    image: "/images/aerial-solar-campus.jpg",
     icon: "camera",
   },
   {
@@ -20,7 +20,7 @@ export const SERVICES = [
     title: "Luxury Real Estate Aerial Tours",
     description:
       "Virtual property showcases for listings across Corona, Temecula, Palm Springs, and the Inland Empire — formatted for agent and brokerage marketing workflows.",
-    image: "/images/service-realestate.jpg",
+    image: "/images/aerial-diamond-bar-wide.jpg",
     icon: "home",
   },
   {
@@ -28,7 +28,7 @@ export const SERVICES = [
     title: "Commercial & Event Videography",
     description:
       "Dynamic brand films, venue coverage, and event storytelling with smooth tracking shots and professional post-production.",
-    image: "/images/service-commercial.jpg",
+    image: "/images/aerial-genoptix-campus.jpg",
     icon: "film",
   },
   {
@@ -36,7 +36,7 @@ export const SERVICES = [
     title: "Custom Media Production",
     description:
       "Tailored aerial and ground-based photo/video packages for developers, hospitality, construction progress, and private clients.",
-    image: "/images/service-custom.jpg",
+    image: "/images/aerial-diamond-bar-valley.jpg",
     icon: "spark",
   },
 ] as const;
@@ -50,20 +50,6 @@ export const PORTFOLIO_ITEMS = [
     location: "Corona, CA",
   },
   {
-    id: "hillside-diamond-bar",
-    title: "Hillside Neighborhood — Pool Estates",
-    category: "Real Estate",
-    image: "/images/aerial-hillside-neighborhood.jpg",
-    location: "Diamond Bar, CA",
-  },
-  {
-    id: "pathfinder",
-    title: "Pathfinder — Suburban Aerial",
-    category: "Real Estate",
-    image: "/images/aerial-pathfinder-neighborhood.jpg",
-    location: "Diamond Bar, CA",
-  },
-  {
     id: "estate-front",
     title: "Residential Estate — Front Aerial",
     category: "Real Estate",
@@ -71,17 +57,17 @@ export const PORTFOLIO_ITEMS = [
     location: "Yucaipa, CA",
   },
   {
+    id: "suburban-panorama",
+    title: "Curved Streets — Neighborhood Panorama",
+    category: "Real Estate",
+    image: "/images/aerial-suburban-panorama.jpg",
+    location: "Diamond Bar, CA",
+  },
+  {
     id: "graybar-campus",
     title: "Office Campus — Aerial Survey",
     category: "Commercial",
     image: "/images/aerial-graybar-campus.jpg",
-    location: "Diamond Bar, CA",
-  },
-  {
-    id: "cognizant-campus",
-    title: "Corporate Campus — Overhead View",
-    category: "Commercial",
-    image: "/images/aerial-cognizant-campus.jpg",
     location: "Diamond Bar, CA",
   },
   {
@@ -92,24 +78,10 @@ export const PORTFOLIO_ITEMS = [
     location: "Corona, CA",
   },
   {
-    id: "community-amenity",
-    title: "Community Amenity Courtyard",
-    category: "Events",
-    image: "/images/aerial-community-amenity.jpg",
-    location: "Corona, CA",
-  },
-  {
     id: "playground",
     title: "Playground & Recreation Area",
     category: "Events",
     image: "/images/aerial-playground-corona.jpg",
-    location: "Corona, CA",
-  },
-  {
-    id: "landscaping",
-    title: "Community Landscaping — Aerial",
-    category: "Landscape",
-    image: "/images/aerial-landscaping-corona.jpg",
     location: "Corona, CA",
   },
   {

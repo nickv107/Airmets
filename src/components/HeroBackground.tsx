@@ -15,7 +15,7 @@ export function HeroBackground() {
 
       <div className="absolute inset-0 opacity-[0.12] mix-blend-screen">
         <Image
-          src="/images/la-night.jpg"
+          src="/images/hero-background.jpg"
           alt=""
           fill
           priority
