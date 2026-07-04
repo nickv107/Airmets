@@ -2,17 +2,26 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { ServiceAreaMap } from "@/components/ServiceAreaMap";
 import { BUSINESS } from "@/lib/legal";
+import { SERVICE_DETAILS } from "@/lib/services";
 
 type FormStatus = "idle" | "submitting" | "success" | "error" | "mailto";
 
 export function Contact() {
+  const searchParams = useSearchParams();
+  const requestedService = searchParams.get("service");
+  const defaultService =
+    SERVICE_DETAILS.find((service) => service.title === requestedService)?.title ??
+    SERVICE_DETAILS[0].title;
+
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [consent, setConsent] = useState(false);
   const [mailtoHref, setMailtoHref] = useState("");
+  const [selectedService, setSelectedService] = useState(defaultService);
 
   const buildMailtoLink = (payload: {
     name: string;
@@ -174,13 +183,16 @@ export function Contact() {
                   <span className="mb-2 block text-sm text-air-muted">Service</span>
                   <select
                     name="service"
+                    value={selectedService}
+                    onChange={(e) => setSelectedService(e.target.value)}
                     disabled={status === "submitting"}
                     className="w-full rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
                   >
-                    <option>Drone Aerial Photography & Videography</option>
-                    <option>Luxury Real Estate Aerial Tours</option>
-                    <option>Commercial & Event Videography</option>
-                    <option>Custom Media Production</option>
+                    {SERVICE_DETAILS.map((service) => (
+                      <option key={service.id} value={service.title}>
+                        {service.title}
+                      </option>
+                    ))}
                   </select>
                 </label>
                 <label className="block">

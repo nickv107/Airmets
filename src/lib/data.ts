@@ -1,4 +1,5 @@
 import { SITE_MEDIA } from "@/lib/media";
+import { SERVICE_DETAILS } from "@/lib/services";
 
 export const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -8,40 +9,14 @@ export const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
-export const SERVICES = [
-  {
-    id: "drone-aerial",
-    title: "Drone Aerial Photography & Videography",
-    description:
-      "Cinematic 4K aerial capture with precision flight planning, color-graded delivery, and web-optimized assets for marketing campaigns.",
-    image: SITE_MEDIA.services.drone,
-    icon: "camera",
-  },
-  {
-    id: "real-estate",
-    title: "Luxury Real Estate Aerial Tours",
-    description:
-      "Virtual property showcases for listings across Corona, Temecula, Palm Springs, and the Inland Empire — formatted for agent and brokerage marketing workflows.",
-    image: SITE_MEDIA.services.realEstate,
-    icon: "home",
-  },
-  {
-    id: "commercial",
-    title: "Commercial & Event Videography",
-    description:
-      "Dynamic brand films, venue coverage, and event storytelling with smooth tracking shots and professional post-production.",
-    image: SITE_MEDIA.services.commercial,
-    icon: "film",
-  },
-  {
-    id: "custom",
-    title: "Custom Media Production",
-    description:
-      "Tailored aerial and ground-based photo/video packages for developers, hospitality, construction progress, and private clients.",
-    image: SITE_MEDIA.services.custom,
-    icon: "spark",
-  },
-] as const;
+export const SERVICES = SERVICE_DETAILS.map((service) => ({
+  id: service.id,
+  title: service.title,
+  description: service.description,
+  image: service.image,
+  icon: service.icon,
+  href: `/services/${service.id}`,
+}));
 
 export const PORTFOLIO_ITEMS = [
   {

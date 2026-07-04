@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { SERVICES } from "@/lib/data";
@@ -70,13 +71,13 @@ function ServiceBlock({
           </div>
           <h3 className="font-display mb-4 text-2xl font-bold sm:text-3xl">{service.title}</h3>
           <p className="mb-6 leading-relaxed text-air-silver">{service.description}</p>
-          <a
-            href="#contact"
+          <Link
+            href={service.href}
             className="inline-flex items-center gap-2 text-sm font-semibold text-air-red transition hover:gap-3"
           >
             Learn More
             <span aria-hidden>→</span>
-          </a>
+          </Link>
         </motion.div>
       </motion.div>
     </section>
