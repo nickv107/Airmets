@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FormEvent, useState } from "react";
+import { ServiceAreaMap } from "@/components/ServiceAreaMap";
 import { BUSINESS } from "@/lib/legal";
 
 type FormStatus = "idle" | "submitting" | "success" | "error" | "mailto";
@@ -289,27 +290,7 @@ export function Contact() {
               </p>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-air-border">
-              <iframe
-                title="Southern California service area"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d424146.5!2d-117.2!3d33.8!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcb1d5b8b8b8b9%3A0x0!2sInland%20Empire%2C%20CA!5e0!3m2!1sen!2sus!4v1"
-                className="h-64 w-full border-0 grayscale invert"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-              <p className="border-t border-air-border bg-air-card px-4 py-3 text-xs text-air-muted">
-                Map provided by Google. Google may collect usage data per its{" "}
-                <a
-                  href="https://policies.google.com/privacy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-air-red hover:underline"
-                >
-                  Privacy Policy
-                </a>
-                .
-              </p>
-            </div>
+            <ServiceAreaMap />
           </motion.div>
         </div>
       </div>

@@ -138,10 +138,26 @@ export default function PrivacyPage() {
       <section>
         <h2 className="font-display mb-3 text-xl font-bold text-white">Cookies and Similar Technologies</h2>
         <p>
-          We do not use cookies for advertising or analytics on our site. Our hosting, security, and embedded
-          third-party providers may use cookies, local storage, or similar technologies for essential site
-          operation, security, load balancing, or fraud prevention. You can control cookies through your browser
-          settings, but disabling certain cookies may affect site functionality or embedded content.
+          When you first visit our site, you can choose <strong className="text-white">Accept Essential</strong> or{" "}
+          <strong className="text-white">Accept All</strong>. Your choice is saved in your browser&apos;s local
+          storage so we can remember your preference on future visits. You can change your choice at any time using
+          the <strong className="text-white">Cookie Preferences</strong> link in the footer.
+        </p>
+        <ul className="mt-3 list-disc space-y-2 pl-6">
+          <li>
+            <strong className="text-white">Essential</strong> — required technologies for site security, performance,
+            and core functionality provided by our hosting and infrastructure partners
+          </li>
+          <li>
+            <strong className="text-white">Optional (Accept All)</strong> — embedded third-party content such as
+            Google Maps, which may set cookies or collect usage data under the third party&apos;s privacy policy
+          </li>
+        </ul>
+        <p className="mt-3">
+          We do not use cookies for advertising or analytics. If your browser sends a Global Privacy Control signal,
+          we default to essential-only preferences unless you later choose otherwise. You can also control cookies
+          through your browser settings, but disabling certain cookies may affect site functionality or embedded
+          content.
         </p>
       </section>
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { BUSINESS } from "@/lib/legal";
 
 type LegalPageProps = {
@@ -35,6 +36,8 @@ export function LegalPage({ title, effectiveDate, children }: LegalPageProps) {
           <Link href="/terms" className="text-air-red hover:underline">
             Terms
           </Link>
+          {" · "}
+          <CookiePreferencesButton className="text-air-red hover:underline" />
         </p>
       </footer>
     </div>

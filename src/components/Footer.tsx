@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { FOOTER_LINKS } from "@/lib/data";
 import { BUSINESS } from "@/lib/legal";
 
@@ -23,6 +24,7 @@ export function Footer() {
               {link.label}
             </Link>
           ))}
+          <CookiePreferencesButton />
         </nav>
 
         <div className="flex flex-col items-center gap-2 sm:items-end">
