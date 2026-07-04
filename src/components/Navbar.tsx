@@ -32,9 +32,9 @@ export function Navbar() {
           <Image
             src="/logo-full.png"
             alt="Airmets"
-            width={180}
-            height={50}
-            className="h-9 w-auto transition-transform group-hover:scale-105 sm:h-10"
+            width={240}
+            height={67}
+            className="h-11 w-auto transition-transform group-hover:scale-105 sm:h-12 lg:h-14"
             priority
           />
         </a>
