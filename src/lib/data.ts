@@ -1,3 +1,5 @@
+import { SITE_MEDIA } from "@/lib/media";
+
 export const NAV_LINKS = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
@@ -12,7 +14,7 @@ export const SERVICES = [
     title: "Drone Aerial Photography & Videography",
     description:
       "Cinematic 4K aerial capture with precision flight planning, color-graded delivery, and web-optimized assets for marketing campaigns.",
-    image: "/images/aerial-solar-campus.jpg",
+    image: SITE_MEDIA.services.drone,
     icon: "camera",
   },
   {
@@ -20,7 +22,7 @@ export const SERVICES = [
     title: "Luxury Real Estate Aerial Tours",
     description:
       "Virtual property showcases for listings across Corona, Temecula, Palm Springs, and the Inland Empire — formatted for agent and brokerage marketing workflows.",
-    image: "/images/aerial-diamond-bar-wide.jpg",
+    image: SITE_MEDIA.services.realEstate,
     icon: "home",
   },
   {
@@ -28,7 +30,7 @@ export const SERVICES = [
     title: "Commercial & Event Videography",
     description:
       "Dynamic brand films, venue coverage, and event storytelling with smooth tracking shots and professional post-production.",
-    image: "/images/aerial-genoptix-campus.jpg",
+    image: SITE_MEDIA.services.commercial,
     icon: "film",
   },
   {
@@ -36,7 +38,7 @@ export const SERVICES = [
     title: "Custom Media Production",
     description:
       "Tailored aerial and ground-based photo/video packages for developers, hospitality, construction progress, and private clients.",
-    image: "/images/aerial-diamond-bar-valley.jpg",
+    image: SITE_MEDIA.services.custom,
     icon: "spark",
   },
 ] as const;
@@ -46,57 +48,50 @@ export const PORTFOLIO_ITEMS = [
     id: "townhomes-corona",
     title: "Solar Townhomes — Community Overview",
     category: "Real Estate",
-    image: "/images/aerial-townhomes-corona.jpg",
+    image: SITE_MEDIA.portfolio.townhomesCorona,
     location: "Corona, CA",
   },
   {
-    id: "estate-front",
-    title: "Residential Estate — Front Aerial",
+    id: "diamond-bar-wide",
+    title: "Hillside Streets — Neighborhood Aerial",
     category: "Real Estate",
-    image: "/images/aerial-estate-front.jpg",
-    location: "Yucaipa, CA",
-  },
-  {
-    id: "suburban-panorama",
-    title: "Curved Streets — Neighborhood Panorama",
-    category: "Real Estate",
-    image: "/images/aerial-suburban-panorama.jpg",
+    image: SITE_MEDIA.portfolio.diamondBarWide,
     location: "Diamond Bar, CA",
   },
   {
     id: "graybar-campus",
     title: "Office Campus — Aerial Survey",
     category: "Commercial",
-    image: "/images/aerial-graybar-campus.jpg",
+    image: SITE_MEDIA.portfolio.graybarCampus,
     location: "Diamond Bar, CA",
   },
   {
     id: "park-trails",
     title: "Park Trails — Landscape Design",
     category: "Landscape",
-    image: "/images/aerial-park-trails.jpg",
+    image: SITE_MEDIA.portfolio.parkTrails,
     location: "Corona, CA",
   },
   {
     id: "playground",
     title: "Playground & Recreation Area",
     category: "Events",
-    image: "/images/aerial-playground-corona.jpg",
+    image: SITE_MEDIA.portfolio.playgroundCorona,
     location: "Corona, CA",
   },
   {
     id: "mountain-lake",
     title: "Mountain Lake — Aerial Vista",
     category: "Landscape",
-    image: "/images/aerial-mountain-lake.jpg",
+    image: SITE_MEDIA.portfolio.mountainLake,
     location: "High Desert, CA",
   },
   {
     id: "carbon-canyon-video",
     title: "Carbon Canyon — Aerial Flythrough",
     category: "Commercial",
-    image: "/images/video-carbon-canyon-poster.jpg",
-    video: "/videos/carbon-canyon-aerial.mp4",
+    image: SITE_MEDIA.portfolio.carbonCanyonPoster,
+    video: SITE_MEDIA.video.carbonCanyon,
     location: "Carbon Canyon, CA",
   },
 ] as const;

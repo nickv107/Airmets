@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { SITE_MEDIA } from "@/lib/media";
 
 const FLIGHT_PATHS = [
   "M 0 400 Q 200 200 400 350 T 800 280 T 1200 320 T 1600 240",
@@ -15,7 +16,7 @@ export function HeroBackground() {
 
       <div className="absolute inset-0 opacity-[0.12] mix-blend-screen">
         <Image
-          src="/images/hero-background.jpg"
+          src={SITE_MEDIA.heroBackground}
           alt=""
           fill
           priority
