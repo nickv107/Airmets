@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { BUSINESS } from "@/lib/legal";
 
 type ContactPayload = {
   name: string;
@@ -6,10 +7,92 @@ type ContactPayload = {
   service: string;
   message: string;
   consent: boolean;
+  website?: string;
 };
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+const CONTACT_TO = process.env.CONTACT_TO_EMAIL ?? BUSINESS.email;
+
+async function sendViaResend(payload: ContactPayload) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return false;
+
+  const from = process.env.RESEND_FROM_EMAIL ?? `Airmets Contact <contact@${new URL(BUSINESS.website).hostname}>`;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [CONTACT_TO],
+      reply_to: payload.email,
+      subject: `Airmets inquiry — ${payload.service}`,
+      text: [
+        `Name: ${payload.name}`,
+        `Email: ${payload.email}`,
+        `Service: ${payload.service}`,
+        "",
+        "Project details:",
+        payload.message,
+      ].join("\n"),
+    }),
+  });
+
+  return response.ok;
+}
+
+async function sendViaFormspree(payload: ContactPayload) {
+  const formId = process.env.FORMSPREE_FORM_ID;
+  if (!formId) return false;
+
+  const response = await fetch(`https://formspree.io/f/${formId}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: payload.name,
+      email: payload.email,
+      service: payload.service,
+      message: payload.message,
+      _subject: `Airmets inquiry — ${payload.service}`,
+      _replyto: payload.email,
+    }),
+  });
+
+  return response.ok;
+}
+
+async function sendViaFormSubmit(payload: ContactPayload) {
+  const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(CONTACT_TO)}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: payload.name,
+      email: payload.email,
+      service: payload.service,
+      message: payload.message,
+      _subject: `Airmets inquiry — ${payload.service}`,
+      _replyto: payload.email,
+      _template: "table",
+      _captcha: "false",
+    }),
+  });
+
+  if (!response.ok) return false;
+
+  const result = await response.json().catch(() => null);
+  return result?.success === true || result?.success === "true";
 }
 
 export async function POST(request: Request) {
@@ -19,6 +102,10 @@ export async function POST(request: Request) {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  }
+
+  if (body.website?.trim()) {
+    return NextResponse.json({ success: true });
   }
 
   const name = body.name?.trim();
@@ -38,38 +125,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Privacy consent is required." }, { status: 400 });
   }
 
-  const formId = process.env.FORMSPREE_FORM_ID;
+  const payload: ContactPayload = { name, email, service, message, consent: true };
 
-  if (!formId) {
+  const delivered =
+    (await sendViaResend(payload)) ||
+    (await sendViaFormspree(payload)) ||
+    (await sendViaFormSubmit(payload));
+
+  if (!delivered) {
     return NextResponse.json(
       {
-        error: "Form delivery is not configured. Please use the email link to contact us directly.",
+        error: "We could not send your message. Please email or call us directly.",
         fallback: true,
       },
       { status: 503 },
-    );
-  }
-
-  const formspreeResponse = await fetch(`https://formspree.io/f/${formId}`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name,
-      email,
-      service,
-      message,
-      _subject: `Airmets inquiry — ${service}`,
-      _replyto: email,
-    }),
-  });
-
-  if (!formspreeResponse.ok) {
-    return NextResponse.json(
-      { error: "We could not send your message. Please email us directly." },
-      { status: 502 },
     );
   }
 

@@ -43,6 +43,7 @@ export function Contact() {
       email: String(data.get("email") ?? ""),
       service: String(data.get("service") ?? ""),
       message: String(data.get("message") ?? ""),
+      website: String(data.get("website") ?? ""),
       consent: true,
     };
 
@@ -227,8 +228,21 @@ export function Contact() {
                   {status === "submitting" ? "Sending..." : "Get Quote"}
                 </button>
 
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
+
                 <p className="text-center text-xs text-air-muted">
-                  Prefer email?{" "}
+                  Prefer to reach us directly?{" "}
+                  <a href={`tel:${BUSINESS.phoneTel}`} className="text-air-red hover:underline">
+                    {BUSINESS.phone}
+                  </a>
+                  {" · "}
                   <a href={`mailto:${BUSINESS.email}`} className="text-air-red hover:underline">
                     {BUSINESS.email}
                   </a>
@@ -244,16 +258,24 @@ export function Contact() {
             className="space-y-6"
           >
             <div className="rounded-2xl border border-air-border bg-air-card p-6">
-              <h3 className="font-display mb-4 text-xl font-bold">Book a Consultation</h3>
+              <h3 className="font-display mb-4 text-xl font-bold">Get in Touch</h3>
               <p className="mb-4 text-air-silver">
-                Schedule a free 15-minute flight planning call to discuss your aerial media needs.
+                Call or email for quotes, bookings, and flight planning. We typically respond within one business day.
               </p>
-              <a
-                href={`mailto:${BUSINESS.email}?subject=${encodeURIComponent("Airmets Booking Request")}`}
-                className="inline-block rounded-full border border-air-red/50 px-6 py-3 text-sm font-semibold text-air-red transition hover:bg-air-red/10"
-              >
-                Schedule via Email
-              </a>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={`tel:${BUSINESS.phoneTel}`}
+                  className="inline-block rounded-full border border-air-red/50 px-6 py-3 text-center text-sm font-semibold text-air-red transition hover:bg-air-red/10"
+                >
+                  {BUSINESS.phone}
+                </a>
+                <a
+                  href={`mailto:${BUSINESS.email}?subject=${encodeURIComponent("Airmets Booking Request")}`}
+                  className="inline-block rounded-full border border-air-red/50 px-6 py-3 text-center text-sm font-semibold text-air-red transition hover:bg-air-red/10"
+                >
+                  {BUSINESS.email}
+                </a>
+              </div>
             </div>
 
             <div className="rounded-2xl border border-air-border bg-air-card p-6">

@@ -27,6 +27,12 @@ export function Footer() {
 
         <div className="flex flex-col items-center gap-2 sm:items-end">
           <a
+            href={`tel:${BUSINESS.phoneTel}`}
+            className="text-sm text-air-silver transition hover:text-air-red"
+          >
+            {BUSINESS.phone}
+          </a>
+          <a
             href={`mailto:${BUSINESS.email}`}
             className="text-sm text-air-silver transition hover:text-air-red"
           >
