@@ -12,7 +12,7 @@ export const SERVICES = [
     title: "Drone Aerial Photography & Videography",
     description:
       "Cinematic 4K aerial capture with precision flight planning, color-graded delivery, and web-optimized assets for marketing campaigns.",
-    image: "/images/hero-mansion.jpg",
+    image: "/images/service-drone.jpg",
     icon: "camera",
   },
   {
@@ -20,7 +20,7 @@ export const SERVICES = [
     title: "Luxury Real Estate Aerial Tours",
     description:
       "Virtual property showcases for listings across Corona, Temecula, Palm Springs, and the Inland Empire — formatted for agent and brokerage marketing workflows.",
-    image: "/images/vineyards.jpg",
+    image: "/images/service-realestate.jpg",
     icon: "home",
   },
   {
@@ -28,7 +28,7 @@ export const SERVICES = [
     title: "Commercial & Event Videography",
     description:
       "Dynamic brand films, venue coverage, and event storytelling with smooth tracking shots and professional post-production.",
-    image: "/images/event-venue.jpg",
+    image: "/images/service-commercial.jpg",
     icon: "film",
   },
   {
@@ -36,7 +36,7 @@ export const SERVICES = [
     title: "Custom Media Production",
     description:
       "Tailored aerial and ground-based photo/video packages for developers, hospitality, construction progress, and private clients.",
-    image: "/images/coastal-cliff.jpg",
+    image: "/images/service-custom.jpg",
     icon: "spark",
   },
 ] as const;
@@ -44,45 +44,45 @@ export const SERVICES = [
 export const PORTFOLIO_ITEMS = [
   {
     id: "mansion",
-    title: "Hillside Estate — Golden Hour",
+    title: "Hillside Estates — Golden Hour",
     category: "Real Estate",
     image: "/images/hero-mansion.jpg",
-    location: "Southern California (sample)",
+    location: "Diamond Bar, CA",
   },
   {
     id: "joshua",
-    title: "Joshua Tree — Twilight",
+    title: "Inland Empire — Rolling Hills",
     category: "Landscape",
     image: "/images/joshua-tree.jpg",
-    location: "Joshua Tree, CA (sample)",
+    location: "Diamond Bar, CA",
   },
   {
     id: "la",
-    title: "LA Skyline — Night Flight",
+    title: "Suburban Community Overview",
     category: "Commercial",
     image: "/images/la-night.jpg",
-    location: "Los Angeles, CA (sample)",
+    location: "Diamond Bar, CA",
   },
   {
     id: "vineyards",
-    title: "Temecula Vineyards — Sunrise",
+    title: "Pathfinder Neighborhood — Aerial",
     category: "Real Estate",
     image: "/images/vineyards.jpg",
-    location: "Temecula, CA (sample)",
+    location: "Diamond Bar, CA",
   },
   {
     id: "coastal",
-    title: "Coastal Cliff Residence",
+    title: "Luxury Pool Estates — Overhead",
     category: "Real Estate",
     image: "/images/coastal-cliff.jpg",
-    location: "SoCal Coast (sample)",
+    location: "Diamond Bar, CA",
   },
   {
     id: "event",
-    title: "Desert Venue — Sunset Event",
+    title: "Community Aerial Survey",
     category: "Events",
     image: "/images/event-venue.jpg",
-    location: "Palm Springs, CA (sample)",
+    location: "Corona, CA",
   },
 ] as const;
 
