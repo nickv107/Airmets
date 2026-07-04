@@ -29,7 +29,7 @@ export function Portfolio() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">Portfolio</p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Aerial Impact Gallery</h2>
           <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-            Recent Airmets drone captures from Southern California — real FAA Part 107 flights with DJI Air 3S.
+            Real DJI aerial photos and video from Airmets flights across Southern California — landscapes, homes, and communities.
           </p>
         </motion.div>
 
@@ -72,6 +72,11 @@ export function Portfolio() {
                     className="object-cover transition duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
+                  {"video" in item && item.video && (
+                    <span className="absolute right-3 top-3 rounded-full bg-air-black/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                      Video
+                    </span>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-air-black/80 via-transparent to-transparent opacity-0 transition group-hover:opacity-100" />
                   <div className="absolute bottom-0 left-0 right-0 translate-y-4 p-4 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
                     <p className="text-xs uppercase tracking-wider text-air-red">{item.category}</p>
@@ -100,18 +105,28 @@ export function Portfolio() {
               className="relative max-h-[85vh] max-w-5xl overflow-hidden rounded-2xl border border-air-border"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
-                src={lightbox.image}
-                alt={lightbox.title}
-                width={1600}
-                height={1000}
-                className="max-h-[75vh] w-auto object-contain"
-              />
+              {"video" in lightbox && lightbox.video ? (
+                <video
+                  src={lightbox.video}
+                  poster={lightbox.image}
+                  controls
+                  playsInline
+                  className="max-h-[75vh] w-full bg-air-black object-contain"
+                />
+              ) : (
+                <Image
+                  src={lightbox.image}
+                  alt={lightbox.title}
+                  width={1600}
+                  height={1000}
+                  className="max-h-[75vh] w-auto object-contain"
+                />
+              )}
               <div className="border-t border-air-border bg-air-card p-6">
                 <p className="text-sm text-air-red">{lightbox.category} · {lightbox.location}</p>
                 <h3 className="font-display mt-1 text-2xl font-bold">{lightbox.title}</h3>
                 <p className="mt-2 text-xs text-air-muted">
-                  Airmets capture · {lightbox.location}. Client projects are labeled when applicable.
+                  Airmets DJI capture · {lightbox.location}. All portfolio media is from real Part 107 flights.
                 </p>
               </div>
               <button
