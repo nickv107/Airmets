@@ -29,8 +29,7 @@ export function Portfolio() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">Portfolio</p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Aerial Impact Gallery</h2>
           <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-            Representative sample imagery illustrating our style and capabilities across Southern California.
-            Client projects are labeled separately when published with permission.
+            Recent Airmets drone captures from Southern California — real FAA Part 107 flights with DJI Air 3S.
           </p>
         </motion.div>
 
