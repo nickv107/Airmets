@@ -49,8 +49,8 @@ export function Footer() {
 
       <p className="mx-auto mt-8 max-w-7xl text-center text-xs leading-relaxed text-air-muted">
         © {new Date().getFullYear()} {BUSINESS.name}. All rights reserved. Commercial UAS operations conducted
-        under FAA Part 107 by a certificated remote pilot. Sample portfolio imagery is for demonstration unless
-        otherwise noted.
+        under FAA Part 107 by a certificated remote pilot. Portfolio imagery represents Airmets aerial work unless
+        otherwise labeled as a client project.
       </p>
     </footer>
   );

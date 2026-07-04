@@ -13,7 +13,11 @@ export default function TermsPage() {
       <p>
         These Terms of Service (&quot;Terms&quot;) govern your use of {BUSINESS.website} and any inquiry or service
         engagement with {BUSINESS.name}. By using this website or submitting a contact request, you agree to these
-        Terms.
+        Terms and our{" "}
+        <a href="/privacy" className="text-air-red hover:underline">
+          Privacy Policy
+        </a>
+        , which describes how we collect and use personal information.
       </p>
 
       <section>
@@ -124,11 +128,24 @@ export default function TermsPage() {
       </section>
 
       <section>
+        <h2 className="font-display mb-3 text-xl font-bold text-white">Electronic Communications</h2>
+        <p>
+          By contacting us through this website, email, or phone, you consent to receive communications from us
+          regarding your inquiry or project by email or phone. Marketing messages, if any, will include an
+          unsubscribe option consistent with applicable law, including the CAN-SPAM Act.
+        </p>
+      </section>
+
+      <section>
         <h2 className="font-display mb-3 text-xl font-bold text-white">Contact</h2>
         <p>
           Questions about these Terms may be sent to{" "}
           <a href={`mailto:${BUSINESS.email}`} className="text-air-red hover:underline">
             {BUSINESS.email}
+          </a>{" "}
+          or{" "}
+          <a href={`tel:${BUSINESS.phoneTel}`} className="text-air-red hover:underline">
+            {BUSINESS.phone}
           </a>
           .
         </p>

@@ -205,12 +205,12 @@ export function Contact() {
                     required
                   />
                   <span>
-                    I agree that {BUSINESS.name} may use my information to respond to this inquiry, as described in
-                    the{" "}
+                    I understand that {BUSINESS.name} will collect the information I provide to respond to this
+                    inquiry and deliver requested services, as described in the{" "}
                     <Link href="/privacy" className="text-air-red hover:underline">
                       Privacy Policy
                     </Link>
-                    .
+                    . I confirm I am at least 13 years old.
                   </span>
                 </label>
 

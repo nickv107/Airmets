@@ -10,5 +10,6 @@ export const BUSINESS = {
 
 export const LEGAL = {
   privacyEffectiveDate: "July 4, 2026",
+  privacyLastUpdated: "July 4, 2026",
   termsEffectiveDate: "July 4, 2026",
 } as const;

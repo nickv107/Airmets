@@ -110,7 +110,9 @@ export function Portfolio() {
               <div className="border-t border-air-border bg-air-card p-6">
                 <p className="text-sm text-air-red">{lightbox.category} · {lightbox.location}</p>
                 <h3 className="font-display mt-1 text-2xl font-bold">{lightbox.title}</h3>
-                <p className="mt-2 text-xs text-air-muted">Sample imagery for demonstration purposes.</p>
+                <p className="mt-2 text-xs text-air-muted">
+                  Airmets capture · {lightbox.location}. Client projects are labeled when applicable.
+                </p>
               </div>
               <button
                 type="button"
