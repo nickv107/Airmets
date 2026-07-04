@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
   output: isStaticExport ? "export" : "standalone",
   ...(isStaticExport ? { trailingSlash: true } : {}),
   images: {
-    unoptimized: isStaticExport,
+    // Standalone Alpine deploys lack a working sharp binary for /_next/image.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
   },
 };
