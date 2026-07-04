@@ -1,23 +1,8 @@
-# Git
-.git
-.gitignore
-
-# Deployment / config files for other platforms
-netlify.toml
-vercel.json
-railway.json
-
-# Docs
-*.md
-LICENSE
-
-# OS / temp
+node_modules
+.next
+out
 .DS_Store
-Thumbs.db
-*.log
-*.tmp
-
-# IDE
-.idea/
-.vscode/
-*.sublime-*
+*.pem
+.env*.local
+npm-debug.log*
+scripts/wp-home-content.html

@@ -1,14 +1,11 @@
-# OS / editor
+node_modules
+.next
+out
+.git
+.gitignore
+README.md
+scripts
 .DS_Store
-*.swp
-*~
-Thumbs.db
-
-# IDE
-.idea/
-.vscode/
-*.sublime-*
-
-# Temp
-*.tmp
-*.log
+*.pem
+.env*.local
+npm-debug.log*
