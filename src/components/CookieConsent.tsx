@@ -18,7 +18,7 @@ export function CookieConsent() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 24 }}
-          className="fixed inset-x-4 bottom-4 z-[200] mx-auto max-w-3xl rounded-2xl border border-air-border bg-air-card/95 p-6 shadow-[0_0_40px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:inset-x-6"
+          className="safe-bottom fixed inset-x-4 z-[200] mx-auto max-w-3xl rounded-2xl border border-air-border bg-air-card/95 p-5 shadow-[0_0_40px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:inset-x-6 sm:p-6"
         >
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -42,14 +42,14 @@ export function CookieConsent() {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="rounded-full bg-air-red px-5 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow"
+                className="touch-target rounded-full bg-air-red px-5 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow"
               >
                 Accept All
               </button>
               <button
                 type="button"
                 onClick={acceptEssential}
-                className="rounded-full border border-air-border px-5 py-3 text-sm font-semibold text-white transition hover:border-air-red/50 hover:bg-air-red/10"
+                className="touch-target rounded-full border border-air-border px-5 py-3 text-sm font-semibold text-white transition hover:border-air-red/50 hover:bg-air-red/10"
               >
                 Accept Essential
               </button>
@@ -57,7 +57,7 @@ export function CookieConsent() {
                 <button
                   type="button"
                   onClick={closePreferences}
-                  className="text-sm text-air-muted underline transition hover:text-white"
+                  className="touch-target text-sm text-air-muted underline transition hover:text-white"
                 >
                   Cancel
                 </button>

@@ -7,10 +7,10 @@ import { TechDecode, TechHeadline, TechLabel, TechStatusPills } from "@/componen
 
 export function Hero() {
   return (
-    <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#0A0A0A]">
+    <section id="home" className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-[#0A0A0A] scroll-mt-20">
       <HeroBackground />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 py-32 text-center">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 py-24 text-center sm:px-6 sm:py-32">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,11 +41,12 @@ export function Hero() {
           transition={{ delay: 0.15, duration: 0.5 }}
           className="mb-6"
         >
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.22em] sm:text-base md:tracking-[0.28em]">
+          <p className="font-display text-[0.65rem] font-semibold uppercase tracking-[0.1em] sm:text-base sm:tracking-[0.22em] md:tracking-[0.28em]">
             <TechDecode
               text="ELEVATING PERSPECTIVES • PRECISION AERIAL MEDIA"
               delayMs={200}
               accent
+              className="break-words"
             />
           </p>
           <TechStatusPills />
@@ -77,17 +78,17 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.05, duration: 0.5 }}
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mx-auto sm:max-w-none sm:flex-row sm:items-center sm:gap-4"
         >
           <a
             href="#contact"
-            className="tech-cta-primary rounded-full px-8 py-4 text-sm font-bold uppercase tracking-wider text-white"
+            className="tech-cta-primary touch-target flex items-center justify-center rounded-full px-8 py-4 text-sm font-bold uppercase tracking-wider text-white"
           >
             Launch a Mission
           </a>
           <a
             href="#portfolio"
-            className="tech-cta-secondary rounded-full border border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-sm transition hover:border-air-red/50 hover:bg-white/5"
+            className="tech-cta-secondary touch-target flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-sm transition hover:border-air-red/50 hover:bg-white/5"
           >
             View Portfolio
           </a>

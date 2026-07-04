@@ -6,7 +6,7 @@ import { TECH_SPECS } from "@/lib/data";
 export function TechAbout() {
   return (
     <>
-      <section id="technology" className="border-y border-air-border bg-air-card/50 px-6 py-24 lg:px-8">
+      <section id="technology" className="scroll-mt-20 border-y border-air-border bg-air-card/50 px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -63,7 +63,7 @@ export function TechAbout() {
         </div>
       </section>
 
-      <section id="about" className="px-6 py-24 lg:px-8">
+      <section id="about" className="scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, x: -30 }}

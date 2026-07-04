@@ -6,7 +6,7 @@ import { BUSINESS } from "@/lib/legal";
 
 export function Footer() {
   return (
-    <footer className="border-t border-air-border bg-air-black px-6 py-12 lg:px-8">
+    <footer className="border-t border-air-border bg-air-black px-4 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-6 sm:py-12 lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 sm:flex-row">
         <div className="flex flex-col items-center gap-1 sm:items-start">
           <Image src="/logo-full.png" alt="Airmets" width={140} height={40} className="h-8 w-auto" />
@@ -14,35 +14,35 @@ export function Footer() {
           <p className="text-xs text-air-muted">{BUSINESS.region}</p>
         </div>
 
-        <nav className="flex flex-wrap justify-center gap-6" aria-label="Footer">
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-3" aria-label="Footer">
           {FOOTER_LINKS.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="text-sm text-air-silver transition hover:text-white"
+              className="touch-target inline-flex items-center text-sm text-air-silver transition hover:text-white"
             >
               {link.label}
             </Link>
           ))}
-          <CookiePreferencesButton />
+          <CookiePreferencesButton className="touch-target inline-flex items-center" />
         </nav>
 
-        <div className="flex flex-col items-center gap-2 sm:items-end">
+        <div className="flex flex-col items-center gap-3 sm:items-end">
           <a
             href={`tel:${BUSINESS.phoneTel}`}
-            className="text-sm text-air-silver transition hover:text-air-red"
+            className="touch-target inline-flex items-center text-sm text-air-silver transition hover:text-air-red"
           >
             {BUSINESS.phone}
           </a>
           <a
             href={`mailto:${BUSINESS.email}`}
-            className="text-sm text-air-silver transition hover:text-air-red"
+            className="touch-target inline-flex items-center text-sm text-air-silver transition hover:text-air-red"
           >
             {BUSINESS.email}
           </a>
           <a
             href={`mailto:${BUSINESS.email}?subject=${encodeURIComponent("Accessibility request")}`}
-            className="text-xs text-air-muted transition hover:text-white"
+            className="touch-target inline-flex items-center text-xs text-air-muted transition hover:text-white"
           >
             Accessibility inquiries
           </a>

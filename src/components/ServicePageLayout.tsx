@@ -13,30 +13,36 @@ type ServicePageLayoutProps = {
 export function ServicePageLayout({ service, children }: ServicePageLayoutProps) {
   return (
     <div className="min-h-screen bg-air-black text-white">
-      <header className="border-b border-air-border px-6 py-6 lg:px-8">
+      <header className="safe-top border-b border-air-border px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
-          <Link href="/" className="font-display text-lg font-bold text-air-red transition hover:text-air-red-glow">
+          <Link
+            href="/"
+            className="touch-target font-display inline-flex items-center text-base font-bold text-air-red transition hover:text-air-red-glow sm:text-lg"
+          >
             ← {BUSINESS.name}
           </Link>
-          <Link href="/#services" className="text-sm text-air-muted transition hover:text-white">
+          <Link
+            href="/#services"
+            className="touch-target inline-flex items-center text-sm text-air-muted transition hover:text-white"
+          >
             All Services
           </Link>
         </div>
       </header>
 
-      <section className="relative min-h-[42vh] overflow-hidden border-b border-air-border">
+      <section className="relative min-h-[36vh] overflow-hidden border-b border-air-border sm:min-h-[42vh]">
         <Image src={service.image} alt={service.title} fill className="object-cover" priority sizes="100vw" />
         <div className="absolute inset-0 bg-gradient-to-t from-air-black via-air-black/70 to-air-black/30" />
-        <div className="relative mx-auto flex min-h-[42vh] max-w-5xl items-end px-6 py-12 lg:px-8">
+        <div className="relative mx-auto flex min-h-[36vh] max-w-5xl items-end px-4 py-10 sm:min-h-[42vh] sm:px-6 sm:py-12 lg:px-8">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">Service</p>
-            <h1 className="font-display max-w-3xl text-3xl font-bold sm:text-4xl md:text-5xl">{service.title}</h1>
-            <p className="mt-4 max-w-2xl text-lg text-air-silver">{service.tagline}</p>
+            <h1 className="font-display max-w-3xl text-2xl font-bold sm:text-4xl md:text-5xl">{service.title}</h1>
+            <p className="mt-4 max-w-2xl text-base text-air-silver sm:text-lg">{service.tagline}</p>
           </div>
         </div>
       </section>
 
-      <main className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
+      <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="legal-prose space-y-12 text-air-silver leading-relaxed">
           <section>
             <h2 className="font-display mb-4 text-2xl font-bold text-white">Overview</h2>
@@ -96,16 +102,16 @@ export function ServicePageLayout({ service, children }: ServicePageLayoutProps)
             <p className="mx-auto mb-6 max-w-xl text-air-silver">
               Tell us about your property, timeline, and deliverables. We typically respond within one business day.
             </p>
-            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
               <Link
                 href={`/?service=${encodeURIComponent(service.title)}#contact`}
-                className="rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow"
+                className="touch-target flex items-center justify-center rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow"
               >
                 Get Quote
               </Link>
               <Link
                 href={`tel:${BUSINESS.phoneTel}`}
-                className="rounded-full border border-air-border px-8 py-3 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
+                className="touch-target flex items-center justify-center rounded-full border border-air-border px-8 py-3 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
               >
                 {BUSINESS.phone}
               </Link>

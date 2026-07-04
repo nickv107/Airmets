@@ -29,14 +29,14 @@ export function ServiceAreaMap() {
             <button
               type="button"
               onClick={acceptAll}
-              className="rounded-full bg-air-red px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-air-red-glow"
+              className="touch-target rounded-full bg-air-red px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-air-red-glow"
             >
               Accept All &amp; Show Map
             </button>
             <button
               type="button"
               onClick={openPreferences}
-              className="rounded-full border border-air-border px-5 py-2.5 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
+              className="touch-target rounded-full border border-air-border px-5 py-2.5 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
             >
               Cookie Preferences
             </button>

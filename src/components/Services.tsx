@@ -36,7 +36,7 @@ function ServiceBlock({
   const contentY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
 
   return (
-    <section ref={ref} className="relative min-h-[85vh] overflow-hidden">
+    <section ref={ref} className="relative min-h-[70vh] overflow-hidden sm:min-h-[85vh]">
       <motion.div style={{ y: bgY }} className="absolute inset-0 -top-[15%] -bottom-[15%]">
         <Image
           src={service.image}
@@ -50,7 +50,7 @@ function ServiceBlock({
 
       <motion.div
         style={{ y: contentY }}
-        className={`relative z-10 mx-auto flex min-h-[85vh] max-w-7xl items-center px-6 py-24 lg:px-8 ${
+        className={`relative z-10 mx-auto flex min-h-[70vh] max-w-7xl items-center px-4 py-16 sm:min-h-[85vh] sm:px-6 sm:py-24 lg:px-8 ${
           index % 2 === 1 ? "lg:justify-end" : ""
         }`}
       >
@@ -59,7 +59,7 @@ function ServiceBlock({
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className="glow-border max-w-xl rounded-2xl border border-air-border bg-air-card/80 p-8 backdrop-blur-md sm:p-10"
+          className="glow-border w-full max-w-xl rounded-2xl border border-air-border bg-air-card/80 p-6 backdrop-blur-md sm:p-10"
         >
           <div className="mb-4 flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-air-red/10">
@@ -73,7 +73,7 @@ function ServiceBlock({
           <p className="mb-6 leading-relaxed text-air-silver">{service.description}</p>
           <Link
             href={service.href}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-air-red transition hover:gap-3"
+            className="touch-target inline-flex items-center gap-2 py-1 text-sm font-semibold text-air-red transition hover:gap-3"
           >
             Learn More
             <span aria-hidden>→</span>
@@ -86,8 +86,8 @@ function ServiceBlock({
 
 export function Services() {
   return (
-    <div id="services">
-      <div className="border-y border-air-border bg-air-black px-6 py-20 text-center lg:px-8">
+    <div id="services" className="scroll-mt-20">
+      <div className="border-y border-air-border bg-air-black px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

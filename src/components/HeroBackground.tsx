@@ -95,10 +95,10 @@ export function HeroBackground() {
         />
       ))}
 
-      <div className="hero-hud-corner hero-hud-corner--tl" />
-      <div className="hero-hud-corner hero-hud-corner--tr" />
-      <div className="hero-hud-corner hero-hud-corner--bl" />
-      <div className="hero-hud-corner hero-hud-corner--br" />
+      <div className="hero-hud-corner hero-hud-corner--tl hidden sm:block" />
+      <div className="hero-hud-corner hero-hud-corner--tr hidden sm:block" />
+      <div className="hero-hud-corner hero-hud-corner--bl hidden sm:block" />
+      <div className="hero-hud-corner hero-hud-corner--br hidden sm:block" />
 
       <div className="absolute left-6 top-24 hidden font-mono text-[10px] uppercase tracking-widest text-air-red/60 sm:block">
         <div className="hero-pulse-text">SYS::AIRMETS v2.0</div>

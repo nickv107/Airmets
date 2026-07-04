@@ -110,7 +110,7 @@ export function TechLabel({ children, className = "" }: TechLabelProps) {
 export function TechStatusPills() {
   const pills = ["4K HDR", "FAA PART 107", "DJI AIR 3S", "SOCAL OPS"];
   return (
-    <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+    <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 px-2 sm:gap-2 sm:px-0">
       {pills.map((pill) => (
         <span key={pill} className="tech-pill">
           {pill}
@@ -127,13 +127,13 @@ type TechHeadlineProps = {
 
 export function TechHeadline({ primary, secondary }: TechHeadlineProps) {
   return (
-    <div className="tech-headline-block">
-      <h1 className="font-display text-3xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl">
-        <TechDecode text={primary} delayMs={400} className="tech-headline-primary block" showCursor={false} />
+    <div className="tech-headline-block mx-auto max-w-[min(100%,36rem)] px-1 sm:max-w-none sm:px-0">
+      <h1 className="font-display text-[1.65rem] font-bold leading-[1.15] tracking-tight sm:text-5xl sm:leading-tight md:text-6xl">
+        <TechDecode text={primary} delayMs={400} className="tech-headline-primary block break-words" showCursor={false} />
         <TechDecode
           text={secondary}
           delayMs={900}
-          className="tech-headline-secondary mt-2 block text-xl sm:text-3xl md:text-4xl"
+          className="tech-headline-secondary mt-2 block break-words text-base sm:text-3xl md:text-4xl"
           showCursor={false}
         />
       </h1>

@@ -16,30 +16,47 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed inset-x-0 top-0 z-50 safe-top transition-all duration-300 ${
+        scrolled || menuOpen
           ? "border-b border-air-border/80 bg-air-black/90 backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        <a href="#home" className="group inline-flex items-center">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
+        <a href="#home" className="group inline-flex items-center" onClick={closeMenu}>
           <Image
             src="/logo-full.png"
             alt="Airmets"
             width={240}
             height={67}
-            className="h-11 w-auto transition-transform group-hover:scale-105 sm:h-12 lg:h-14"
+            className="h-10 w-auto transition-transform group-hover:scale-105 sm:h-12 lg:h-14"
             priority
           />
         </a>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
@@ -68,9 +85,11 @@ export function Navbar() {
 
         <button
           type="button"
-          aria-label="Toggle menu"
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-air-border lg:hidden"
-          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          className="touch-target flex items-center justify-center rounded-lg border border-air-border lg:hidden"
+          onClick={() => setMenuOpen((open) => !open)}
         >
           <span className="sr-only">Menu</span>
           <div className="flex flex-col gap-1.5">
@@ -84,26 +103,34 @@ export function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-t border-air-border bg-air-black/95 backdrop-blur-xl lg:hidden"
+            className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-air-border bg-air-black/95 backdrop-blur-xl lg:hidden"
           >
-            <div className="flex flex-col gap-4 px-6 py-6">
+            <div className="flex flex-col gap-2 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6 sm:py-6">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-lg font-medium text-air-silver"
-                  onClick={() => setMenuOpen(false)}
+                  className="touch-target flex items-center rounded-lg px-2 text-lg font-medium text-air-silver transition hover:text-white"
+                  onClick={closeMenu}
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="#contact"
-                className="mt-2 rounded-full bg-air-red px-5 py-3 text-center text-sm font-semibold"
-                onClick={() => setMenuOpen(false)}
+                className="touch-target mt-2 flex items-center justify-center rounded-full border border-air-red/40 px-5 py-3 text-center text-sm font-semibold text-white"
+                onClick={closeMenu}
+              >
+                Get Quote
+              </a>
+              <a
+                href="#contact"
+                className="touch-target flex items-center justify-center rounded-full bg-air-red px-5 py-3 text-center text-sm font-semibold text-white"
+                onClick={closeMenu}
               >
                 Launch a Mission
               </a>

@@ -90,7 +90,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="px-6 py-24 lg:px-8">
+    <section id="contact" className="scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,7 +111,7 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="glow-border space-y-5 rounded-2xl border border-air-border bg-air-card p-8"
+            className="glow-border space-y-5 rounded-2xl border border-air-border bg-air-card p-5 sm:p-8"
             noValidate
           >
             {status === "mailto" ? (
@@ -123,7 +123,7 @@ export function Contact() {
                 </p>
                 <a
                   href={mailtoHref}
-                  className="mt-6 inline-block rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white"
+                  className="touch-target mt-6 inline-flex items-center justify-center rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white"
                 >
                   Open Email App
                 </a>
@@ -214,7 +214,7 @@ export function Contact() {
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
                     disabled={status === "submitting"}
-                    className="mt-1 h-4 w-4 shrink-0 accent-air-red"
+                    className="mt-0.5 h-5 w-5 shrink-0 accent-air-red"
                     required
                   />
                   <span>
@@ -236,7 +236,7 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full rounded-full bg-air-red py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow disabled:cursor-not-allowed disabled:opacity-60"
+                  className="touch-target w-full rounded-full bg-air-red py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "submitting" ? "Sending..." : "Get Quote"}
                 </button>
@@ -278,13 +278,13 @@ export function Contact() {
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a
                   href={`tel:${BUSINESS.phoneTel}`}
-                  className="inline-block rounded-full border border-air-red/50 px-6 py-3 text-center text-sm font-semibold text-air-red transition hover:bg-air-red/10"
+                  className="touch-target inline-flex items-center justify-center rounded-full border border-air-red/50 px-6 py-3 text-center text-sm font-semibold text-air-red transition hover:bg-air-red/10"
                 >
                   {BUSINESS.phone}
                 </a>
                 <a
                   href={`mailto:${BUSINESS.email}?subject=${encodeURIComponent("Airmets Booking Request")}`}
-                  className="inline-block rounded-full border border-air-red/50 px-6 py-3 text-center text-sm font-semibold text-air-red transition hover:bg-air-red/10"
+                  className="touch-target inline-flex items-center justify-center rounded-full border border-air-red/50 px-6 py-3 text-center text-sm font-semibold text-air-red transition hover:bg-air-red/10"
                 >
                   {BUSINESS.email}
                 </a>
