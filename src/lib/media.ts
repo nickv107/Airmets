@@ -6,6 +6,7 @@ export const SITE_MEDIA = {
   heroVideos: [
     "/videos/drone-flying-up.mp4",
     "/videos/baseball-game-high.mp4",
+    "/videos/park-roll.mp4",
     "/videos/solar.mp4",
   ] as const,
   services: {
