@@ -7,3 +7,5 @@ out
 npm-debug.log*
 scripts/wp-home-content.html
 *.DNG
+*.mov
+*.MOV
