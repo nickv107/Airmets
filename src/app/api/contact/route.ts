@@ -4,6 +4,7 @@ import { BUSINESS } from "@/lib/legal";
 type ContactPayload = {
   name: string;
   email: string;
+  phone: string;
   service: string;
   message: string;
   consent: boolean;
@@ -12,6 +13,11 @@ type ContactPayload = {
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPhone(phone: string) {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length >= 10 && digits.length <= 15;
 }
 
 const CONTACT_TO = process.env.CONTACT_TO_EMAIL ?? BUSINESS.email;
@@ -36,6 +42,7 @@ async function sendViaResend(payload: ContactPayload) {
       text: [
         `Name: ${payload.name}`,
         `Email: ${payload.email}`,
+        `Phone: ${payload.phone}`,
         `Service: ${payload.service}`,
         "",
         "Project details:",
@@ -60,6 +67,7 @@ async function sendViaFormspree(payload: ContactPayload) {
     body: JSON.stringify({
       name: payload.name,
       email: payload.email,
+      phone: payload.phone,
       service: payload.service,
       message: payload.message,
       _subject: `Airmets inquiry — ${payload.service}`,
@@ -80,6 +88,7 @@ async function sendViaFormSubmit(payload: ContactPayload) {
     body: JSON.stringify({
       name: payload.name,
       email: payload.email,
+      phone: payload.phone,
       service: payload.service,
       message: payload.message,
       _subject: `Airmets inquiry — ${payload.service}`,
@@ -110,10 +119,11 @@ export async function POST(request: Request) {
 
   const name = body.name?.trim();
   const email = body.email?.trim();
+  const phone = body.phone?.trim();
   const service = body.service?.trim();
   const message = body.message?.trim();
 
-  if (!name || !email || !service || !message) {
+  if (!name || !email || !phone || !service || !message) {
     return NextResponse.json({ error: "All fields are required." }, { status: 400 });
   }
 
@@ -121,11 +131,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
 
+  if (!isValidPhone(phone)) {
+    return NextResponse.json({ error: "Please provide a valid phone number." }, { status: 400 });
+  }
+
   if (!body.consent) {
     return NextResponse.json({ error: "Privacy consent is required." }, { status: 400 });
   }
 
-  const payload: ContactPayload = { name, email, service, message, consent: true };
+  const payload: ContactPayload = { name, email, phone, service, message, consent: true };
 
   const delivered =
     (await sendViaResend(payload)) ||
