@@ -1,7 +1,12 @@
 /** Every image below is used exactly once across the single-page site. */
 export const SITE_MEDIA = {
   heroBackground: "/images/drone/hero-background.jpg",
-  heroVideo: "/videos/drone-flying-up.mp4",
+  heroVideos: [
+    "/videos/drone-flying-up.mp4",
+    "/videos/baseball-game-high.mp4",
+    "/videos/baseball-game-low.mp4",
+    "/videos/solar.mp4",
+  ] as const,
   services: {
     drone: "/images/drone/aerial-solar-campus.jpg",
     realEstate: "/images/drone/aerial-estate-front.jpg",

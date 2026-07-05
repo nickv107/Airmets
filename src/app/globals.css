@@ -135,6 +135,12 @@ textarea {
   pointer-events: none;
 }
 
+.hero-video-layer {
+  transition: opacity 0.7s ease-in-out;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 .hero-bg-node {
   box-shadow: 0 0 6px rgba(255, 0, 0, 0.8), 0 0 12px rgba(255, 0, 0, 0.4);
 }

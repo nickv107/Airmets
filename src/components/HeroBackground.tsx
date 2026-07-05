@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SITE_MEDIA } from "@/lib/media";
 
 const FLIGHT_PATHS = [
@@ -10,8 +10,26 @@ const FLIGHT_PATHS = [
   "M 200 800 Q 500 650 800 720 T 1400 600",
 ];
 
+const HERO_VIDEOS = SITE_MEDIA.heroVideos;
+const ROTATE_MS = 5000;
+
+function prefetchVideo(url: string) {
+  if (typeof document === "undefined") return;
+  const existing = document.querySelector(`link[data-hero-prefetch="${url}"]`);
+  if (existing) return;
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.as = "video";
+  link.href = url;
+  link.setAttribute("data-hero-prefetch", url);
+  document.head.appendChild(link);
+}
+
 export function HeroBackground() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
+  const indexRef = useRef(0);
+  const layerRef = useRef(0);
+  const [activeLayer, setActiveLayer] = useState(0);
   const [useVideo, setUseVideo] = useState(true);
 
   useEffect(() => {
@@ -22,36 +40,91 @@ export function HeroBackground() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
+  const prepareVideo = useCallback(async (el: HTMLVideoElement, src: string) => {
+    if (el.src !== new URL(src, window.location.origin).href) {
+      el.src = src;
+      el.load();
+    }
+    await new Promise<void>((resolve) => {
+      if (el.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        resolve();
+        return;
+      }
+      const onReady = () => {
+        el.removeEventListener("canplay", onReady);
+        resolve();
+      };
+      el.addEventListener("canplay", onReady);
+    });
+    el.currentTime = 0;
+    await el.play().catch(() => setUseVideo(false));
+  }, []);
+
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !useVideo) return;
+    if (!useVideo) return;
 
-    const play = () => {
-      void video.play().catch(() => setUseVideo(false));
+    const first = videoRefs[0].current;
+    if (!first) return;
+
+    let cancelled = false;
+
+    void (async () => {
+      await prepareVideo(first, HERO_VIDEOS[0]);
+      if (cancelled) return;
+      prefetchVideo(HERO_VIDEOS[1]);
+    })();
+
+    return () => {
+      cancelled = true;
     };
+  }, [useVideo, prepareVideo]);
 
-    play();
-    video.addEventListener("canplay", play);
-    return () => video.removeEventListener("canplay", play);
-  }, [useVideo]);
+  useEffect(() => {
+    if (!useVideo) return;
+
+    const intervalId = window.setInterval(() => {
+      void (async () => {
+        const nextIndex = (indexRef.current + 1) % HERO_VIDEOS.length;
+        const backLayer = 1 - layerRef.current;
+        const back = videoRefs[backLayer].current;
+        if (!back) return;
+
+        prefetchVideo(HERO_VIDEOS[(nextIndex + 1) % HERO_VIDEOS.length]);
+
+        await prepareVideo(back, HERO_VIDEOS[nextIndex]);
+
+        layerRef.current = backLayer;
+        indexRef.current = nextIndex;
+        setActiveLayer(backLayer);
+      })();
+    }, ROTATE_MS);
+
+    return () => window.clearInterval(intervalId);
+  }, [useVideo, prepareVideo]);
 
   return (
     <div className="hero-bg absolute inset-0 overflow-hidden" aria-hidden>
       <div className="absolute inset-0 bg-[#0A0A0A]" />
 
       {useVideo ? (
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={SITE_MEDIA.heroBackground}
-          className="absolute inset-0 h-full w-full scale-105 object-cover opacity-50"
-        >
-          <source src={SITE_MEDIA.heroVideo} type="video/mp4" />
-        </video>
+        <div className="absolute inset-0">
+          {videoRefs.map((ref, i) => (
+            <video
+              key={i}
+              ref={ref}
+              muted
+              playsInline
+              autoPlay={i === 0}
+              preload={i === 0 ? "auto" : "none"}
+              poster={SITE_MEDIA.heroBackground}
+              disablePictureInPicture
+              disableRemotePlayback
+              className={`hero-video-layer absolute inset-0 h-full w-full scale-105 object-cover ${
+                activeLayer === i ? "opacity-50" : "opacity-0"
+              }`}
+            />
+          ))}
+        </div>
       ) : (
         <div className="absolute inset-0 opacity-[0.35]">
           <Image
