@@ -29,6 +29,7 @@ export function HeroBackground() {
   const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
   const indexRef = useRef(0);
   const layerRef = useRef(0);
+  const warmedIndexRef = useRef<number | null>(null);
   const [activeLayer, setActiveLayer] = useState(0);
   const [useVideo, setUseVideo] = useState(true);
 
@@ -40,25 +41,74 @@ export function HeroBackground() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  const prepareVideo = useCallback(async (el: HTMLVideoElement, src: string) => {
-    if (el.src !== new URL(src, window.location.origin).href) {
+  const loadVideo = useCallback(async (el: HTMLVideoElement, src: string) => {
+    const resolvedSrc = new URL(src, window.location.origin).href;
+    if (el.src !== resolvedSrc) {
       el.src = src;
       el.load();
     }
+
     await new Promise<void>((resolve) => {
-      if (el.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      if (el.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
         resolve();
         return;
       }
+
       const onReady = () => {
-        el.removeEventListener("canplay", onReady);
+        el.removeEventListener("canplaythrough", onReady);
         resolve();
       };
-      el.addEventListener("canplay", onReady);
+
+      el.addEventListener("canplaythrough", onReady);
     });
+  }, []);
+
+  const startVideo = useCallback(async (el: HTMLVideoElement) => {
     el.currentTime = 0;
     await el.play().catch(() => setUseVideo(false));
   }, []);
+
+  const warmHiddenLayer = useCallback(
+    async (currentIndex: number) => {
+      const nextIndex = (currentIndex + 1) % HERO_VIDEOS.length;
+      const hiddenLayer = 1 - layerRef.current;
+      const hidden = videoRefs[hiddenLayer].current;
+      if (!hidden) return;
+
+      prefetchVideo(HERO_VIDEOS[nextIndex]);
+      prefetchVideo(HERO_VIDEOS[(nextIndex + 1) % HERO_VIDEOS.length]);
+
+      await loadVideo(hidden, HERO_VIDEOS[nextIndex]);
+      warmedIndexRef.current = nextIndex;
+    },
+    [loadVideo],
+  );
+
+  const advanceToNext = useCallback(async () => {
+    const nextIndex = (indexRef.current + 1) % HERO_VIDEOS.length;
+    const backLayer = 1 - layerRef.current;
+    const back = videoRefs[backLayer].current;
+    const front = videoRefs[layerRef.current].current;
+    if (!back) return;
+
+    if (warmedIndexRef.current !== nextIndex) {
+      await loadVideo(back, HERO_VIDEOS[nextIndex]);
+    }
+
+    await startVideo(back);
+
+    layerRef.current = backLayer;
+    indexRef.current = nextIndex;
+    warmedIndexRef.current = null;
+    setActiveLayer(backLayer);
+
+    if (front) {
+      front.pause();
+      front.currentTime = 0;
+    }
+
+    void warmHiddenLayer(nextIndex);
+  }, [loadVideo, startVideo, warmHiddenLayer]);
 
   useEffect(() => {
     if (!useVideo) return;
@@ -69,38 +119,27 @@ export function HeroBackground() {
     let cancelled = false;
 
     void (async () => {
-      await prepareVideo(first, HERO_VIDEOS[0]);
+      await loadVideo(first, HERO_VIDEOS[0]);
       if (cancelled) return;
-      prefetchVideo(HERO_VIDEOS[1]);
+      await startVideo(first);
+      if (cancelled) return;
+      await warmHiddenLayer(0);
     })();
 
     return () => {
       cancelled = true;
     };
-  }, [useVideo, prepareVideo]);
+  }, [useVideo, loadVideo, startVideo, warmHiddenLayer]);
 
   useEffect(() => {
     if (!useVideo) return;
 
     const intervalId = window.setInterval(() => {
-      void (async () => {
-        const nextIndex = (indexRef.current + 1) % HERO_VIDEOS.length;
-        const backLayer = 1 - layerRef.current;
-        const back = videoRefs[backLayer].current;
-        if (!back) return;
-
-        prefetchVideo(HERO_VIDEOS[(nextIndex + 1) % HERO_VIDEOS.length]);
-
-        await prepareVideo(back, HERO_VIDEOS[nextIndex]);
-
-        layerRef.current = backLayer;
-        indexRef.current = nextIndex;
-        setActiveLayer(backLayer);
-      })();
+      void advanceToNext();
     }, ROTATE_MS);
 
     return () => window.clearInterval(intervalId);
-  }, [useVideo, prepareVideo]);
+  }, [useVideo, advanceToNext]);
 
   return (
     <div className="hero-bg absolute inset-0 overflow-hidden" aria-hidden>
@@ -113,9 +152,10 @@ export function HeroBackground() {
               key={i}
               ref={ref}
               muted
+              loop
               playsInline
               autoPlay={i === 0}
-              preload={i === 0 ? "auto" : "none"}
+              preload="auto"
               poster={SITE_MEDIA.heroBackground}
               disablePictureInPicture
               disableRemotePlayback

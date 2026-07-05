@@ -4,12 +4,12 @@ const DRONE_PHOTOS = "/images/drone/photos";
 export const SITE_MEDIA = {
   heroBackground: `${DRONE_PHOTOS}/hero-background.jpg`,
   heroVideos: [
+    "/videos/solar.mp4",
     "/videos/drone-flying-up.mp4",
     "/videos/baseball-game-high.mp4",
     "/videos/park-roll.mp4",
     "/videos/diamond-bar-ca.mp4",
     "/videos/chino-ca.mp4",
-    "/videos/solar.mp4",
   ] as const,
   services: {
     drone: `${DRONE_PHOTOS}/aerial-solar-campus.jpg`,
