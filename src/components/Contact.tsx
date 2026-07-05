@@ -26,12 +26,13 @@ export function Contact() {
   const buildMailtoLink = (payload: {
     name: string;
     email: string;
+    phone: string;
     service: string;
     message: string;
   }) => {
     const subject = encodeURIComponent(`Airmets inquiry — ${payload.service}`);
     const body = encodeURIComponent(
-      `Name: ${payload.name}\nEmail: ${payload.email}\nService: ${payload.service}\n\nProject details:\n${payload.message}`,
+      `Name: ${payload.name}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nService: ${payload.service}\n\nProject details:\n${payload.message}`,
     );
     return `mailto:${BUSINESS.email}?subject=${subject}&body=${body}`;
   };
@@ -51,6 +52,7 @@ export function Contact() {
     const payload = {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
+      phone: String(data.get("phone") ?? ""),
       service: String(data.get("service") ?? ""),
       message: String(data.get("message") ?? ""),
       website: String(data.get("website") ?? ""),
@@ -167,18 +169,31 @@ export function Contact() {
                     />
                   </label>
                   <label className="block">
-                    <span className="mb-2 block text-sm text-air-muted">Email</span>
+                    <span className="mb-2 block text-sm text-air-muted">Phone</span>
                     <input
                       required
-                      type="email"
-                      name="email"
-                      autoComplete="email"
+                      type="tel"
+                      name="phone"
+                      autoComplete="tel"
+                      inputMode="tel"
                       disabled={status === "submitting"}
                       className="w-full rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
-                      placeholder="you@email.com"
+                      placeholder="(555) 555-5555"
                     />
                   </label>
                 </div>
+                <label className="block">
+                  <span className="mb-2 block text-sm text-air-muted">Email</span>
+                  <input
+                    required
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    disabled={status === "submitting"}
+                    className="w-full rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
+                    placeholder="you@email.com"
+                  />
+                </label>
                 <label className="block">
                   <span className="mb-2 block text-sm text-air-muted">Service</span>
                   <select
