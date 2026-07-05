@@ -132,7 +132,7 @@ export function Portfolio() {
                 <p className="text-sm text-air-red">{lightbox.category} · {lightbox.location}</p>
                 <h3 className="font-display mt-1 text-xl font-bold sm:text-2xl">{lightbox.title}</h3>
                 <p className="mt-2 text-xs text-air-muted">
-                  Airmets DJI capture · {lightbox.location}. All portfolio media is from real Part 107 flights.
+                  Airmets aerial capture · {lightbox.location}. All portfolio media is from real Part 107 flights.
                 </p>
               </div>
               <button

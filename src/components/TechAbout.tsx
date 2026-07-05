@@ -46,8 +46,8 @@ export function TechAbout() {
                 body: "Commercial flights are conducted under FAA Part 107 by a certificated remote pilot, with safety-first planning on every mission.",
               },
               {
-                title: "DJI Air 3S Platform",
-                body: "Dual-camera system with obstacle sensing for cinematic 4K HDR video and high-resolution stills in challenging environments.",
+                title: "Professional UAS Platform",
+                body: "Commercial-grade aerial systems for cinematic 4K HDR video and high-resolution stills in challenging environments.",
               },
               {
                 title: "Real Estate Integration",

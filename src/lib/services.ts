@@ -49,7 +49,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       },
       {
         title: "Capture Day",
-        body: "A certificated remote pilot executes the mission on a DJI Air 3S with safety-first procedures, capturing photo and video sequences per your approved shot list.",
+        body: "A certificated remote pilot executes the mission with safety-first procedures, capturing photo and video sequences per your approved shot list.",
       },
       {
         title: "Post-Production & Delivery",

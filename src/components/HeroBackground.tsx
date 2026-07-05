@@ -149,7 +149,7 @@ export function HeroBackground() {
       <div className="absolute right-6 top-24 hidden text-right font-mono text-[10px] uppercase tracking-widest text-white/30 sm:block">
         <div>ALT — FT AGL</div>
         <div className="hero-pulse-text mt-1 text-air-red/70">● LIVE</div>
-        <div className="mt-1">DJI AIR 3S</div>
+        <div className="mt-1">UAS ONLINE</div>
       </div>
 
       {Array.from({ length: 3 }).map((_, i) => (

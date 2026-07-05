@@ -108,7 +108,7 @@ export function TechLabel({ children, className = "" }: TechLabelProps) {
 }
 
 export function TechStatusPills() {
-  const pills = ["4K HDR", "FAA PART 107", "DJI AIR 3S", "SOCAL OPS"];
+  const pills = ["4K HDR", "FAA PART 107", "PRO UAS", "SOCAL OPS"];
   return (
     <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 px-2 sm:gap-2 sm:px-0">
       {pills.map((pill) => (
