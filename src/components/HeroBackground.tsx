@@ -12,6 +12,7 @@ const FLIGHT_PATHS = [
 
 const HERO_VIDEOS = SITE_MEDIA.heroVideos;
 const ROTATE_MS = 5000;
+const FADE_MS = 1000;
 
 function prefetchVideo(url: string) {
   if (typeof document === "undefined") return;
@@ -23,6 +24,14 @@ function prefetchVideo(url: string) {
   link.href = url;
   link.setAttribute("data-hero-prefetch", url);
   document.head.appendChild(link);
+}
+
+function waitForNextFrame() {
+  return new Promise<void>((resolve) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => resolve());
+    });
+  });
 }
 
 export function HeroBackground() {
@@ -66,6 +75,27 @@ export function HeroBackground() {
   const startVideo = useCallback(async (el: HTMLVideoElement) => {
     el.currentTime = 0;
     await el.play().catch(() => setUseVideo(false));
+    await waitForNextFrame();
+  }, []);
+
+  const settleOutgoingLayer = useCallback((el: HTMLVideoElement, layerIndex: number) => {
+    let settled = false;
+
+    const cleanup = () => {
+      if (settled || layerRef.current === layerIndex) return;
+      settled = true;
+      el.pause();
+      el.currentTime = 0;
+      el.removeEventListener("transitionend", onTransitionEnd);
+    };
+
+    const onTransitionEnd = (event: TransitionEvent) => {
+      if (event.propertyName !== "opacity") return;
+      cleanup();
+    };
+
+    el.addEventListener("transitionend", onTransitionEnd);
+    window.setTimeout(cleanup, FADE_MS + 150);
   }, []);
 
   const warmHiddenLayer = useCallback(
@@ -86,29 +116,29 @@ export function HeroBackground() {
 
   const advanceToNext = useCallback(async () => {
     const nextIndex = (indexRef.current + 1) % HERO_VIDEOS.length;
-    const backLayer = 1 - layerRef.current;
-    const back = videoRefs[backLayer].current;
-    const front = videoRefs[layerRef.current].current;
-    if (!back) return;
+    const outgoingLayer = layerRef.current;
+    const incomingLayer = 1 - outgoingLayer;
+    const incoming = videoRefs[incomingLayer].current;
+    const outgoing = videoRefs[outgoingLayer].current;
+    if (!incoming) return;
 
     if (warmedIndexRef.current !== nextIndex) {
-      await loadVideo(back, HERO_VIDEOS[nextIndex]);
+      await loadVideo(incoming, HERO_VIDEOS[nextIndex]);
     }
 
-    await startVideo(back);
+    await startVideo(incoming);
 
-    layerRef.current = backLayer;
+    layerRef.current = incomingLayer;
     indexRef.current = nextIndex;
     warmedIndexRef.current = null;
-    setActiveLayer(backLayer);
+    setActiveLayer(incomingLayer);
 
-    if (front) {
-      front.pause();
-      front.currentTime = 0;
+    if (outgoing) {
+      settleOutgoingLayer(outgoing, outgoingLayer);
     }
 
     void warmHiddenLayer(nextIndex);
-  }, [loadVideo, startVideo, warmHiddenLayer]);
+  }, [loadVideo, startVideo, warmHiddenLayer, settleOutgoingLayer]);
 
   useEffect(() => {
     if (!useVideo) return;
@@ -156,11 +186,10 @@ export function HeroBackground() {
               playsInline
               autoPlay={i === 0}
               preload="auto"
-              poster={SITE_MEDIA.heroBackground}
               disablePictureInPicture
               disableRemotePlayback
               className={`hero-video-layer absolute inset-0 h-full w-full scale-105 object-cover ${
-                activeLayer === i ? "opacity-50" : "opacity-0"
+                activeLayer === i ? "hero-video-layer--active" : "hero-video-layer--inactive"
               }`}
             />
           ))}

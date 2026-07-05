@@ -136,9 +136,22 @@ textarea {
 }
 
 .hero-video-layer {
-  transition: opacity 0.7s ease-in-out;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
   transform: translateZ(0);
   backface-visibility: hidden;
+  will-change: opacity;
+  pointer-events: none;
+}
+
+.hero-video-layer--active {
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.hero-video-layer--inactive {
+  opacity: 0;
+  z-index: 1;
 }
 
 .hero-bg-node {
