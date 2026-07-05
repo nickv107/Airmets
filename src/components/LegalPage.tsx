@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
+import { SiteFooter } from "@/components/SiteFooter";
 import { BUSINESS } from "@/lib/legal";
 
 type LegalPageProps = {
@@ -26,20 +26,7 @@ export function LegalPage({ title, effectiveDate, children }: LegalPageProps) {
         <div className="legal-prose space-y-6 text-air-silver leading-relaxed">{children}</div>
       </main>
 
-      <footer className="border-t border-air-border px-6 py-8 text-center text-xs text-air-muted lg:px-8">
-        <p>
-          © {new Date().getFullYear()} {BUSINESS.name}.{" "}
-          <Link href="/privacy" className="text-air-red hover:underline">
-            Privacy
-          </Link>
-          {" · "}
-          <Link href="/terms" className="text-air-red hover:underline">
-            Terms
-          </Link>
-          {" · "}
-          <CookiePreferencesButton className="text-air-red hover:underline" />
-        </p>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

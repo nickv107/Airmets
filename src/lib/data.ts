@@ -167,6 +167,8 @@ export const SERVICE_STANDARDS = [
 export const FOOTER_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Service Area", href: "/service-area" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
   { label: "Privacy", href: "/privacy" },

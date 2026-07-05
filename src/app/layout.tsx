@@ -24,24 +24,31 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Airmets | Precision Aerial Drone Media — Southern California",
+  metadataBase: new URL("https://www.airmets.com"),
+  title: {
+    default: "Airmets | Precision Aerial Drone Media — Southern California",
+    template: "%s | Airmets",
+  },
   description:
-    "Cinematic drone photography and videography for luxury real estate, commercial brands, and events across the Inland Empire, Corona, LA, Palm Springs, and Joshua Tree.",
+    "Cinematic drone photography and videography for luxury real estate, commercial brands, and events across Los Angeles, Orange County, the Inland Empire, San Diego, Palm Springs, and Joshua Tree.",
   keywords: [
-    "drone photography",
-    "aerial videography",
-    "real estate drone",
-    "Southern California",
-    "Inland Empire",
-    "Corona",
-    "Palm Springs",
+    "drone photography Southern California",
+    "aerial videography Los Angeles",
+    "real estate drone Inland Empire",
     "FAA Part 107 remote pilot",
+    "Corona drone photographer",
+    "Palm Springs aerial media",
+    "Orange County UAS",
+    "general photography Southern California",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Airmets — Elevating Perspectives",
     description: "Precision aerial media for real estate, business & beyond.",
     type: "website",
-    url: "https://airmets.com",
+    url: "https://www.airmets.com",
+    siteName: "Airmets",
+    locale: "en_US",
   },
   icons: {
     icon: [
