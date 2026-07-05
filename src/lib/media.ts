@@ -7,6 +7,8 @@ export const SITE_MEDIA = {
     "/videos/drone-flying-up.mp4",
     "/videos/baseball-game-high.mp4",
     "/videos/park-roll.mp4",
+    "/videos/diamond-bar-ca.mp4",
+    "/videos/chino-ca.mp4",
     "/videos/solar.mp4",
   ] as const,
   services: {
