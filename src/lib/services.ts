@@ -6,7 +6,7 @@ export type ServiceDetail = {
   tagline: string;
   description: string;
   image: string;
-  icon: "camera" | "home" | "film" | "spark";
+  icon: "camera" | "home" | "film" | "spark" | "lens";
   overview: string;
   idealFor: string[];
   deliverables: string[];
@@ -228,6 +228,60 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         question: "Do you sign NDAs for private estates or unreleased developments?",
         answer:
           "Yes. Confidential projects are welcome. Note any NDA or embargo requirements when you submit a quote request.",
+      },
+    ],
+  },
+  {
+    id: "general-photography",
+    title: "General Photography",
+    tagline: "Ground-based DSLR capture for portraits, landscapes, travel, and brand storytelling.",
+    description:
+      "Professional on-location photography with full-frame DSLR and mirrorless cameras — portraits, landscapes, architecture, and editorial coverage beyond the drone.",
+    image: SITE_MEDIA.services.generalPhotography,
+    icon: "lens",
+    overview:
+      "Airmets extends beyond aerial work with ground-based photography for clients who need polished still imagery on location. From maternity and portrait sessions to travel landscapes and architectural coverage, we deliver color-graded, web-ready files with the same production standards as our drone missions.",
+    idealFor: [
+      "Portrait, maternity, and lifestyle sessions on location",
+      "Travel and landscape photography for brands and publications",
+      "Architectural and heritage site documentation",
+      "Marketing teams needing both aerial and ground photo packages",
+    ],
+    deliverables: [
+      "High-resolution edited JPEG sets (web and print-ready)",
+      "RAW source files on request",
+      "Color-graded exports matched to your brand palette",
+      "Vertical and horizontal crops for social and web layouts",
+      "Optional same-day shoot combining drone and ground coverage",
+    ],
+    process: [
+      {
+        title: "Creative Brief",
+        body: "We align on locations, wardrobe or styling notes, shot list priorities, and how stills will be used across web, print, and social channels.",
+      },
+      {
+        title: "Location Scout",
+        body: "We confirm access, golden-hour timing, permits when required, and backup indoor or covered options for weather-sensitive sessions.",
+      },
+      {
+        title: "On-Site Capture",
+        body: "Using professional DSLR and mirrorless bodies with a range of focal lengths, we capture the compositions and lighting your project needs.",
+      },
+      {
+        title: "Edit & Delivery",
+        body: "Selected images are culled, color-graded, and delivered in organized folders with filenames suited to your workflow.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can you combine drone and ground photography in one booking?",
+        answer:
+          "Yes. Many clients book a unified production day so aerial and ground stills share consistent lighting, location access, and delivery timelines.",
+      },
+      {
+        question: "Do you shoot events or interiors?",
+        answer:
+          "We focus on on-location exteriors, portraits, landscapes, and architectural coverage. Share your venue or event details and we will confirm fit during intake.",
       },
     ],
   },

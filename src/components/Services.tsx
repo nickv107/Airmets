@@ -12,6 +12,7 @@ function ServiceIcon({ type }: { type: string }) {
     home: "M3 11l9-7 9 7v10H5V11zm6 8h4v-6h-4v6z",
     film: "M4 5h16v14H4V5zm2 2v10h12V7H6zm2 2h2v2H8V9zm6 0h2v2h-2V9z",
     spark: "M12 2l2.4 7.2H22l-6 4.6 2.4 7.2L12 17l-6.4 4 2.4-7.2-6-4.6h7.6L12 2z",
+    lens: "M12 8a4 4 0 110 8 4 4 0 010-8zm8-2h-1.2l-.8-1.6a1 1 0 00-.9-.6H8.9a1 1 0 00-.9.6L7.2 6H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2zm-8 10a6 6 0 100-12 6 6 0 000 12z",
   };
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6 fill-air-red" aria-hidden>

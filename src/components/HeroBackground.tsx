@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { SITE_MEDIA } from "@/lib/media";
 
 const FLIGHT_PATHS = [
@@ -10,20 +11,59 @@ const FLIGHT_PATHS = [
 ];
 
 export function HeroBackground() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [useVideo, setUseVideo] = useState(true);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setUseVideo(!mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !useVideo) return;
+
+    const play = () => {
+      void video.play().catch(() => setUseVideo(false));
+    };
+
+    play();
+    video.addEventListener("canplay", play);
+    return () => video.removeEventListener("canplay", play);
+  }, [useVideo]);
+
   return (
     <div className="hero-bg absolute inset-0 overflow-hidden" aria-hidden>
       <div className="absolute inset-0 bg-[#0A0A0A]" />
 
-      <div className="absolute inset-0 opacity-[0.12] mix-blend-screen">
-        <Image
-          src={SITE_MEDIA.heroBackground}
-          alt=""
-          fill
-          priority
-          className="scale-105 object-cover"
-          sizes="100vw"
-        />
-      </div>
+      {useVideo ? (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={SITE_MEDIA.heroBackground}
+          className="absolute inset-0 h-full w-full scale-105 object-cover opacity-50"
+        >
+          <source src={SITE_MEDIA.heroVideo} type="video/mp4" />
+        </video>
+      ) : (
+        <div className="absolute inset-0 opacity-[0.35]">
+          <Image
+            src={SITE_MEDIA.heroBackground}
+            alt=""
+            fill
+            priority
+            className="scale-105 object-cover"
+            sizes="100vw"
+          />
+        </div>
+      )}
 
       <div className="hero-bg-radial absolute inset-0" />
       <div className="hero-bg-vignette absolute inset-0" />
@@ -108,7 +148,7 @@ export function HeroBackground() {
 
       <div className="absolute right-6 top-24 hidden text-right font-mono text-[10px] uppercase tracking-widest text-white/30 sm:block">
         <div>ALT — FT AGL</div>
-        <div className="hero-pulse-text mt-1 text-air-red/70">● DEMO</div>
+        <div className="hero-pulse-text mt-1 text-air-red/70">● LIVE</div>
         <div className="mt-1">DJI AIR 3S</div>
       </div>
 

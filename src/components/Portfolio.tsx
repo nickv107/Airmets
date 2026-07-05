@@ -45,7 +45,7 @@ export function Portfolio() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">Portfolio</p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Aerial Impact Gallery</h2>
           <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-            Real DJI aerial photos from Airmets flights across Southern California — landscapes, homes, and communities.
+            Drone aerials and ground-based DSLR photography from Airmets — landscapes, homes, and on-location sessions.
           </p>
         </motion.div>
 

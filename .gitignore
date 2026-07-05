@@ -9,3 +9,10 @@ scripts/wp-home-content.html
 *.DNG
 *.mov
 *.MOV
+*.TIF
+*.tif
+*.ARW
+*.arw
+public/images/dslr/DSC*
+public/images/dslr/GOPR*
+public/images/dslr/Moraine*
