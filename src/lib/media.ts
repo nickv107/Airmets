@@ -13,6 +13,10 @@ export const SITE_MEDIA = {
     graybarCampus: "/images/aerial-graybar-campus.jpg",
     playgroundCorona: "/images/aerial-playground-corona.jpg",
     mountainLake: "/images/aerial-mountain-lake.jpg",
+    plannedCommunity: "/images/aerial-planned-community.jpg",
+    valleyGrid: "/images/aerial-valley-grid.jpg",
+    curvedStreets: "/images/aerial-curved-streets.jpg",
+    parkPathways: "/images/aerial-park-pathways.jpg",
   },
 } as const;
 

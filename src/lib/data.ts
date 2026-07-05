@@ -54,6 +54,34 @@ export const PORTFOLIO_ITEMS = [
     image: SITE_MEDIA.portfolio.mountainLake,
     location: "High Desert, CA",
   },
+  {
+    id: "planned-community",
+    title: "Planned Community — Aerial Overview",
+    category: "Real Estate",
+    image: SITE_MEDIA.portfolio.plannedCommunity,
+    location: "Inland Empire, CA",
+  },
+  {
+    id: "valley-grid",
+    title: "Residential Grid — Valley Aerial",
+    category: "Real Estate",
+    image: SITE_MEDIA.portfolio.valleyGrid,
+    location: "Inland Empire, CA",
+  },
+  {
+    id: "curved-streets",
+    title: "Curved Streets — Neighborhood Aerial",
+    category: "Real Estate",
+    image: SITE_MEDIA.portfolio.curvedStreets,
+    location: "Southern California",
+  },
+  {
+    id: "park-pathways",
+    title: "Community Park — Trail Aerial",
+    category: "Landscape",
+    image: SITE_MEDIA.portfolio.parkPathways,
+    location: "Southern California",
+  },
 ] as const;
 
 export const PORTFOLIO_FILTERS = [
