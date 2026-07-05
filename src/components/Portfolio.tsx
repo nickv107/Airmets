@@ -45,7 +45,7 @@ export function Portfolio() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">Portfolio</p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Aerial Impact Gallery</h2>
           <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-            Real DJI aerial photos and video from Airmets flights across Southern California — landscapes, homes, and communities.
+            Real DJI aerial photos from Airmets flights across Southern California — landscapes, homes, and communities.
           </p>
         </motion.div>
 
@@ -88,11 +88,6 @@ export function Portfolio() {
                     className="object-cover transition duration-500 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
-                  {"video" in item && item.video && (
-                    <span className="absolute right-3 top-3 rounded-full bg-air-black/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
-                      Video
-                    </span>
-                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-air-black/80 via-transparent to-transparent opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 opacity-100 transition sm:translate-y-4 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100">
                     <p className="text-xs uppercase tracking-wider text-air-red">{item.category}</p>
@@ -125,23 +120,13 @@ export function Portfolio() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative min-h-0 flex-1 overflow-auto">
-                {"video" in lightbox && lightbox.video ? (
-                  <video
-                    src={lightbox.video}
-                    poster={lightbox.image}
-                    controls
-                    playsInline
-                    className="max-h-[55dvh] w-full bg-air-black object-contain sm:max-h-[65dvh]"
-                  />
-                ) : (
-                  <Image
-                    src={lightbox.image}
-                    alt={lightbox.title}
-                    width={1600}
-                    height={1000}
-                    className="mx-auto max-h-[55dvh] w-full object-contain sm:max-h-[65dvh] sm:w-auto"
-                  />
-                )}
+                <Image
+                  src={lightbox.image}
+                  alt={lightbox.title}
+                  width={1600}
+                  height={1000}
+                  className="mx-auto max-h-[55dvh] w-full object-contain sm:max-h-[65dvh] sm:w-auto"
+                />
               </div>
               <div className="shrink-0 border-t border-air-border bg-air-card p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:p-6">
                 <p className="text-sm text-air-red">{lightbox.category} · {lightbox.location}</p>

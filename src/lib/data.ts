@@ -41,13 +41,6 @@ export const PORTFOLIO_ITEMS = [
     location: "Diamond Bar, CA",
   },
   {
-    id: "park-trails",
-    title: "Park Trails — Landscape Design",
-    category: "Landscape",
-    image: SITE_MEDIA.portfolio.parkTrails,
-    location: "Corona, CA",
-  },
-  {
     id: "playground",
     title: "Playground & Recreation Area",
     category: "Events",
@@ -60,14 +53,6 @@ export const PORTFOLIO_ITEMS = [
     category: "Landscape",
     image: SITE_MEDIA.portfolio.mountainLake,
     location: "High Desert, CA",
-  },
-  {
-    id: "carbon-canyon-video",
-    title: "Carbon Canyon — Aerial Flythrough",
-    category: "Commercial",
-    image: SITE_MEDIA.portfolio.carbonCanyonPoster,
-    video: SITE_MEDIA.video.carbonCanyon,
-    location: "Carbon Canyon, CA",
   },
 ] as const;
 

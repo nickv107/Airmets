@@ -10,14 +10,9 @@ export const SITE_MEDIA = {
   portfolio: {
     townhomesCorona: "/images/aerial-townhomes-corona.jpg",
     diamondBarWide: "/images/aerial-diamond-bar-wide.jpg",
-    playgroundCorona: "/images/aerial-playground-corona.jpg",
     graybarCampus: "/images/aerial-graybar-campus.jpg",
-    parkTrails: "/images/aerial-park-trails.jpg",
+    playgroundCorona: "/images/aerial-playground-corona.jpg",
     mountainLake: "/images/aerial-mountain-lake.jpg",
-    carbonCanyonPoster: "/images/video-carbon-canyon-poster.jpg",
-  },
-  video: {
-    carbonCanyon: "/videos/carbon-canyon-aerial.mp4",
   },
 } as const;
 
