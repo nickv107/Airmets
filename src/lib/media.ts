@@ -1,6 +1,8 @@
+const DRONE_PHOTOS = "/images/drone/photos";
+
 /** Every image below is used exactly once across the single-page site. */
 export const SITE_MEDIA = {
-  heroBackground: "/images/drone/hero-background.jpg",
+  heroBackground: `${DRONE_PHOTOS}/hero-background.jpg`,
   heroVideos: [
     "/videos/drone-flying-up.mp4",
     "/videos/baseball-game-high.mp4",
@@ -8,22 +10,22 @@ export const SITE_MEDIA = {
     "/videos/solar.mp4",
   ] as const,
   services: {
-    drone: "/images/drone/aerial-solar-campus.jpg",
-    realEstate: "/images/drone/aerial-estate-front.jpg",
-    commercial: "/images/drone/aerial-genoptix-campus.jpg",
-    custom: "/images/drone/aerial-diamond-bar-valley.jpg",
+    drone: `${DRONE_PHOTOS}/aerial-solar-campus.jpg`,
+    realEstate: `${DRONE_PHOTOS}/aerial-estate-front.jpg`,
+    commercial: `${DRONE_PHOTOS}/aerial-genoptix-campus.jpg`,
+    custom: `${DRONE_PHOTOS}/aerial-diamond-bar-valley.jpg`,
     generalPhotography: "/images/dslr/photo-dsc09003.jpg",
   },
   portfolio: {
-    townhomesCorona: "/images/drone/aerial-townhomes-corona.jpg",
-    diamondBarWide: "/images/drone/aerial-diamond-bar-wide.jpg",
-    graybarCampus: "/images/drone/aerial-graybar-campus.jpg",
-    playgroundCorona: "/images/drone/aerial-playground-corona.jpg",
-    mountainLake: "/images/drone/aerial-mountain-lake.jpg",
-    plannedCommunity: "/images/drone/aerial-planned-community.jpg",
-    valleyGrid: "/images/drone/aerial-valley-grid.jpg",
-    curvedStreets: "/images/drone/aerial-curved-streets.jpg",
-    parkPathways: "/images/drone/aerial-park-pathways.jpg",
+    townhomesCorona: `${DRONE_PHOTOS}/aerial-townhomes-corona.jpg`,
+    diamondBarWide: `${DRONE_PHOTOS}/aerial-diamond-bar-wide.jpg`,
+    graybarCampus: `${DRONE_PHOTOS}/aerial-graybar-campus.jpg`,
+    playgroundCorona: `${DRONE_PHOTOS}/aerial-playground-corona.jpg`,
+    mountainLake: `${DRONE_PHOTOS}/aerial-mountain-lake.jpg`,
+    plannedCommunity: `${DRONE_PHOTOS}/aerial-planned-community.jpg`,
+    valleyGrid: `${DRONE_PHOTOS}/aerial-valley-grid.jpg`,
+    curvedStreets: `${DRONE_PHOTOS}/aerial-curved-streets.jpg`,
+    parkPathways: `${DRONE_PHOTOS}/aerial-park-pathways.jpg`,
     jiufenTeaHouse: "/images/dslr/photo-dsc07163.jpg",
     moraineLake: "/images/dslr/photo-moraine_1.jpg",
     alpineLakeIsland: "/images/dslr/photo-dsc05340_2.jpg",
