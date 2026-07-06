@@ -11,7 +11,6 @@ const FLIGHT_PATHS = [
 ];
 
 const HERO_VIDEOS = SITE_MEDIA.heroVideos;
-const ROTATE_MS = 5000;
 const FADE_OUT_MS = 600;
 const FADE_IN_MS = 600;
 const VISIBLE_OPACITY = 0.5;
@@ -114,15 +113,15 @@ export function HeroBackground() {
       const hidden = videoRefs[hiddenLayer].current;
       if (!hidden) return;
 
-      prefetchVideo(HERO_VIDEOS[nextIndex]);
-      prefetchVideo(HERO_VIDEOS[(nextIndex + 1) % HERO_VIDEOS.length]);
+      prefetchVideo(HERO_VIDEOS[nextIndex].src);
+      prefetchVideo(HERO_VIDEOS[(nextIndex + 1) % HERO_VIDEOS.length].src);
 
       hidden.pause();
       hidden.currentTime = 0;
       hidden.style.visibility = "hidden";
       hidden.style.opacity = "0";
 
-      await loadVideo(hidden, HERO_VIDEOS[nextIndex]);
+      await loadVideo(hidden, HERO_VIDEOS[nextIndex].src);
       warmedIndexRef.current = nextIndex;
     },
     [loadVideo],
@@ -145,7 +144,7 @@ export function HeroBackground() {
 
     try {
       if (warmedIndexRef.current !== nextIndex) {
-        await loadVideo(incoming, HERO_VIDEOS[nextIndex]);
+        await loadVideo(incoming, HERO_VIDEOS[nextIndex].src);
       }
 
       incoming.pause();
@@ -179,17 +178,22 @@ export function HeroBackground() {
     }
   }, [loadVideo, warmHiddenLayer]);
 
-  const scheduleNextRotation = useCallback(() => {
-    if (rotateTimeoutRef.current !== null) {
-      window.clearTimeout(rotateTimeoutRef.current);
-    }
+  const scheduleNextRotation = useCallback(
+    (videoIndex: number) => {
+      if (rotateTimeoutRef.current !== null) {
+        window.clearTimeout(rotateTimeoutRef.current);
+      }
 
-    rotateTimeoutRef.current = window.setTimeout(() => {
-      void advanceToNext().finally(() => {
-        scheduleNextRotation();
-      });
-    }, ROTATE_MS);
-  }, [advanceToNext]);
+      const holdMs = HERO_VIDEOS[videoIndex]?.holdMs ?? 5000;
+
+      rotateTimeoutRef.current = window.setTimeout(() => {
+        void advanceToNext().finally(() => {
+          scheduleNextRotation(indexRef.current);
+        });
+      }, holdMs);
+    },
+    [advanceToNext],
+  );
 
   useEffect(() => {
     if (!useVideo) return;
@@ -200,7 +204,7 @@ export function HeroBackground() {
     let cancelled = false;
 
     void (async () => {
-      await loadVideo(first, HERO_VIDEOS[0]);
+      await loadVideo(first, HERO_VIDEOS[0].src);
       if (cancelled) return;
 
       await first.play().catch(() => setUseVideo(false));
@@ -214,7 +218,7 @@ export function HeroBackground() {
       await warmHiddenLayer(0);
       if (cancelled) return;
 
-      scheduleNextRotation();
+      scheduleNextRotation(0);
     })();
 
     return () => {
@@ -236,7 +240,6 @@ export function HeroBackground() {
               key={i}
               ref={ref}
               muted
-              loop
               playsInline
               autoPlay={i === 0}
               preload="auto"

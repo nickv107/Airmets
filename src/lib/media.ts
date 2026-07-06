@@ -4,12 +4,12 @@ const DRONE_PHOTOS = "/images/drone/photos";
 export const SITE_MEDIA = {
   heroBackground: `${DRONE_PHOTOS}/hero-background.jpg`,
   heroVideos: [
-    "/videos/solar.mp4",
-    "/videos/drone-flying-up.mp4",
-    "/videos/baseball-game-high.mp4",
-    "/videos/park-roll.mp4",
-    "/videos/diamond-bar-ca.mp4",
-    "/videos/chino-ca.mp4",
+    { src: "/videos/solar.mp4", holdMs: 5000 },
+    { src: "/videos/drone-flying-up.mp4", holdMs: 5000 },
+    { src: "/videos/baseball-game-high.mp4", holdMs: 3700 },
+    { src: "/videos/park-roll.mp4", holdMs: 5000 },
+    { src: "/videos/diamond-bar-ca.mp4", holdMs: 5000 },
+    { src: "/videos/chino-ca.mp4", holdMs: 5000 },
   ] as const,
   services: {
     drone: `${DRONE_PHOTOS}/aerial-solar-campus.jpg`,
@@ -46,4 +46,9 @@ const ALL_SITE_IMAGES = [
 
 if (new Set(ALL_SITE_IMAGES).size !== ALL_SITE_IMAGES.length) {
   throw new Error("Duplicate image paths detected in SITE_MEDIA.");
+}
+
+const HERO_VIDEO_SRCS = SITE_MEDIA.heroVideos.map((video) => video.src);
+if (new Set(HERO_VIDEO_SRCS).size !== HERO_VIDEO_SRCS.length) {
+  throw new Error("Duplicate hero video paths detected in SITE_MEDIA.");
 }
