@@ -137,20 +137,21 @@ textarea {
 
 .hero-video-layer {
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  visibility: hidden;
   transform: translateZ(0);
   backface-visibility: hidden;
-  will-change: opacity;
   pointer-events: none;
 }
 
 .hero-video-layer--active {
   opacity: 0.5;
+  visibility: visible;
   z-index: 2;
 }
 
 .hero-video-layer--inactive {
   opacity: 0;
+  visibility: hidden;
   z-index: 1;
 }
 
