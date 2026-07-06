@@ -13,7 +13,9 @@ const FLIGHT_PATHS = [
 const HERO_VIDEOS = SITE_MEDIA.heroVideos;
 const FADE_OUT_MS = 600;
 const FADE_IN_MS = 600;
+const FADE_MS_TOTAL = FADE_OUT_MS + FADE_IN_MS;
 const VISIBLE_OPACITY = 0.5;
+const SNAP_THRESHOLD_MS = 1500;
 
 function prefetchVideo(url: string) {
   if (typeof document === "undefined") return;
@@ -66,6 +68,45 @@ function fadeOpacity(el: HTMLVideoElement, from: number, to: number, duration: n
   });
 }
 
+function getSegmentDuration(index: number) {
+  return HERO_VIDEOS[index].holdMs + FADE_MS_TOTAL;
+}
+
+function getTotalCycleMs() {
+  return HERO_VIDEOS.reduce((sum, _video, index) => sum + getSegmentDuration(index), 0);
+}
+
+function getWallClockPosition(elapsedMs: number) {
+  const total = getTotalCycleMs();
+  const position = ((elapsedMs % total) + total) % total;
+  let elapsed = 0;
+
+  for (let index = 0; index < HERO_VIDEOS.length; index += 1) {
+    const holdMs = HERO_VIDEOS[index].holdMs;
+    const segmentMs = getSegmentDuration(index);
+
+    if (position < elapsed + holdMs) {
+      return {
+        index,
+        remainingHoldMs: holdMs - (position - elapsed),
+      };
+    }
+
+    if (position < elapsed + segmentMs) {
+      const nextIndex = (index + 1) % HERO_VIDEOS.length;
+      const intoTransition = position - elapsed - holdMs;
+      return {
+        index: nextIndex,
+        remainingHoldMs: Math.max(400, HERO_VIDEOS[nextIndex].holdMs - intoTransition),
+      };
+    }
+
+    elapsed += segmentMs;
+  }
+
+  return { index: 0, remainingHoldMs: HERO_VIDEOS[0].holdMs };
+}
+
 export function HeroBackground() {
   const videoRefs = [useRef<HTMLVideoElement>(null), useRef<HTMLVideoElement>(null)];
   const indexRef = useRef(0);
@@ -73,6 +114,10 @@ export function HeroBackground() {
   const warmedIndexRef = useRef<number | null>(null);
   const transitioningRef = useRef(false);
   const rotateTimeoutRef = useRef<number | null>(null);
+  const epochRef = useRef<number | null>(null);
+  const nextAdvanceAtRef = useRef<number>(0);
+  const startedRef = useRef(false);
+  const advanceToNextRef = useRef<(() => Promise<void>) | null>(null);
   const [activeLayer, setActiveLayer] = useState(0);
   const [useVideo, setUseVideo] = useState(true);
 
@@ -82,6 +127,13 @@ export function HeroBackground() {
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const clearRotationTimer = useCallback(() => {
+    if (rotateTimeoutRef.current !== null) {
+      window.clearTimeout(rotateTimeoutRef.current);
+      rotateTimeoutRef.current = null;
+    }
   }, []);
 
   const loadVideo = useCallback(async (el: HTMLVideoElement, src: string) => {
@@ -106,6 +158,14 @@ export function HeroBackground() {
     });
   }, []);
 
+  const resumeActivePlayback = useCallback(() => {
+    if (!useVideo || transitioningRef.current) return;
+    const active = videoRefs[layerRef.current].current;
+    if (active && active.paused) {
+      void active.play().catch(() => {});
+    }
+  }, [useVideo]);
+
   const warmHiddenLayer = useCallback(
     async (currentIndex: number) => {
       const nextIndex = (currentIndex + 1) % HERO_VIDEOS.length;
@@ -126,6 +186,84 @@ export function HeroBackground() {
     },
     [loadVideo],
   );
+
+  const scheduleNextRotation = useCallback(
+    (videoIndex: number, delayMs?: number) => {
+      clearRotationTimer();
+
+      const holdMs = delayMs ?? HERO_VIDEOS[videoIndex]?.holdMs ?? 5000;
+      nextAdvanceAtRef.current = Date.now() + holdMs;
+
+      rotateTimeoutRef.current = window.setTimeout(() => {
+        void advanceToNextRef.current?.().finally(() => {
+          scheduleNextRotation(indexRef.current);
+        });
+      }, holdMs);
+    },
+    [clearRotationTimer],
+  );
+
+  const snapToWallClock = useCallback(async () => {
+    if (epochRef.current === null) return;
+
+    const { index, remainingHoldMs } = getWallClockPosition(Date.now() - epochRef.current);
+    const targetLayer = layerRef.current;
+    const otherLayer = 1 - targetLayer;
+    const target = videoRefs[targetLayer].current;
+    const other = videoRefs[otherLayer].current;
+    if (!target) return;
+
+    transitioningRef.current = true;
+
+    try {
+      if (other) {
+        other.pause();
+        other.currentTime = 0;
+        other.style.visibility = "hidden";
+        other.style.opacity = "0";
+        clearInlineVideoStyles(other);
+      }
+
+      await loadVideo(target, HERO_VIDEOS[index].src);
+      target.currentTime = 0;
+      target.style.visibility = "visible";
+      target.style.opacity = String(VISIBLE_OPACITY);
+      clearInlineVideoStyles(target);
+      await target.play().catch(() => setUseVideo(false));
+
+      layerRef.current = targetLayer;
+      indexRef.current = index;
+      warmedIndexRef.current = null;
+      setActiveLayer(targetLayer);
+
+      await warmHiddenLayer(index);
+      scheduleNextRotation(index, remainingHoldMs);
+    } finally {
+      transitioningRef.current = false;
+    }
+  }, [loadVideo, scheduleNextRotation, warmHiddenLayer]);
+
+  const syncRotation = useCallback(async () => {
+    if (!startedRef.current || !useVideo || transitioningRef.current) return;
+
+    resumeActivePlayback();
+
+    const overdue = Date.now() - nextAdvanceAtRef.current;
+    if (overdue > SNAP_THRESHOLD_MS) {
+      await snapToWallClock();
+      return;
+    }
+
+    if (overdue > 0) {
+      clearRotationTimer();
+      await advanceToNextRef.current?.();
+      scheduleNextRotation(indexRef.current);
+      return;
+    }
+
+    const remaining = Math.max(0, nextAdvanceAtRef.current - Date.now());
+    scheduleNextRotation(indexRef.current, remaining || undefined);
+  }, [resumeActivePlayback, scheduleNextRotation, snapToWallClock, useVideo]);
 
   const advanceToNext = useCallback(async () => {
     if (transitioningRef.current) return;
@@ -178,22 +316,7 @@ export function HeroBackground() {
     }
   }, [loadVideo, warmHiddenLayer]);
 
-  const scheduleNextRotation = useCallback(
-    (videoIndex: number) => {
-      if (rotateTimeoutRef.current !== null) {
-        window.clearTimeout(rotateTimeoutRef.current);
-      }
-
-      const holdMs = HERO_VIDEOS[videoIndex]?.holdMs ?? 5000;
-
-      rotateTimeoutRef.current = window.setTimeout(() => {
-        void advanceToNext().finally(() => {
-          scheduleNextRotation(indexRef.current);
-        });
-      }, holdMs);
-    },
-    [advanceToNext],
-  );
+  advanceToNextRef.current = advanceToNext;
 
   useEffect(() => {
     if (!useVideo) return;
@@ -204,6 +327,9 @@ export function HeroBackground() {
     let cancelled = false;
 
     void (async () => {
+      epochRef.current = Date.now();
+      startedRef.current = true;
+
       await loadVideo(first, HERO_VIDEOS[0].src);
       if (cancelled) return;
 
@@ -223,11 +349,66 @@ export function HeroBackground() {
 
     return () => {
       cancelled = true;
-      if (rotateTimeoutRef.current !== null) {
-        window.clearTimeout(rotateTimeoutRef.current);
+      startedRef.current = false;
+      clearRotationTimer();
+    };
+  }, [useVideo, loadVideo, warmHiddenLayer, scheduleNextRotation, clearRotationTimer]);
+
+  useEffect(() => {
+    if (!useVideo) return;
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        void syncRotation();
       }
     };
-  }, [useVideo, loadVideo, warmHiddenLayer, scheduleNextRotation]);
+
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        void syncRotation();
+      }
+    };
+
+    const onFocus = () => {
+      resumeActivePlayback();
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("pageshow", onPageShow);
+    window.addEventListener("focus", onFocus);
+
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("pageshow", onPageShow);
+      window.removeEventListener("focus", onFocus);
+    };
+  }, [useVideo, syncRotation, resumeActivePlayback]);
+
+  useEffect(() => {
+    if (!useVideo) return;
+
+    const cleanups = videoRefs.map((ref, layerIndex) => {
+      const el = ref.current;
+      if (!el) return undefined;
+
+      const onPause = () => {
+        if (
+          document.visibilityState === "visible" &&
+          !transitioningRef.current &&
+          layerRef.current === layerIndex
+        ) {
+          void el.play().catch(() => {});
+        }
+      };
+
+      el.addEventListener("pause", onPause);
+      return () => el.removeEventListener("pause", onPause);
+    });
+
+    return () => {
+      cleanups.forEach((cleanup) => cleanup?.());
+    };
+  }, [useVideo, activeLayer]);
 
   return (
     <div className="hero-bg absolute inset-0 overflow-hidden" aria-hidden>
