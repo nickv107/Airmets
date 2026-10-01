@@ -120,7 +120,7 @@ export function Contact() {
               <div className="py-12 text-center">
                 <p className="font-display text-2xl font-bold text-air-red">Send via Email</p>
                 <p className="mt-2 text-air-silver">
-                  Online delivery isn&apos;t configured yet. Use the button below to send your inquiry from your
+                  The form could not be delivered just now. Use the button below to send this inquiry from your
                   email app.
                 </p>
                 <a
@@ -142,6 +142,18 @@ export function Contact() {
               </div>
             ) : status === "success" ? (
               <div className="py-12 text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-air-red/40 bg-air-red/10">
+                  <svg viewBox="0 0 24 24" className="h-7 w-7 text-air-red" aria-hidden>
+                    <path
+                      d="M5 12.5l4.2 4.2L19 7.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
                 <p className="font-display text-2xl font-bold text-air-red">Inquiry Sent</p>
                 <p className="mt-2 text-air-silver">
                   Thank you. We&apos;ll respond at the email address you provided, usually within one business day.
@@ -164,7 +176,7 @@ export function Contact() {
                       name="name"
                       autoComplete="name"
                       disabled={status === "submitting"}
-                      className="w-full rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
+                      className="field"
                       placeholder="Your name"
                     />
                   </label>
@@ -177,7 +189,7 @@ export function Contact() {
                       autoComplete="tel"
                       inputMode="tel"
                       disabled={status === "submitting"}
-                      className="w-full rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
+                      className="field"
                       placeholder="(555) 555-5555"
                     />
                   </label>
@@ -190,7 +202,7 @@ export function Contact() {
                     name="email"
                     autoComplete="email"
                     disabled={status === "submitting"}
-                    className="w-full rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
+                    className="field"
                     placeholder="you@email.com"
                   />
                 </label>
@@ -201,7 +213,7 @@ export function Contact() {
                     value={selectedService}
                     onChange={(e) => setSelectedService(e.target.value)}
                     disabled={status === "submitting"}
-                    className="w-full rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
+                    className="field"
                   >
                     {SERVICE_DETAILS.map((service) => (
                       <option key={service.id} value={service.title}>
@@ -217,7 +229,7 @@ export function Contact() {
                     name="message"
                     rows={4}
                     disabled={status === "submitting"}
-                    className="w-full resize-none rounded-lg border border-air-border bg-air-black px-4 py-3 text-white outline-none focus:border-air-red disabled:opacity-60"
+                    className="field resize-none"
                     placeholder="Property address, date, deliverables..."
                   />
                 </label>

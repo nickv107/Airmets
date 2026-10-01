@@ -68,7 +68,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.5 }}
-          className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-air-muted sm:text-lg"
+          className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg"
         >
           Southern California drone media and website development for real estate, commercial brands, and
           custom production — serving the Inland Empire, Corona, Los Angeles, Palm Springs, and Joshua Tree.

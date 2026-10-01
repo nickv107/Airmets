@@ -38,7 +38,11 @@ function ServiceBlock({
   const contentY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
 
   return (
-    <section ref={ref} className="relative min-h-[70vh] overflow-hidden sm:min-h-[85vh]">
+    <section
+      id={`service-${service.id}`}
+      ref={ref}
+      className="relative min-h-[70vh] scroll-mt-24 overflow-hidden sm:min-h-[78vh]"
+    >
       <motion.div style={{ y: bgY }} className="absolute inset-0 -top-[15%] -bottom-[15%]">
         <Image
           src={service.image}
@@ -52,7 +56,7 @@ function ServiceBlock({
 
       <motion.div
         style={{ y: contentY }}
-        className={`relative z-10 mx-auto flex min-h-[70vh] max-w-7xl items-center px-4 py-16 sm:min-h-[85vh] sm:px-6 sm:py-24 lg:px-8 ${
+        className={`relative z-10 mx-auto flex min-h-[70vh] max-w-7xl items-center px-4 py-16 sm:min-h-[78vh] sm:px-6 sm:py-24 lg:px-8 ${
           index % 2 === 1 ? "lg:justify-end" : ""
         }`}
       >
@@ -61,7 +65,7 @@ function ServiceBlock({
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7 }}
-          className="glow-border w-full max-w-xl rounded-2xl border border-air-border bg-air-card/80 p-6 backdrop-blur-md sm:p-10"
+          className="glow-border w-full max-w-xl rounded-2xl border border-white/10 bg-air-black/75 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-md transition duration-300 hover:border-air-red/40 sm:p-10"
         >
           <div className="mb-4 flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-air-red/10">
@@ -75,9 +79,9 @@ function ServiceBlock({
           <p className="mb-6 leading-relaxed text-air-silver">{service.description}</p>
           <Link
             href={service.href}
-            className="touch-target inline-flex items-center gap-2 py-1 text-sm font-semibold text-air-red transition hover:gap-3"
+            className="touch-target inline-flex items-center gap-2 rounded-full border border-air-red/50 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-air-red"
           >
-            Learn More
+            View service
             <span aria-hidden>→</span>
           </Link>
         </motion.div>
@@ -110,6 +114,20 @@ export function Services() {
           Drone photography, videography, and custom marketing websites for businesses across
           Southern California.
         </p>
+        <nav aria-label="Jump to a service" className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((service, index) => (
+            <a
+              key={service.id}
+              href={`#service-${service.id}`}
+              className="group flex items-center gap-3 rounded-xl border border-air-border bg-air-card px-4 py-3 text-left transition hover:border-air-red/50 hover:bg-air-black"
+            >
+              <span className="font-display w-7 shrink-0 text-sm font-bold text-air-red">0{index + 1}</span>
+              <span className="text-sm font-medium leading-snug text-air-silver transition group-hover:text-white">
+                {service.title}
+              </span>
+            </a>
+          ))}
+        </nav>
       </div>
       {SERVICES.map((service, index) => (
         <ServiceBlock key={service.id} service={service} index={index} />

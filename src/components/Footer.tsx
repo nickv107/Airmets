@@ -7,6 +7,7 @@ import { BUSINESS } from "@/lib/legal";
 export function Footer() {
   return (
     <footer className="border-t border-air-border bg-air-black px-4 py-10 pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto mb-8 h-px max-w-7xl bg-gradient-to-r from-transparent via-air-red/80 to-transparent" />
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 sm:flex-row">
         <div className="flex flex-col items-center gap-1 sm:items-start">
           <Image src="/logo-full.png" alt="Airmets" width={140} height={40} className="h-8 w-auto" />

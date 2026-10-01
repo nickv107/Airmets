@@ -9,22 +9,6 @@ export function Portfolio() {
   const [filter, setFilter] = useState<string>("All");
   const [lightbox, setLightbox] = useState<(typeof PORTFOLIO_ITEMS)[number] | null>(null);
 
-  useEffect(() => {
-    if (!lightbox) return;
-
-    document.body.style.overflow = "hidden";
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setLightbox(null);
-    };
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [lightbox]);
-
   const filtered = useMemo(
     () =>
       filter === "All"
@@ -32,6 +16,46 @@ export function Portfolio() {
         : PORTFOLIO_ITEMS.filter((item) => item.category === filter),
     [filter],
   );
+
+  const lightboxIndex = lightbox ? filtered.findIndex((item) => item.id === lightbox.id) : -1;
+
+  const showLightboxAt = (index: number) => {
+    if (filtered.length === 0) return;
+    const next = (index + filtered.length) % filtered.length;
+    setLightbox(filtered[next]);
+  };
+
+  useEffect(() => {
+    if (!lightbox) return;
+
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setLightbox(null);
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setLightbox((current) => {
+          if (!current) return current;
+          const index = filtered.findIndex((item) => item.id === current.id);
+          return filtered[(index + 1) % filtered.length];
+        });
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setLightbox((current) => {
+          if (!current) return current;
+          const index = filtered.findIndex((item) => item.id === current.id);
+          return filtered[(index - 1 + filtered.length) % filtered.length];
+        });
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [lightbox, filtered]);
 
   return (
     <section id="portfolio" className="relative scroll-mt-20 px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
@@ -106,7 +130,7 @@ export function Portfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-end justify-center bg-air-black/95 p-0 backdrop-blur-sm sm:items-center sm:p-4"
+            className="fixed inset-0 z-[220] flex items-end justify-center overflow-hidden bg-air-black/95 p-0 backdrop-blur-sm sm:items-center sm:p-4"
             onClick={() => setLightbox(null)}
           >
             <motion.div
@@ -116,7 +140,7 @@ export function Portfolio() {
               role="dialog"
               aria-modal="true"
               aria-label={lightbox.title}
-              className="relative flex max-h-[100dvh] w-full max-w-5xl flex-col overflow-hidden rounded-t-2xl border border-air-border sm:max-h-[90dvh] sm:rounded-2xl"
+              className="relative flex max-h-[100dvh] w-full min-w-0 max-w-5xl flex-col overflow-hidden rounded-t-2xl border border-air-border sm:max-h-[90dvh] sm:rounded-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative min-h-0 flex-1 overflow-auto">
@@ -125,15 +149,40 @@ export function Portfolio() {
                   alt={lightbox.title}
                   width={1600}
                   height={1000}
-                  className="mx-auto max-h-[55dvh] w-full object-contain sm:max-h-[65dvh] sm:w-auto"
+                  className="mx-auto h-auto max-h-[55dvh] w-full max-w-full object-contain sm:max-h-[65dvh] sm:w-auto"
                 />
               </div>
               <div className="shrink-0 border-t border-air-border bg-air-card p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:p-6">
-                <p className="text-sm text-air-red">{lightbox.category} · {lightbox.location}</p>
-                <h3 className="font-display mt-1 text-xl font-bold sm:text-2xl">{lightbox.title}</h3>
-                <p className="mt-2 text-xs text-air-muted">
-                  Airmets aerial capture · {lightbox.location}. All portfolio media is from real Part 107 flights.
-                </p>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm text-air-red">{lightbox.category} · {lightbox.location}</p>
+                    <h3 className="font-display mt-1 text-xl font-bold sm:text-2xl">{lightbox.title}</h3>
+                    <p className="mt-2 text-xs text-air-muted">
+                      Airmets aerial capture · {lightbox.location}. All portfolio media is from real Part 107 flights.
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => showLightboxAt(lightboxIndex - 1)}
+                      className="touch-target flex items-center justify-center rounded-full border border-air-border text-lg text-white transition hover:border-air-red hover:text-air-red"
+                      aria-label="Previous photo"
+                    >
+                      ←
+                    </button>
+                    <span className="min-w-12 text-center text-xs text-air-muted">
+                      {lightboxIndex + 1} / {filtered.length}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => showLightboxAt(lightboxIndex + 1)}
+                      className="touch-target flex items-center justify-center rounded-full border border-air-border text-lg text-white transition hover:border-air-red hover:text-air-red"
+                      aria-label="Next photo"
+                    >
+                      →
+                    </button>
+                  </div>
+                </div>
               </div>
               <button
                 type="button"

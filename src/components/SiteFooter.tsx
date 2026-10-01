@@ -6,6 +6,7 @@ import { BUSINESS } from "@/lib/legal";
 export function SiteFooter() {
   return (
     <footer className="border-t border-air-border px-4 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] text-center text-xs text-air-muted sm:px-6 lg:px-8">
+      <div className="mx-auto mb-6 h-px max-w-3xl bg-gradient-to-r from-transparent via-air-red/80 to-transparent" />
       <nav className="mb-4 flex flex-wrap justify-center gap-x-4 gap-y-2" aria-label="Footer">
         {FOOTER_LINKS.map((link) => (
           <Link key={link.label} href={link.href} className="text-air-silver transition hover:text-white">

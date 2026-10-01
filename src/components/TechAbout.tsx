@@ -105,7 +105,7 @@ export function TechAbout() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-air-muted">Specialties</p>
-                  <p className="font-semibold">Real Estate · Commercial · Events · Custom Production</p>
+                  <p className="font-semibold">Real Estate · Commercial · Events · Websites</p>
                 </div>
               </div>
             </div>

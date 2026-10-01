@@ -29,8 +29,9 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="rounded-2xl border border-air-border bg-air-black p-8"
+              className="rounded-2xl border border-air-border bg-air-black p-8 transition duration-300 hover:border-air-red/40"
             >
+              <p className="mb-4 font-display text-sm font-bold tracking-[0.2em] text-air-red">0{i + 1}</p>
               <h3 className="font-display mb-4 text-lg font-semibold text-white">{item.title}</h3>
               <p className="leading-relaxed text-air-silver">{item.body}</p>
             </motion.article>

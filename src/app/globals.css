@@ -67,6 +67,32 @@ textarea {
   color: #fff;
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #ff2b2b;
+  outline-offset: 3px;
+}
+
+.field {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-air-border);
+  background: #0a0a0a;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field:focus {
+  border-color: #ff0000;
+  box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.22);
+}
+
+.field:disabled {
+  opacity: 0.6;
+}
+
 .neon-red {
   text-shadow: 0 0 20px rgba(255, 0, 0, 0.6), 0 0 40px rgba(255, 0, 0, 0.3);
 }
