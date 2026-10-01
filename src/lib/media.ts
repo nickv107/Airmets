@@ -17,6 +17,7 @@ export const SITE_MEDIA = {
     commercial: `${DRONE_PHOTOS}/aerial-genoptix-campus.jpg`,
     custom: `${DRONE_PHOTOS}/aerial-diamond-bar-valley.jpg`,
     generalPhotography: "/images/dslr/photo-dsc09003.jpg",
+    websiteDevelopment: "/images/services/website-development.jpg",
   },
   portfolio: {
     townhomesCorona: `${DRONE_PHOTOS}/aerial-townhomes-corona.jpg`,

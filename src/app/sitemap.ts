@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const servicePages = SERVICE_DETAILS.map((service) => ({
     url: `${SITE_URL}/services/${service.id}`,
     changeFrequency: "monthly" as const,
-    priority: 0.8,
+    priority: service.id === "website-development" ? 0.9 : 0.8,
   }));
 
   const blogPages = BLOG_POSTS.map((post) => ({

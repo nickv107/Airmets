@@ -95,12 +95,30 @@ export function ServicePageLayout({ service, children }: ServicePageLayoutProps)
             </div>
           </section>
 
+          {service.related && service.related.length > 0 && (
+            <section>
+              <h2 className="font-display mb-4 text-2xl font-bold text-white">Related</h2>
+              <ul className="flex flex-col gap-2">
+                {service.related.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-air-red hover:underline">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
           {children}
 
           <section className="rounded-2xl border border-air-red/30 bg-air-card p-8 text-center">
-            <h2 className="font-display mb-3 text-2xl font-bold text-white">Ready for a Quote?</h2>
+            <h2 className="font-display mb-3 text-2xl font-bold text-white">
+              {service.quoteTitle ?? "Ready for a Quote?"}
+            </h2>
             <p className="mx-auto mb-6 max-w-xl text-air-silver">
-              Tell us about your property, timeline, and deliverables. We typically respond within one business day.
+              {service.quoteBody ??
+                "Tell us about your property, timeline, and deliverables. We typically respond within one business day."}
             </p>
             <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
               <Link

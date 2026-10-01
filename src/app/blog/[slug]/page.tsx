@@ -106,6 +106,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
           </li>
           <li>
+            <Link href="/services/website-development" className="text-air-red hover:underline">
+              Website development
+            </Link>
+          </li>
+          <li>
             <Link href="/blog" className="text-air-red hover:underline">
               All blog articles
             </Link>

@@ -23,8 +23,9 @@ export default function TermsPage() {
       <section>
         <h2 className="font-display mb-3 text-xl font-bold text-white">Services</h2>
         <p>
-          {BUSINESS.name} provides commercial unmanned aircraft systems (UAS) photography and videography services in
-          {BUSINESS.region}. Specific scope, deliverables, pricing, and schedules are defined in a written proposal
+          {BUSINESS.name} provides commercial unmanned aircraft systems (UAS) photography and videography, ground
+          photography, and custom website development in {BUSINESS.region}. Specific scope, deliverables, pricing,
+          and schedules are defined in a written proposal
           or service agreement for each project. Website content is for general information only and does not
           constitute a binding offer.
         </p>

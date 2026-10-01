@@ -6,12 +6,18 @@ export type ServiceDetail = {
   tagline: string;
   description: string;
   image: string;
-  icon: "camera" | "home" | "film" | "spark" | "lens";
+  icon: "camera" | "home" | "film" | "spark" | "lens" | "code";
   overview: string;
   idealFor: string[];
   deliverables: string[];
   process: { title: string; body: string }[];
   faqs: { question: string; answer: string }[];
+  seoTitle?: string;
+  seoDescription?: string;
+  keywords?: string[];
+  quoteTitle?: string;
+  quoteBody?: string;
+  related?: { href: string; label: string }[];
 };
 
 export const SERVICE_DETAILS: ServiceDetail[] = [
@@ -283,6 +289,91 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         answer:
           "We focus on on-location exteriors, portraits, landscapes, and architectural coverage. Share your venue or event details and we will confirm fit during intake.",
       },
+    ],
+  },
+  {
+    id: "website-development",
+    title: "Website Development",
+    seoTitle: "Website Development in Southern California",
+    tagline: "Custom marketing websites built to load fast and show up in search.",
+    seoDescription:
+      "Website development for Southern California businesses. Airmets designs and builds fast marketing sites for real estate, practices, and local brands.",
+    description:
+      "Custom marketing websites for real estate teams, professional practices, and local brands — with search-ready pages, mobile layouts, and a clear way to request a quote.",
+    keywords: [
+      "website development Southern California",
+      "custom website design Inland Empire",
+      "business website developer Los Angeles",
+      "real estate website development",
+      "small business website Corona",
+      "marketing website Orange County",
+    ],
+    image: SITE_MEDIA.services.websiteDevelopment,
+    icon: "code",
+    overview:
+      "Airmets designs and builds custom marketing websites for businesses that need a clear, fast site. Pages are written around the services you sell and the places you serve, laid out for phones, and connected to an inquiry path that reaches you. When a project also needs photography or aerial media, capture and the website are planned together so the images have a page to live on.",
+    idealFor: [
+      "Real estate teams and brokerages that need a site beyond a listing portal",
+      "Professional practices and local service businesses",
+      "Brands replacing a template site that is hard to update or hard to find",
+      "Clients who want photography, video, and the website handled in one engagement",
+    ],
+    deliverables: [
+      "Custom marketing website organized around your services and service area",
+      "Mobile layouts and pages built for fast loading",
+      "Unique titles, descriptions, and a sitemap for public pages",
+      "Contact or inquiry forms that reach your inbox",
+      "Your photography and video placed on the pages that need them",
+      "Launch on your domain with HTTPS",
+    ],
+    process: [
+      {
+        title: "Scope",
+        body: "We confirm the pages, offers, locations, and anything the site should not collect. You leave with a written page list before design starts.",
+      },
+      {
+        title: "Structure",
+        body: "We map the sitemap, draft the page copy, and choose the searches each page should answer so the build has a search plan, not only a layout.",
+      },
+      {
+        title: "Design & Build",
+        body: "The site is designed around your brand and your photos. Layouts are checked on desktop and phone before anything goes live.",
+      },
+      {
+        title: "Launch",
+        body: "We connect your domain, test the inquiry form, and walk through how to request updates. You keep ownership of the domain and accounts.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Do you only build websites for aerial clients?",
+        answer:
+          "No. Website development is its own service. Aerial or ground photography can be added when the project needs original images, and it is not required to start.",
+      },
+      {
+        question: "Can you take over a site you did not build?",
+        answer:
+          "We review the current site and recommend either a focused update or a rebuild. If the foundation cannot support the pages you need, we say so before work starts.",
+      },
+      {
+        question: "Will the site be set up for search?",
+        answer:
+          "Yes. Each public page gets its own title, description, and canonical URL, and the site publishes a sitemap. Copy is written for the services and cities you actually serve.",
+      },
+      {
+        question: "How long does a marketing website take?",
+        answer:
+          "A focused service site is often a few weeks after copy, logos, and photos are in hand. Sites with many location or service pages take longer, and the proposal states the schedule.",
+      },
+    ],
+    quoteTitle: "Ready to plan your website?",
+    quoteBody:
+      "Tell us about the business, the pages you need, and when you want to launch. We typically respond within one business day.",
+    related: [
+      { href: "/service-area", label: "Southern California service area" },
+      { href: "/services/drone-aerial", label: "Drone aerial photography" },
+      { href: "/services/real-estate", label: "Real estate aerial tours" },
+      { href: "/#contact", label: "Request a quote" },
     ],
   },
 ];

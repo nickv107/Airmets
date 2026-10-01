@@ -13,10 +13,11 @@ function ServiceIcon({ type }: { type: string }) {
     film: "M4 5h16v14H4V5zm2 2v10h12V7H6zm2 2h2v2H8V9zm6 0h2v2h-2V9z",
     spark: "M12 2l2.4 7.2H22l-6 4.6 2.4 7.2L12 17l-6.4 4 2.4-7.2-6-4.6h7.6L12 2z",
     lens: "M12 8a4 4 0 110 8 4 4 0 010-8zm8-2h-1.2l-.8-1.6a1 1 0 00-.9-.6H8.9a1 1 0 00-.9.6L7.2 6H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2zm-8 10a6 6 0 100-12 6 6 0 000 12z",
+    code: "M3 4h18a1 1 0 011 1v11a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1zm1 3v8h16V7H4zm4 13h8v1.5H8z",
   };
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6 fill-air-red" aria-hidden>
-      <path d={paths[type] ?? paths.spark} />
+      <path d={paths[type] ?? paths.spark} fillRule={type === "code" ? "evenodd" : "nonzero"} />
     </svg>
   );
 }
@@ -103,11 +104,11 @@ export function Services() {
           viewport={{ once: true }}
           className="font-display text-3xl font-bold sm:text-4xl md:text-5xl"
         >
-          Mission-Capable Aerial Media
+          Aerial Media & Website Development
         </motion.h2>
         <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-          Parallax-powered service showcases engineered for luxury real estate, commercial brands,
-          and bespoke production workflows.
+          Drone photography, videography, and custom marketing websites for businesses across
+          Southern California.
         </p>
       </div>
       {SERVICES.map((service, index) => (

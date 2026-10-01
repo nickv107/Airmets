@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Airmets",
   },
   description:
-    "Cinematic drone photography and videography for luxury real estate, commercial brands, and events across Los Angeles, Orange County, the Inland Empire, San Diego, Palm Springs, and Joshua Tree.",
+    "Drone photography, videography, and website development for real estate and local businesses across Los Angeles, the Inland Empire, Orange County, San Diego, and Palm Springs.",
   keywords: [
     "drone photography Southern California",
     "aerial videography Los Angeles",
@@ -40,11 +40,14 @@ export const metadata: Metadata = {
     "Palm Springs aerial media",
     "Orange County UAS",
     "general photography Southern California",
+    "website development Southern California",
+    "custom website design Inland Empire",
+    "business website developer Los Angeles",
   ],
   alternates: { canonical: "/" },
   openGraph: {
     title: "Airmets — Elevating Perspectives",
-    description: "Precision aerial media for real estate, business & beyond.",
+    description: "Precision aerial media and website development for real estate, business, and beyond.",
     type: "website",
     url: "https://www.airmets.com",
     siteName: "Airmets",

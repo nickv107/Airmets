@@ -89,6 +89,18 @@ export default function ServiceAreaPage() {
         ))}
       </div>
 
+      <section className="rounded-2xl border border-air-border bg-air-card/50 p-6">
+        <h2 className="font-display mb-3 text-2xl font-bold text-white">Website development in this area</h2>
+        <p className="text-air-silver">
+          Airmets also builds custom marketing websites for businesses across these cities. Each site is structured
+          around the services you offer and the places you serve.{" "}
+          <Link href="/services/website-development" className="text-air-red hover:underline">
+            See website development
+          </Link>
+          .
+        </p>
+      </section>
+
       <section className="rounded-2xl border border-air-red/30 bg-air-card p-8">
         <h2 className="font-display mb-3 text-2xl font-bold text-white">Book an Aerial Mission</h2>
         <p className="mb-6 text-air-silver">
@@ -107,6 +119,12 @@ export default function ServiceAreaPage() {
             className="touch-target inline-flex items-center justify-center rounded-full border border-air-border px-8 py-3 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
           >
             Drone Services
+          </Link>
+          <Link
+            href="/services/website-development"
+            className="touch-target inline-flex items-center justify-center rounded-full border border-air-border px-8 py-3 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
+          >
+            Website Development
           </Link>
         </div>
       </section>
