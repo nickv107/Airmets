@@ -3,8 +3,9 @@ import { LegalPage } from "@/components/LegalPage";
 import { BUSINESS, LEGAL } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Airmets",
+  title: "Privacy Policy",
   description: "How Airmets collects, uses, and protects your personal information under U.S. and California law.",
+  alternates: { canonical: "https://www.airmets.com/privacy" },
 };
 
 export default function PrivacyPage() {

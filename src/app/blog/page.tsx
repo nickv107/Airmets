@@ -6,7 +6,7 @@ import { BLOG_POSTS } from "@/lib/blog";
 const SITE_URL = "https://www.airmets.com";
 
 export const metadata: Metadata = {
-  title: "UAS & Aerial Media Blog | Airmets",
+  title: "UAS & Aerial Media Blog",
   description:
     "Guides on FAA Part 107 compliance, real estate aerial marketing, airspace planning, and professional drone production across Southern California.",
   keywords: [
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     description: "Expert articles on commercial drone operations, aerial marketing, and production workflows.",
     url: `${SITE_URL}/blog`,
     type: "website",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Airmets" }],
   },
 };
 

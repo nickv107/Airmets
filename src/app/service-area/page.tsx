@@ -7,7 +7,7 @@ import { ALL_SERVICE_CITIES, SERVICE_AREA_INTRO, SERVICE_REGIONS } from "@/lib/s
 const SITE_URL = "https://www.airmets.com";
 
 export const metadata: Metadata = {
-  title: "Service Area — Southern California Drone & Aerial Photography | Airmets",
+  title: "Service Area — Southern California Drone & Aerial Photography",
   description:
     "Airmets serves Los Angeles, Orange County, the Inland Empire, San Diego, Ventura, Palm Springs, Joshua Tree, and cities across Southern California with FAA Part 107 aerial media.",
   keywords: [
@@ -26,6 +26,7 @@ export const metadata: Metadata = {
       "Professional drone photography and aerial videography across Southern California cities and counties.",
     url: `${SITE_URL}/service-area`,
     type: "website",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Airmets" }],
   },
 };
 

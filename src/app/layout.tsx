@@ -52,6 +52,20 @@ export const metadata: Metadata = {
     url: "https://www.airmets.com",
     siteName: "Airmets",
     locale: "en_US",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Airmets — aerial media and website development in Southern California",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Airmets — Elevating Perspectives",
+    description: "Precision aerial media and website development for real estate, business, and beyond.",
+    images: ["/og.jpg"],
   },
   icons: {
     icon: [

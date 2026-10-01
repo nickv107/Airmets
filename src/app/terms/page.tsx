@@ -3,8 +3,9 @@ import { LegalPage } from "@/components/LegalPage";
 import { BUSINESS, LEGAL } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Airmets",
-  description: "Terms governing use of the Airmets website and aerial media services.",
+  title: "Terms of Service",
+  description: "Terms governing use of the Airmets website, aerial media, and website development services.",
+  alternates: { canonical: "https://www.airmets.com/terms" },
 };
 
 export default function TermsPage() {

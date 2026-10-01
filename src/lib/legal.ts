@@ -5,7 +5,7 @@ export const BUSINESS = {
   phone: "626-740-8304",
   phoneTel: "6267408304",
   region: "Southern California, United States",
-  website: "https://airmets.com",
+  website: "https://www.airmets.com",
 } as const;
 
 export const LEGAL = {

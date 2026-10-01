@@ -26,7 +26,7 @@ async function sendViaResend(payload: ContactPayload) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return false;
 
-  const from = process.env.RESEND_FROM_EMAIL ?? `Airmets Contact <contact@${new URL(BUSINESS.website).hostname}>`;
+  const from = process.env.RESEND_FROM_EMAIL ?? `Airmets <${BUSINESS.email}>`;
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",

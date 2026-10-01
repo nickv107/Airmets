@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const post = getBlogPost(slug);
 
   if (!post) {
-    return { title: "Article Not Found | Airmets Blog" };
+    return { title: "Article Not Found" };
   }
 
   return {
-    title: `${post.title} | Airmets Blog`,
+    title: post.title,
     description: post.seoDescription,
     keywords: [post.category, "UAS", "drone photography", "Southern California", "FAA Part 107"],
     alternates: { canonical: `${SITE_URL}/blog/${post.slug}` },
@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       url: `${SITE_URL}/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Airmets" }],
     },
   };
 }
