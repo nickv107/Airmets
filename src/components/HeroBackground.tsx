@@ -43,6 +43,44 @@ function clearInlineVideoStyles(el: HTMLVideoElement) {
   el.style.visibility = "";
 }
 
+const restartingVideos = new WeakSet<HTMLVideoElement>();
+
+function seekToStart(el: HTMLVideoElement) {
+  return new Promise<void>((resolve) => {
+    if (el.currentTime < 0.05 && !el.ended) {
+      resolve();
+      return;
+    }
+
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      el.removeEventListener("seeked", finish);
+      resolve();
+    };
+
+    el.addEventListener("seeked", finish);
+    try {
+      el.currentTime = 0;
+    } catch {
+      finish();
+      return;
+    }
+    window.setTimeout(finish, 400);
+  });
+}
+
+async function playFromStart(el: HTMLVideoElement) {
+  restartingVideos.add(el);
+  try {
+    await seekToStart(el);
+    await el.play();
+  } finally {
+    restartingVideos.delete(el);
+  }
+}
+
 function fadeOpacity(el: HTMLVideoElement, from: number, to: number, duration: number) {
   return new Promise<void>((resolve) => {
     el.style.visibility = "visible";
@@ -161,9 +199,12 @@ export function HeroBackground() {
   const resumeActivePlayback = useCallback(() => {
     if (!useVideo || transitioningRef.current) return;
     const active = videoRefs[layerRef.current].current;
-    if (active && active.paused) {
-      void active.play().catch(() => {});
+    if (!active || !active.paused) return;
+    if (active.ended) {
+      void playFromStart(active).catch(() => {});
+      return;
     }
+    void active.play().catch(() => {});
   }, [useVideo]);
 
   const warmHiddenLayer = useCallback(
@@ -177,11 +218,12 @@ export function HeroBackground() {
       prefetchVideo(HERO_VIDEOS[(nextIndex + 1) % HERO_VIDEOS.length].src);
 
       hidden.pause();
-      hidden.currentTime = 0;
-      hidden.style.visibility = "hidden";
+      hidden.style.visibility = "visible";
       hidden.style.opacity = "0";
 
       await loadVideo(hidden, HERO_VIDEOS[nextIndex].src);
+      await seekToStart(hidden);
+      hidden.style.visibility = "hidden";
       warmedIndexRef.current = nextIndex;
     },
     [loadVideo],
@@ -195,9 +237,7 @@ export function HeroBackground() {
       nextAdvanceAtRef.current = Date.now() + holdMs;
 
       rotateTimeoutRef.current = window.setTimeout(() => {
-        void advanceToNextRef.current?.().finally(() => {
-          scheduleNextRotation(indexRef.current);
-        });
+        void advanceToNextRef.current?.();
       }, holdMs);
     },
     [clearRotationTimer],
@@ -225,8 +265,9 @@ export function HeroBackground() {
       }
 
       await loadVideo(target, HERO_VIDEOS[index].src);
-      target.currentTime = 0;
       target.style.visibility = "visible";
+      target.style.opacity = "0";
+      await seekToStart(target);
       target.style.opacity = String(VISIBLE_OPACITY);
       clearInlineVideoStyles(target);
       await target.play().catch(() => setUseVideo(false));
@@ -235,9 +276,9 @@ export function HeroBackground() {
       indexRef.current = index;
       warmedIndexRef.current = null;
       setActiveLayer(targetLayer);
+      scheduleNextRotation(index, remainingHoldMs);
 
       await warmHiddenLayer(index);
-      scheduleNextRotation(index, remainingHoldMs);
     } finally {
       transitioningRef.current = false;
     }
@@ -257,7 +298,6 @@ export function HeroBackground() {
     if (overdue > 0) {
       clearRotationTimer();
       await advanceToNextRef.current?.();
-      scheduleNextRotation(indexRef.current);
       return;
     }
 
@@ -266,7 +306,10 @@ export function HeroBackground() {
   }, [resumeActivePlayback, scheduleNextRotation, snapToWallClock, useVideo]);
 
   const advanceToNext = useCallback(async () => {
-    if (transitioningRef.current) return;
+    if (transitioningRef.current) {
+      scheduleNextRotation(indexRef.current, 300);
+      return;
+    }
     transitioningRef.current = true;
 
     const nextIndex = (indexRef.current + 1) % HERO_VIDEOS.length;
@@ -277,28 +320,31 @@ export function HeroBackground() {
 
     if (!outgoing || !incoming) {
       transitioningRef.current = false;
+      scheduleNextRotation(indexRef.current, 1000);
       return;
     }
+
+    let startedHold = false;
 
     try {
       if (warmedIndexRef.current !== nextIndex) {
         await loadVideo(incoming, HERO_VIDEOS[nextIndex].src);
       }
 
-      incoming.pause();
-      incoming.currentTime = 0;
-      incoming.style.visibility = "hidden";
+      incoming.style.visibility = "visible";
       incoming.style.opacity = "0";
+      await seekToStart(incoming);
 
       await fadeOpacity(outgoing, VISIBLE_OPACITY, 0, FADE_OUT_MS);
 
       outgoing.pause();
-      outgoing.currentTime = 0;
       outgoing.style.visibility = "hidden";
       outgoing.style.opacity = "0";
 
       await incoming.play().catch(() => setUseVideo(false));
       await waitForNextFrame();
+      scheduleNextRotation(nextIndex);
+      startedHold = true;
 
       layerRef.current = incomingLayer;
       indexRef.current = nextIndex;
@@ -313,8 +359,11 @@ export function HeroBackground() {
       await warmHiddenLayer(nextIndex);
     } finally {
       transitioningRef.current = false;
+      if (!startedHold && nextAdvanceAtRef.current <= Date.now()) {
+        scheduleNextRotation(indexRef.current, 1000);
+      }
     }
-  }, [loadVideo, warmHiddenLayer]);
+  }, [loadVideo, scheduleNextRotation, warmHiddenLayer]);
 
   advanceToNextRef.current = advanceToNext;
 
@@ -333,18 +382,16 @@ export function HeroBackground() {
       await loadVideo(first, HERO_VIDEOS[0].src);
       if (cancelled) return;
 
-      await first.play().catch(() => setUseVideo(false));
+      await playFromStart(first).catch(() => setUseVideo(false));
       if (cancelled) return;
 
       clearInlineVideoStyles(first);
       setActiveLayer(0);
       layerRef.current = 0;
       indexRef.current = 0;
+      scheduleNextRotation(0);
 
       await warmHiddenLayer(0);
-      if (cancelled) return;
-
-      scheduleNextRotation(0);
     })();
 
     return () => {
@@ -393,12 +440,20 @@ export function HeroBackground() {
 
       const onPause = () => {
         if (
-          document.visibilityState === "visible" &&
-          !transitioningRef.current &&
-          layerRef.current === layerIndex
+          restartingVideos.has(el) ||
+          document.visibilityState !== "visible" ||
+          transitioningRef.current ||
+          layerRef.current !== layerIndex
         ) {
-          void el.play().catch(() => {});
+          return;
         }
+
+        if (el.ended) {
+          void playFromStart(el).catch(() => {});
+          return;
+        }
+
+        void el.play().catch(() => {});
       };
 
       el.addEventListener("pause", onPause);
@@ -422,6 +477,7 @@ export function HeroBackground() {
               ref={ref}
               muted
               playsInline
+              loop
               autoPlay={i === 0}
               preload="auto"
               disablePictureInPicture
