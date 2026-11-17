@@ -16,6 +16,7 @@ export const SERVICES = SERVICE_DETAILS.map((service) => ({
   title: service.title,
   description: service.description,
   image: service.image,
+  imageAlt: service.imageAlt,
   icon: service.icon,
   href: `/services/${service.id}`,
 }));
@@ -148,7 +149,7 @@ export const TECH_SPECS = [
   { label: "Flight Platform", value: "Professional Commercial UAS" },
   { label: "Certification", value: "FAA Part 107 Certificated Remote Pilot" },
   { label: "Coverage Area", value: "Inland Empire · Corona · LA · Palm Springs · Joshua Tree" },
-  { label: "Deliverables", value: "4K Video · RAW & Edited Photo Sets · MLS-Compatible Formats" },
+  { label: "Deliverables", value: "4K Video · Aircraft & Listing Photo Sets · MLS-Ready Stills" },
 ] as const;
 
 export const SERVICE_STANDARDS = [
@@ -158,7 +159,7 @@ export const SERVICE_STANDARDS = [
   },
   {
     title: "Clear Project Scoping",
-    body: "Each engagement includes defined deliverables, turnaround expectations, and flight constraints so clients know what to expect before shoot day.",
+    body: "Each engagement includes defined deliverables, turnaround expectations, and location or flight constraints so clients know what to expect before shoot day.",
   },
   {
     title: "Professional Post-Production",

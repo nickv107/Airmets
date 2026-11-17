@@ -97,6 +97,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
           </li>
           <li>
+            <Link href="/services/aircraft-for-sale" className="text-air-red hover:underline">
+              Aircraft for sale photography
+            </Link>
+          </li>
+          <li>
+            <Link href="/services/real-estate-photography" className="text-air-red hover:underline">
+              Real estate photography
+            </Link>
+          </li>
+          <li>
             <Link href="/services/drone-aerial" className="text-air-red hover:underline">
               Drone aerial photography services
             </Link>

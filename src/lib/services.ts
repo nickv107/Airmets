@@ -6,7 +6,8 @@ export type ServiceDetail = {
   tagline: string;
   description: string;
   image: string;
-  icon: "camera" | "home" | "film" | "spark" | "lens" | "code";
+  icon: "camera" | "home" | "film" | "spark" | "lens" | "code" | "plane" | "frame" | "hangar";
+  imageAlt?: string;
   overview: string;
   idealFor: string[];
   deliverables: string[];
@@ -74,6 +75,181 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
           "High winds, precipitation, low visibility, or conditions that affect aircraft safety or image quality may require rescheduling. We communicate early if a weather hold is likely.",
       },
     ],
+    related: [
+      { href: "/services/aircraft-for-sale", label: "Aircraft for sale photography" },
+      { href: "/services/aviation-facilities", label: "FBO, hangar, and flight school media" },
+      { href: "/services/real-estate", label: "Real estate aerial tours" },
+    ],
+  },
+  {
+    id: "aircraft-for-sale",
+    title: "Aircraft for Sale Photography",
+    seoTitle: "Aircraft for Sale Photography in Southern California",
+    tagline: "Ramp and hangar listing photos that show the aircraft the way a buyer needs to see it.",
+    seoDescription:
+      "Aircraft for sale photography in Southern California. Exterior, cabin, flight deck, and detail sets for brokers, owners, and flight departments.",
+    description:
+      "Listing photography for aircraft on the ramp or in the hangar — exterior, cabin, flight deck, and detail coverage prepared for broker pages and sales listings.",
+    keywords: [
+      "aircraft for sale photography",
+      "aircraft listing photographer Southern California",
+      "aircraft broker photography",
+      "cabin and cockpit photography",
+      "Inland Empire aircraft photographer",
+      "Chino aircraft photography",
+    ],
+    image: SITE_MEDIA.services.aircraftForSale,
+    imageAlt: "Sunrise above a cloud layer",
+    icon: "plane",
+    overview:
+      "Airmets photographs aircraft that are for sale or due for a marketing refresh. A standard session is shot from the ground, on the ramp or inside the hangar, with permission from the owner, FBO, or airport. Coverage walks a buyer from the first exterior angle through the cabin, flight deck, and the details that support the listing. A drone orbit is added only when FAA authorization and the airport both allow it.",
+    idealFor: [
+      "Aircraft brokers preparing a listing or a fleet refresh",
+      "Owners selling a personal or business aircraft",
+      "Flight schools and clubs marketing trainers",
+      "Charter operators and flight departments updating fleet photos",
+    ],
+    deliverables: [
+      "Exterior walkaround edited for listing sites and print",
+      "Cabin, galley, and seating coverage",
+      "Flight-deck photos with avionics powered when you want them shown",
+      "Detail stills of paint, interior materials, and maintenance-relevant areas you ask us to include",
+      "Web and social crops, with RAW files available on request",
+    ],
+    process: [
+      {
+        title: "Listing Intake",
+        body: "Share the airport, the aircraft's availability window, who grants ramp or hangar access, and whether the set is exterior only or a full interior and exterior package.",
+      },
+      {
+        title: "Access & Prep",
+        body: "We confirm FBO or airport rules before the day. You receive a short prep list: clean exterior, cabin staged, covers and clutter out of the hero angles, and a plan for powering the panel.",
+      },
+      {
+        title: "On-Site Capture",
+        body: "We work around the ramp schedule and photograph the agreed shot list from the ground. If a drone flight was cleared in advance, that pass is flown under Part 107 with the required authorization.",
+      },
+      {
+        title: "Listing Delivery",
+        body: "Edited stills are color-graded and delivered in a set your broker page, listing site, and print pieces can use. Turnaround is stated in the proposal.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can you fly a drone on the airport?",
+        answer:
+          "Only when the FAA and the airport both allow it. Many ramps sit in controlled airspace where a drone is not the right tool. The listing set is planned as ground photography, and a drone pass is an add-on we confirm before shoot day.",
+      },
+      {
+        question: "Do you shoot air-to-air?",
+        answer:
+          "A standard session stays on the ground. Air-to-air needs another aircraft, a formation plan, and its own quote. Tell us if you need it and we will say whether that production is a fit.",
+      },
+      {
+        question: "What has to be ready before you arrive?",
+        answer:
+          "A clean exterior, the cabin staged the way you want it shown, covers and loose items moved out of the hero angles, and someone who can power the avionics for flight-deck photos. We send the prep list with the proposal.",
+      },
+      {
+        question: "Will you name the aircraft type on your website?",
+        answer:
+          "No. Portfolio use is separate from the listing delivery and only happens with your written permission. We do not publish tail numbers or model names from a client aircraft.",
+      },
+    ],
+    quoteTitle: "Ready to photograph an aircraft?",
+    quoteBody:
+      "Share the airport, when the aircraft is available, and whether you need exterior, cabin, or both. We typically respond within one business day.",
+    related: [
+      { href: "/services/aviation-facilities", label: "FBO, hangar, and flight school media" },
+      { href: "/services/drone-aerial", label: "Drone aerial photography" },
+      { href: "/services/website-development", label: "Website development" },
+      { href: "/#contact", label: "Request a quote" },
+    ],
+  },
+  {
+    id: "real-estate-photography",
+    title: "Real Estate Photography",
+    seoTitle: "Real Estate Photography in Southern California",
+    tagline: "Interior, exterior, and twilight listing photos, with aerial added when the property needs both.",
+    seoDescription:
+      "Real estate photography for Southern California listings. Interiors, exteriors, details, and twilight, with drone aerials available in the same booking.",
+    description:
+      "Ground listing photography for homes and estates — interiors, exteriors, details, and twilight — with aerial added when the listing needs both.",
+    keywords: [
+      "real estate photographer Inland Empire",
+      "listing photography Corona",
+      "luxury home photographer Temecula",
+      "twilight real estate photography",
+      "interior listing photos Los Angeles",
+      "real estate photography Palm Springs",
+    ],
+    image: SITE_MEDIA.services.realEstatePhotography,
+    imageAlt: "Hillside homes and pools in Diamond Bar",
+    icon: "frame",
+    overview:
+      "Airmets photographs listings from the ground so buyers can judge the rooms, the finishes, and the approach before they book a showing. The set covers interiors, exteriors, and the details that carry a luxury listing. Twilight is available when it is scheduled in advance. Aerial coverage lives with the luxury aerial tour and can share the same visit when the address can be flown.",
+    idealFor: [
+      "Agents preparing a listing for the MLS and their own marketing",
+      "Brokerages that want one team for interior photos and aerials",
+      "Luxury and view properties that need twilight",
+      "Builders and model-home teams documenting a new release",
+    ],
+    deliverables: [
+      "Edited interior and exterior photo sets",
+      "Detail coverage of kitchens, primary suites, and other selling spaces you flag",
+      "Twilight exteriors when scheduled",
+      "MLS-friendly exports when you tell us which board you use",
+      "Vertical crops for agent social posts",
+    ],
+    process: [
+      {
+        title: "Listing Intake",
+        body: "Share the address, the go-live date, occupancy, and whether the booking is photos only or photos plus aerial. Note HOA rules and any rooms that should stay out of frame.",
+      },
+      {
+        title: "Shot Plan",
+        body: "We plan interiors, exteriors, and twilight around the light. If aerial is included, we check airspace before we promise a same-day flight.",
+      },
+      {
+        title: "On-Site Capture",
+        body: "Ground photos are made with professional cameras and lighting suited to the rooms. The visit is coordinated with the agent or seller so the home is photo-ready.",
+      },
+      {
+        title: "Agent-Ready Delivery",
+        body: "You receive a culled, color-graded set named for listing upload, email, and social. Active listings can request the turnaround stated in the proposal.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How is this different from the aerial tour?",
+        answer:
+          "This service is the ground set: interiors, exteriors, details, and twilight. The aerial tour shows lot position, views, and the neighborhood from above. Most listings book both.",
+      },
+      {
+        question: "Do you photograph twilight?",
+        answer:
+          "Yes, when it is on the schedule. Twilight needs a later arrival and a clear weather window, so request it when you book.",
+      },
+      {
+        question: "Will my MLS accept the files?",
+        answer:
+          "Tell us which MLS you use and we will export sizes and compression that match that board's published photo rules.",
+      },
+      {
+        question: "Can interior photos and the drone happen on one visit?",
+        answer:
+          "Often yes, when daylight and airspace allow. We confirm the flight before shoot day so the ground set is never waiting on a flight that cannot happen.",
+      },
+    ],
+    quoteTitle: "Ready to photograph a listing?",
+    quoteBody:
+      "Share the address, the listing date, and whether you want interiors, twilight, or a combined aerial package. We typically respond within one business day.",
+    related: [
+      { href: "/services/real-estate", label: "Luxury real estate aerial tours" },
+      { href: "/services/website-development", label: "Website development" },
+      { href: "/service-area", label: "Southern California service area" },
+      { href: "/#contact", label: "Request a quote" },
+    ],
   },
   {
     id: "real-estate",
@@ -84,7 +260,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     image: SITE_MEDIA.services.realEstate,
     icon: "home",
     overview:
-      "Luxury listings deserve more than ground-level photos. Airmets creates aerial photo and video packages that highlight lot position, architectural scale, nearby amenities, and the surrounding neighborhood — helping buyers understand value before they schedule a showing.",
+      "Luxury listings deserve more than ground-level photos. Airmets creates aerial photo and video packages that highlight lot position, architectural scale, nearby amenities, and the surrounding neighborhood — helping buyers understand value before they schedule a showing. Interiors, exteriors, and twilight are booked with real estate photography and can share the same visit.",
     idealFor: [
       "Luxury agents marketing hillside estates and view properties",
       "Brokerages needing consistent aerial branding across listings",
@@ -127,6 +303,96 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
         answer:
           "We export MLS-friendly dimensions and compression when your board supports it. Tell us your MLS name and we will match their published media guidelines.",
       },
+    ],
+    related: [
+      { href: "/services/real-estate-photography", label: "Real estate photography" },
+      { href: "/services/drone-aerial", label: "Drone aerial photography" },
+      { href: "/#contact", label: "Request a quote" },
+    ],
+  },
+  {
+    id: "aviation-facilities",
+    title: "FBO, Hangar & Flight School Media",
+    seoTitle: "FBO and Hangar Photography in Southern California",
+    tagline: "Facility photography for the ramp, the lobby, the training floor, and the shop.",
+    seoDescription:
+      "Photography for FBOs, hangars, flight schools, and maintenance shops across Southern California. Ramp, lobby, classroom, and shop coverage.",
+    description:
+      "Photography for FBOs, hangars, flight schools, and maintenance shops, including lobbies, ramps, and training or shop spaces.",
+    keywords: [
+      "FBO photography",
+      "hangar photography Southern California",
+      "flight school photographer",
+      "aviation facility photography",
+      "aircraft maintenance shop photos",
+      "Chino FBO photographer",
+    ],
+    image: SITE_MEDIA.services.aviationFacilities,
+    imageAlt: "Shop buildings and a work yard below green hills",
+    icon: "hangar",
+    overview:
+      "Airmets photographs aviation businesses that need current pictures of the place itself. That includes FBO lobbies and ramps, hangar interiors, flight-school classrooms and aircraft lines, and maintenance shops. The work is planned around badges, escorts, and the parts of the field that are off limits. Drone coverage of an airport is included only when FAA authorization and the airport both allow it. Most facility sessions are ground photography for that reason.",
+    idealFor: [
+      "FBOs updating a website, brochure, or broker presentation",
+      "Hangar and flight-department operators",
+      "Flight schools marketing training, aircraft, and facilities",
+      "Maintenance shops documenting the floor, the team space, and the ramp",
+    ],
+    deliverables: [
+      "Exterior and ramp photography",
+      "Lobby, customer, and office coverage",
+      "Hangar, classroom, or shop-floor sets, as access allows",
+      "Detail stills of the spaces you want a visitor to remember",
+      "Web, print, and social crops from the same edit",
+    ],
+    process: [
+      {
+        title: "Facility Intake",
+        body: "Share the airport or address, the spaces to cover, and who will escort the shoot. Note badge rules, customer privacy, and any aircraft that must stay out of frame.",
+      },
+      {
+        title: "Access Plan",
+        body: "We confirm what can be photographed and whether a drone flight is even legal at that field. If it is not, the proposal stays on the ground and says so.",
+      },
+      {
+        title: "On-Site Capture",
+        body: "We work inside the escort and the operating schedule, covering the agreed spaces without blocking customers, students, or maintenance.",
+      },
+      {
+        title: "Delivery",
+        body: "Edited photos are delivered by location and space so a website, listing, or sales deck can use them without a second sort.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can you photograph inside a hangar or FBO?",
+        answer:
+          "Yes, with access from the facility. Tell us about badges, escorts, and rooms or ramps that are off limits when you request the quote.",
+      },
+      {
+        question: "Can you fly a drone over the airport?",
+        answer:
+          "Only with FAA authorization and airport permission. Many of these projects are ground sessions because the field cannot be flown. We answer that before shoot day.",
+      },
+      {
+        question: "Do you photograph flight schools and maintenance shops?",
+        answer:
+          "Yes. A visit can cover the ramp, lobby, training space, shop floor, and exterior when those areas are cleared in advance.",
+      },
+      {
+        question: "Can aircraft on the ramp be included?",
+        answer:
+          "Only with permission from the operator of each aircraft. If a tail number or a specific airplane should not appear, say so in the shot list and we will frame around it.",
+      },
+    ],
+    quoteTitle: "Ready to photograph your facility?",
+    quoteBody:
+      "Tell us the airport or address, the spaces you want covered, and any badge or escort requirements. We typically respond within one business day.",
+    related: [
+      { href: "/services/aircraft-for-sale", label: "Aircraft for sale photography" },
+      { href: "/services/drone-aerial", label: "Drone aerial photography" },
+      { href: "/services/website-development", label: "Website development" },
+      { href: "/#contact", label: "Request a quote" },
     ],
   },
   {
@@ -285,9 +551,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
           "Yes. Many clients book a unified production day so aerial and ground stills share consistent lighting, location access, and delivery timelines.",
       },
       {
-        question: "Do you shoot events or interiors?",
+        question: "Do you shoot listing interiors or aircraft?",
         answer:
-          "We focus on on-location exteriors, portraits, landscapes, and architectural coverage. Share your venue or event details and we will confirm fit during intake.",
+          "Listing interiors, exteriors, and twilight are covered under real estate photography. Aircraft listing photos are covered under aircraft for sale photography. General photography stays with portraits, landscapes, and on-location editorial work.",
       },
     ],
   },
@@ -371,8 +637,9 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       "Tell us about the business, the pages you need, and when you want to launch. We typically respond within one business day.",
     related: [
       { href: "/service-area", label: "Southern California service area" },
+      { href: "/services/real-estate-photography", label: "Real estate photography" },
+      { href: "/services/aircraft-for-sale", label: "Aircraft for sale photography" },
       { href: "/services/drone-aerial", label: "Drone aerial photography" },
-      { href: "/services/real-estate", label: "Real estate aerial tours" },
       { href: "/#contact", label: "Request a quote" },
     ],
   },

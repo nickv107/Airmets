@@ -50,8 +50,8 @@ export function TechAbout() {
                 body: "Commercial-grade aerial systems for cinematic 4K HDR video and high-resolution stills in challenging environments.",
               },
               {
-                title: "Real Estate Integration",
-                body: "Deliverables can be exported in MLS-compatible formats where supported by your local board and listing workflow.",
+                title: "Listing-Ready Delivery",
+                body: "Photo sets are prepared for MLS boards, aircraft listings, and facility websites, in the sizes each workflow needs.",
               },
             ].map((item) => (
               <div key={item.title} className="rounded-2xl border border-air-border p-6">
@@ -73,14 +73,14 @@ export function TechAbout() {
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">About</p>
             <h2 className="font-display mb-6 text-3xl font-bold sm:text-4xl">Born from Aviation. Built for Vision.</h2>
             <p className="mb-4 leading-relaxed text-air-silver">
-              Airmets was founded at the intersection of aviation precision and cinematic storytelling. We bring
-              a technology-forward approach to every flight — from luxury estate tours in Corona and the Inland
-              Empire to desert landscapes around Joshua Tree and Palm Springs.
+              Airmets was founded at the intersection of aviation precision and cinematic storytelling. The same
+              care goes into aircraft listing photos, FBO and hangar coverage, and luxury estate work across
+              Corona, the Inland Empire, Palm Springs, and Joshua Tree.
             </p>
             <p className="mb-4 leading-relaxed text-air-silver">
-              We combine FAA Part 107–compliant drone operations with professional photography and videography
-              expertise, delivering media that doesn&apos;t just document — it elevates. Whether you&apos;re a
-              luxury agent, developer, or brand, we translate aerial perspectives into compelling visual assets.
+              We combine FAA Part 107–compliant drone operations with professional ground photography, delivering
+              media that doesn&apos;t just document — it elevates. Agents, aircraft brokers, FBOs, developers, and
+              brands get visual assets planned around how the pictures will actually be used.
             </p>
             <p className="leading-relaxed text-air-muted">
               Serving Southern California with same-week turnaround, transparent pricing, and white-glove
@@ -105,7 +105,7 @@ export function TechAbout() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-air-muted">Specialties</p>
-                  <p className="font-semibold">Real Estate · Commercial · Events · Websites</p>
+                  <p className="font-semibold">Aircraft · Real Estate · Facilities · Websites</p>
                 </div>
               </div>
             </div>

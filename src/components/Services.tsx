@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { SERVICES } from "@/lib/data";
 
 function ServiceIcon({ type }: { type: string }) {
@@ -14,79 +13,14 @@ function ServiceIcon({ type }: { type: string }) {
     spark: "M12 2l2.4 7.2H22l-6 4.6 2.4 7.2L12 17l-6.4 4 2.4-7.2-6-4.6h7.6L12 2z",
     lens: "M12 8a4 4 0 110 8 4 4 0 010-8zm8-2h-1.2l-.8-1.6a1 1 0 00-.9-.6H8.9a1 1 0 00-.9.6L7.2 6H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V8a2 2 0 00-2-2zm-8 10a6 6 0 100-12 6 6 0 000 12z",
     code: "M3 4h18a1 1 0 011 1v11a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1zm1 3v8h16V7H4zm4 13h8v1.5H8z",
+    plane: "M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z",
+    frame: "M4 4h16v16H4V4zm2 2v12h12V6H6zm2 2h8v8H8V8z",
+    hangar: "M2 20V9.5L12 3l10 6.5V20H2zm2-1.5h16v-8.2L12 5.2 4 10.3v8.2zM8 18v-5h8v5H8z",
   };
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6 fill-air-red" aria-hidden>
       <path d={paths[type] ?? paths.spark} fillRule={type === "code" ? "evenodd" : "nonzero"} />
     </svg>
-  );
-}
-
-function ServiceBlock({
-  service,
-  index,
-}: {
-  service: (typeof SERVICES)[number];
-  index: number;
-}) {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
-
-  return (
-    <section
-      id={`service-${service.id}`}
-      ref={ref}
-      className="relative min-h-[70vh] scroll-mt-24 overflow-hidden sm:min-h-[78vh]"
-    >
-      <motion.div style={{ y: bgY }} className="absolute inset-0 -top-[15%] -bottom-[15%]">
-        <Image
-          src={service.image}
-          alt={service.title}
-          fill
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-air-black/75" />
-      </motion.div>
-
-      <motion.div
-        style={{ y: contentY }}
-        className={`relative z-10 mx-auto flex min-h-[70vh] max-w-7xl items-center px-4 py-16 sm:min-h-[78vh] sm:px-6 sm:py-24 lg:px-8 ${
-          index % 2 === 1 ? "lg:justify-end" : ""
-        }`}
-      >
-        <motion.div
-          initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
-          className="glow-border w-full max-w-xl rounded-2xl border border-white/10 bg-air-black/75 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-md transition duration-300 hover:border-air-red/40 sm:p-10"
-        >
-          <div className="mb-4 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-air-red/10">
-              <ServiceIcon type={service.icon} />
-            </div>
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-air-red">
-              0{index + 1}
-            </span>
-          </div>
-          <h3 className="font-display mb-4 text-2xl font-bold sm:text-3xl">{service.title}</h3>
-          <p className="mb-6 leading-relaxed text-air-silver">{service.description}</p>
-          <Link
-            href={service.href}
-            className="touch-target inline-flex items-center gap-2 rounded-full border border-air-red/50 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-air-red"
-          >
-            View service
-            <span aria-hidden>→</span>
-          </Link>
-        </motion.div>
-      </motion.div>
-    </section>
   );
 }
 
@@ -108,11 +42,11 @@ export function Services() {
           viewport={{ once: true }}
           className="font-display text-3xl font-bold sm:text-4xl md:text-5xl"
         >
-          Aerial Media & Website Development
+          Aviation, Listing & Aerial Media
         </motion.h2>
         <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-          Drone photography, videography, and custom marketing websites for businesses across
-          Southern California.
+          Aircraft sales photography, real estate listings, FBO and hangar media, drone capture, and
+          marketing websites for clients across Southern California.
         </p>
         <nav aria-label="Jump to a service" className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, index) => (
@@ -121,7 +55,9 @@ export function Services() {
               href={`#service-${service.id}`}
               className="group flex items-center gap-3 rounded-xl border border-air-border bg-air-card px-4 py-3 text-left transition hover:border-air-red/50 hover:bg-air-black"
             >
-              <span className="font-display w-7 shrink-0 text-sm font-bold text-air-red">0{index + 1}</span>
+              <span className="font-display w-7 shrink-0 text-sm font-bold text-air-red">
+                {String(index + 1).padStart(2, "0")}
+              </span>
               <span className="text-sm font-medium leading-snug text-air-silver transition group-hover:text-white">
                 {service.title}
               </span>
@@ -129,9 +65,46 @@ export function Services() {
           ))}
         </nav>
       </div>
-      {SERVICES.map((service, index) => (
-        <ServiceBlock key={service.id} service={service} index={index} />
-      ))}
+
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 sm:grid-cols-2 sm:px-6 sm:py-16 lg:grid-cols-3 lg:px-8">
+        {SERVICES.map((service, index) => (
+          <article
+            key={service.id}
+            id={`service-${service.id}`}
+            className="glow-border flex scroll-mt-24 flex-col overflow-hidden rounded-2xl border border-air-border bg-air-card"
+          >
+            <div className="relative aspect-[16/10]">
+              <Image
+                src={service.image}
+                alt={service.imageAlt ?? service.title}
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-air-black/80 via-air-black/10 to-transparent" />
+              <span className="font-display absolute left-4 top-4 text-sm font-bold text-white">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="flex flex-1 flex-col p-6">
+              <div className="mb-3 flex items-start gap-3">
+                <span className="mt-0.5 shrink-0">
+                  <ServiceIcon type={service.icon} />
+                </span>
+                <h3 className="font-display text-xl font-bold leading-snug">{service.title}</h3>
+              </div>
+              <p className="mb-6 flex-1 leading-relaxed text-air-silver">{service.description}</p>
+              <Link
+                href={service.href}
+                className="touch-target inline-flex items-center gap-2 self-start rounded-full border border-air-red/50 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-air-red"
+              >
+                View service
+                <span aria-hidden>→</span>
+              </Link>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
   );
 }

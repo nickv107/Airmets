@@ -31,7 +31,14 @@ export function ServicePageLayout({ service, children }: ServicePageLayoutProps)
       </header>
 
       <section className="relative min-h-[36vh] overflow-hidden border-b border-air-border sm:min-h-[42vh]">
-        <Image src={service.image} alt={service.title} fill className="object-cover" priority sizes="100vw" />
+        <Image
+          src={service.image}
+          alt={service.imageAlt ?? service.title}
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-air-black via-air-black/70 to-air-black/30" />
         <div className="relative mx-auto flex min-h-[36vh] max-w-5xl items-end px-4 py-10 sm:min-h-[42vh] sm:px-6 sm:py-12 lg:px-8">
           <div>

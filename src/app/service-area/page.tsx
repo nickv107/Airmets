@@ -7,9 +7,9 @@ import { ALL_SERVICE_CITIES, SERVICE_AREA_INTRO, SERVICE_REGIONS } from "@/lib/s
 const SITE_URL = "https://www.airmets.com";
 
 export const metadata: Metadata = {
-  title: "Service Area — Southern California Drone & Aerial Photography",
+  title: "Service Area — Aircraft, Real Estate & Aerial Media",
   description:
-    "Airmets serves Los Angeles, Orange County, the Inland Empire, San Diego, Ventura, Palm Springs, Joshua Tree, and cities across Southern California with FAA Part 107 aerial media.",
+    "Airmets serves Los Angeles, Orange County, the Inland Empire, San Diego, Ventura, Palm Springs, and Joshua Tree with aircraft, real estate, facility, and FAA Part 107 aerial media.",
   keywords: [
     "drone photography Southern California",
     "aerial videography Los Angeles",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Southern California Service Area | Airmets",
     description:
-      "Professional drone photography and aerial videography across Southern California cities and counties.",
+      "Aircraft, real estate, facility, and drone photography across Southern California cities and counties.",
     url: `${SITE_URL}/service-area`,
     type: "website",
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Airmets" }],
@@ -44,10 +44,12 @@ const localBusinessJsonLd = {
   })),
   serviceType: [
     "Drone Aerial Photography",
+    "Aircraft for Sale Photography",
+    "Real Estate Photography",
+    "FBO and Hangar Photography",
     "Aerial Videography",
-    "Real Estate Aerial Media",
     "Commercial UAS Production",
-    "General Photography",
+    "Website Development",
   ],
 };
 
@@ -55,7 +57,7 @@ export default function ServiceAreaPage() {
   return (
     <ContentPageLayout
       eyebrow="Service Area"
-      title="Southern California Aerial Media Coverage"
+      title="Southern California Aviation & Aerial Coverage"
       subtitle={SERVICE_AREA_INTRO}
     >
       <script
@@ -89,6 +91,27 @@ export default function ServiceAreaPage() {
           </section>
         ))}
       </div>
+
+      <section className="rounded-2xl border border-air-border bg-air-card/50 p-6">
+        <h2 className="font-display mb-3 text-2xl font-bold text-white">Photography across this area</h2>
+        <p className="text-air-silver">
+          Ground and aerial work is available throughout these cities. Aircraft and facility sessions are planned
+          around airport access. Listing photography can combine interiors with a drone flight when the address
+          allows it.{" "}
+          <Link href="/services/aircraft-for-sale" className="text-air-red hover:underline">
+            Aircraft for sale
+          </Link>
+          {", "}
+          <Link href="/services/real-estate-photography" className="text-air-red hover:underline">
+            real estate photography
+          </Link>
+          {", and "}
+          <Link href="/services/aviation-facilities" className="text-air-red hover:underline">
+            FBO and hangar media
+          </Link>
+          .
+        </p>
+      </section>
 
       <section className="rounded-2xl border border-air-border bg-air-card/50 p-6">
         <h2 className="font-display mb-3 text-2xl font-bold text-white">Website development in this area</h2>

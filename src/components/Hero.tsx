@@ -43,7 +43,7 @@ export function Hero() {
         >
           <p className="font-display text-[0.65rem] font-semibold uppercase tracking-[0.1em] sm:text-base sm:tracking-[0.22em] md:tracking-[0.28em]">
             <TechDecode
-              text="ELEVATING PERSPECTIVES • PRECISION AERIAL MEDIA"
+              text="ELEVATING PERSPECTIVES • AVIATION & LISTING MEDIA"
               delayMs={200}
               accent
               className="break-words"
@@ -59,8 +59,8 @@ export function Hero() {
           className="mb-8"
         >
           <TechHeadline
-            primary="DRONE PHOTOGRAPHY & VIDEOGRAPHY"
-            secondary="FOR REAL ESTATE, BUSINESS & BEYOND"
+            primary="AIRCRAFT, AERIAL & LISTING MEDIA"
+            secondary="FOR AVIATION, REAL ESTATE & BUSINESS"
           />
         </motion.div>
 
@@ -70,8 +70,9 @@ export function Hero() {
           transition={{ delay: 0.9, duration: 0.5 }}
           className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg"
         >
-          Southern California drone media and website development for real estate, commercial brands, and
-          custom production — serving the Inland Empire, Corona, Los Angeles, Palm Springs, and Joshua Tree.
+          Southern California photography for aircraft sales, real estate listings, FBOs, and commercial
+          brands — plus drone media and marketing websites. Serving the Inland Empire, Corona, Los Angeles,
+          Palm Springs, and Joshua Tree.
         </motion.p>
 
         <motion.div

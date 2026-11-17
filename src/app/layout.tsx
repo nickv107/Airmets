@@ -26,11 +26,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.airmets.com"),
   title: {
-    default: "Airmets | Precision Aerial Drone Media — Southern California",
+    default: "Airmets | Aircraft, Aerial & Listing Media — Southern California",
     template: "%s | Airmets",
   },
   description:
-    "Drone photography, videography, and website development for real estate and local businesses across Los Angeles, the Inland Empire, Orange County, San Diego, and Palm Springs.",
+    "Aircraft listing photography, real estate photography, drone media, and website development across Los Angeles, the Inland Empire, Orange County, San Diego, and Palm Springs.",
   keywords: [
     "drone photography Southern California",
     "aerial videography Los Angeles",
@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     "Corona drone photographer",
     "Palm Springs aerial media",
     "Orange County UAS",
+    "aircraft for sale photography Southern California",
+    "real estate photographer Inland Empire",
+    "FBO photography Southern California",
     "general photography Southern California",
     "website development Southern California",
     "custom website design Inland Empire",
@@ -47,7 +50,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     title: "Airmets — Elevating Perspectives",
-    description: "Precision aerial media and website development for real estate, business, and beyond.",
+    description: "Aircraft, real estate, and aerial media, plus website development, for clients across Southern California.",
     type: "website",
     url: "https://www.airmets.com",
     siteName: "Airmets",
@@ -57,14 +60,14 @@ export const metadata: Metadata = {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "Airmets — aerial media and website development in Southern California",
+        alt: "Airmets — aircraft, listing, and aerial media in Southern California",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Airmets — Elevating Perspectives",
-    description: "Precision aerial media and website development for real estate, business, and beyond.",
+    description: "Aircraft, real estate, and aerial media, plus website development, for clients across Southern California.",
     images: ["/og.jpg"],
   },
   icons: {
