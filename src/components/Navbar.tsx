@@ -73,15 +73,9 @@ export function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           <a
             href="#contact"
-            className="rounded-full border border-air-red/40 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-air-red hover:bg-air-red/10"
-          >
-            Get Quote
-          </a>
-          <a
-            href="#contact"
             className="rounded-full bg-air-red px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow"
           >
-            Launch a Mission
+            Request a quote
           </a>
         </div>
 
@@ -124,17 +118,10 @@ export function Navbar() {
               ))}
               <a
                 href="#contact"
-                className="touch-target mt-2 flex items-center justify-center rounded-full border border-air-red/40 px-5 py-3 text-center text-sm font-semibold text-white"
+                className="touch-target mt-2 flex items-center justify-center rounded-full bg-air-red px-5 py-3 text-center text-sm font-semibold text-white"
                 onClick={closeMenu}
               >
-                Get Quote
-              </a>
-              <a
-                href="#contact"
-                className="touch-target flex items-center justify-center rounded-full bg-air-red px-5 py-3 text-center text-sm font-semibold text-white"
-                onClick={closeMenu}
-              >
-                Launch a Mission
+                Request a quote
               </a>
             </div>
           </motion.div>
