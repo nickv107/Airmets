@@ -54,6 +54,55 @@ async function sendViaResend(payload: ContactPayload) {
   return response.ok;
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+async function sendThankYou(payload: ContactPayload) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return false;
+
+  const from = process.env.RESEND_FROM_EMAIL ?? `Airmets <${BUSINESS.email}>`;
+  const name = escapeHtml(payload.name);
+  const service = escapeHtml(payload.service);
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [payload.email],
+      reply_to: BUSINESS.email,
+      subject: "We received your Airmets inquiry",
+      text: [
+        `Hi ${payload.name},`,
+        "",
+        `Thank you for contacting Airmets about ${payload.service}. We received your inquiry, and someone will reach out about your quote, usually within one business day.`,
+        "",
+        `If you need us sooner, call ${BUSINESS.phone} or reply to this email.`,
+        "",
+        "Airmets",
+        BUSINESS.website,
+      ].join("\n"),
+      html: [
+        `<p>Hi ${name},</p>`,
+        `<p>Thank you for contacting Airmets about ${service}. We received your inquiry, and someone will reach out about your quote, usually within one business day.</p>`,
+        `<p>If you need us sooner, call <a href="tel:${BUSINESS.phoneTel}">${BUSINESS.phone}</a> or reply to this email.</p>`,
+        `<p>Airmets<br><a href="${BUSINESS.website}">${BUSINESS.website.replace("https://", "")}</a></p>`,
+      ].join(""),
+    }),
+  });
+
+  return response.ok;
+}
+
 async function sendViaFormspree(payload: ContactPayload) {
   const formId = process.env.FORMSPREE_FORM_ID;
   if (!formId) return false;
@@ -155,6 +204,8 @@ export async function POST(request: Request) {
       { status: 503 },
     );
   }
+
+  await sendThankYou(payload).catch(() => false);
 
   return NextResponse.json({ success: true });
 }
