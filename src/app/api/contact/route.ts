@@ -1,3 +1,5 @@
+import { readFile } from "fs/promises";
+import path from "path";
 import { NextResponse } from "next/server";
 import { BUSINESS } from "@/lib/legal";
 
@@ -62,6 +64,41 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;");
 }
 
+const AIRPLANE_CID = "airmets-airplane";
+
+async function airplaneAttachment() {
+  try {
+    const file = await readFile(path.join(process.cwd(), "public", "logo-icon.png"));
+    return {
+      filename: "airmets-airplane.png",
+      content: file.toString("base64"),
+      content_id: AIRPLANE_CID,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function thankYouHtml(name: string, service: string, planeSrc: string) {
+  return [
+    `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 20px;font-family:Arial,Helvetica,sans-serif;color:#111;">`,
+    `<tr>`,
+    `<td style="padding:0 14px 0 0;vertical-align:middle;">`,
+    `<img src="${planeSrc}" width="64" height="64" alt="Airmets" style="display:block;border:0;outline:none;width:64px;height:64px;" />`,
+    `</td>`,
+    `<td style="vertical-align:middle;font-family:Arial,Helvetica,sans-serif;">`,
+    `<div style="font-size:18px;font-weight:700;line-height:1.2;color:#111;">Airmets</div>`,
+    `<div style="font-size:13px;line-height:1.4;color:#555;">Aviation &amp; Aerial Media</div>`,
+    `</td>`,
+    `</tr>`,
+    `</table>`,
+    `<p style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#111;">Hi ${name},</p>`,
+    `<p style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#111;">Thank you for contacting Airmets about ${service}. We received your inquiry, and someone will reach out about your quote, usually within one business day.</p>`,
+    `<p style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.5;color:#111;">If you need us sooner, call <a href="tel:${BUSINESS.phoneTel}">${BUSINESS.phone}</a> or reply to this email.</p>`,
+    `<p style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#555;"><a href="${BUSINESS.website}">${BUSINESS.website.replace("https://", "")}</a></p>`,
+  ].join("");
+}
+
 async function sendThankYou(payload: ContactPayload) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return false;
@@ -69,6 +106,7 @@ async function sendThankYou(payload: ContactPayload) {
   const from = process.env.RESEND_FROM_EMAIL ?? `Airmets <${BUSINESS.email}>`;
   const name = escapeHtml(payload.name);
   const service = escapeHtml(payload.service);
+  const airplane = await airplaneAttachment();
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -89,14 +127,11 @@ async function sendThankYou(payload: ContactPayload) {
         `If you need us sooner, call ${BUSINESS.phone} or reply to this email.`,
         "",
         "Airmets",
+        "Aviation & Aerial Media",
         BUSINESS.website,
       ].join("\n"),
-      html: [
-        `<p>Hi ${name},</p>`,
-        `<p>Thank you for contacting Airmets about ${service}. We received your inquiry, and someone will reach out about your quote, usually within one business day.</p>`,
-        `<p>If you need us sooner, call <a href="tel:${BUSINESS.phoneTel}">${BUSINESS.phone}</a> or reply to this email.</p>`,
-        `<p>Airmets<br><a href="${BUSINESS.website}">${BUSINESS.website.replace("https://", "")}</a></p>`,
-      ].join(""),
+      html: thankYouHtml(name, service, airplane ? `cid:${AIRPLANE_CID}` : "https://www.airmets.com/logo-icon.png"),
+      attachments: airplane ? [airplane] : undefined,
     }),
   });
 
