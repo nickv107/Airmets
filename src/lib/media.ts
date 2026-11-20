@@ -17,7 +17,6 @@ export const SITE_MEDIA = {
     commercial: `${DRONE_PHOTOS}/aerial-genoptix-campus.jpg`,
     custom: `${DRONE_PHOTOS}/aerial-diamond-bar-valley.jpg`,
     aircraftForSale: "/images/dslr/photo-dsc09871.jpg",
-    realEstatePhotography: "/images/services/real-estate-photography.jpg",
     aviationFacilities: "/images/services/aviation-facilities.jpg",
     generalPhotography: "/images/dslr/photo-dsc09003.jpg",
     websiteDevelopment: "/images/services/website-development.jpg",
@@ -32,13 +31,7 @@ export const SITE_MEDIA = {
     valleyGrid: `${DRONE_PHOTOS}/aerial-valley-grid.jpg`,
     curvedStreets: `${DRONE_PHOTOS}/aerial-curved-streets.jpg`,
     parkPathways: `${DRONE_PHOTOS}/aerial-park-pathways.jpg`,
-    jiufenTeaHouse: "/images/dslr/photo-dsc07163.jpg",
-    moraineLake: "/images/dslr/photo-moraine_1.jpg",
-    alpineLakeIsland: "/images/dslr/photo-dsc05340_2.jpg",
-    monumentValleyRoad: "/images/dslr/photo-dsc08360_2.jpg",
-    mistyLake: "/images/dslr/photo-dsc09040.jpg",
-    desertArch: "/images/dslr/photo-gopr3462.jpg",
-    maternityPortrait: "/images/dslr/photo-dsc00004.jpg",
+    diamondBarHomes: "/images/services/real-estate-photography.jpg",
   },
 } as const;
 

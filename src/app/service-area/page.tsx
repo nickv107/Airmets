@@ -69,10 +69,10 @@ export default function ServiceAreaPage() {
         <h2 className="font-display mb-4 text-2xl font-bold text-white">Counties &amp; Cities We Serve</h2>
         <p>
           Airmets regularly flies in the regions below. If your city is not listed,{" "}
-          <Link href="/#contact" className="text-air-red hover:underline">
+          <Link href="/contact" className="text-air-red hover:underline">
             contact us
-          </Link>{" "}
-          — many nearby locations are available with standard airspace and access planning.
+          </Link>
+          . Many nearby locations are available after an airspace and access check.
         </p>
       </section>
 
@@ -102,8 +102,8 @@ export default function ServiceAreaPage() {
             Aircraft for sale
           </Link>
           {", "}
-          <Link href="/services/real-estate-photography" className="text-air-red hover:underline">
-            real estate photography
+          <Link href="/services/real-estate" className="text-air-red hover:underline">
+            real estate listing media
           </Link>
           {", and "}
           <Link href="/services/aviation-facilities" className="text-air-red hover:underline">
@@ -114,12 +114,11 @@ export default function ServiceAreaPage() {
       </section>
 
       <section className="rounded-2xl border border-air-border bg-air-card/50 p-6">
-        <h2 className="font-display mb-3 text-2xl font-bold text-white">Website development in this area</h2>
+        <h2 className="font-display mb-3 text-2xl font-bold text-white">Also available</h2>
         <p className="text-air-silver">
-          Airmets also builds custom marketing websites for businesses across these cities. Each site is structured
-          around the services you offer and the places you serve.{" "}
+          A marketing website for the photos can be added to a quote. It is not one of the four main services.{" "}
           <Link href="/services/website-development" className="text-air-red hover:underline">
-            See website development
+            Website development
           </Link>
           .
         </p>
@@ -128,27 +127,21 @@ export default function ServiceAreaPage() {
       <section className="rounded-2xl border border-air-red/30 bg-air-card p-8">
         <h2 className="font-display mb-3 text-2xl font-bold text-white">Book an Aerial Mission</h2>
         <p className="mb-6 text-air-silver">
-          Share your property address, timeline, and deliverables. We confirm airspace feasibility and respond with
-          next steps — usually within one business day.
+          Share the airport or property address, the date, and the files you need. We reply with a written quote,
+          usually within one business day.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link
-            href="/#contact"
+            href="/contact"
             className="touch-target inline-flex items-center justify-center rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white"
           >
-            Request a Quote
+            Request a quote
           </Link>
           <Link
             href="/services/drone-aerial"
             className="touch-target inline-flex items-center justify-center rounded-full border border-air-border px-8 py-3 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
           >
-            Drone Services
-          </Link>
-          <Link
-            href="/services/website-development"
-            className="touch-target inline-flex items-center justify-center rounded-full border border-air-border px-8 py-3 text-sm font-semibold text-air-silver transition hover:border-air-red/50 hover:text-white"
-          >
-            Website Development
+            Drone services
           </Link>
         </div>
       </section>

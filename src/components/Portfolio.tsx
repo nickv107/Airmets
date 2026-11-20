@@ -1,21 +1,26 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { PORTFOLIO_FILTERS, PORTFOLIO_ITEMS } from "@/lib/data";
 
-export function Portfolio() {
+type PortfolioProps = {
+  limit?: number;
+};
+
+export function Portfolio({ limit }: PortfolioProps) {
   const [filter, setFilter] = useState<string>("All");
   const [lightbox, setLightbox] = useState<(typeof PORTFOLIO_ITEMS)[number] | null>(null);
 
-  const filtered = useMemo(
-    () =>
+  const filtered = useMemo(() => {
+    const items =
       filter === "All"
         ? PORTFOLIO_ITEMS
-        : PORTFOLIO_ITEMS.filter((item) => item.category === filter),
-    [filter],
-  );
+        : PORTFOLIO_ITEMS.filter((item) => item.category === filter);
+    return typeof limit === "number" ? items.slice(0, limit) : items;
+  }, [filter, limit]);
 
   const lightboxIndex = lightbox ? filtered.findIndex((item) => item.id === lightbox.id) : -1;
 
@@ -67,9 +72,14 @@ export function Portfolio() {
           className="mb-12 text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">Portfolio</p>
-          <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Aerial Impact Gallery</h2>
+          {typeof limit === "number" ? (
+            <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Southern California work</h2>
+          ) : (
+            <h1 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Southern California work</h1>
+          )}
           <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-            Drone aerials and ground-based DSLR photography from Airmets — landscapes, homes, and on-location sessions.
+            Listing and aerial photographs from this region. Aircraft and facility sets are added
+            when the client approves public use.
           </p>
         </motion.div>
 
@@ -122,6 +132,16 @@ export function Portfolio() {
             ))}
           </AnimatePresence>
         </motion.div>
+        {typeof limit === "number" && (
+          <div className="mt-10 text-center">
+            <Link
+              href="/portfolio"
+              className="touch-target inline-flex items-center justify-center rounded-full border border-air-red/50 px-6 py-3 text-sm font-semibold text-white transition hover:bg-air-red"
+            >
+              View the full portfolio
+            </Link>
+          </div>
+        )}
       </div>
 
       <AnimatePresence>
@@ -158,7 +178,7 @@ export function Portfolio() {
                     <p className="text-sm text-air-red">{lightbox.category} · {lightbox.location}</p>
                     <h3 className="font-display mt-1 text-xl font-bold sm:text-2xl">{lightbox.title}</h3>
                     <p className="mt-2 text-xs text-air-muted">
-                      Airmets aerial capture · {lightbox.location}. All portfolio media is from real Part 107 flights.
+                      Southern California aerial. Aircraft and facility photos are published only with the client&apos;s written permission.
                     </p>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">

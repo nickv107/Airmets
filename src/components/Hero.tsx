@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { HeroBackground } from "@/components/HeroBackground";
 
 export function Hero() {
@@ -26,27 +27,26 @@ export function Hero() {
           Aircraft, listing, and aerial photography.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-          Airmets photographs aircraft for sale, homes and estates, and FBOs and hangars. Drone
-          coverage is included when a location can be flown, and we build the marketing websites
-          those photos go on.
+          Listing photos for aircraft, homes, and aviation facilities across Southern California.
+          Drone stills and 4K video are added when FAA rules and the location allow the flight.
         </p>
         <p className="mt-4 text-sm text-white/60">
-          Inland Empire · Corona · Los Angeles · Palm Springs · Joshua Tree
+          Inland Empire · Corona · Los Angeles · Palm Springs · Joshua Tree · Temecula
         </p>
 
         <div className="mt-10 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mx-auto sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="tech-cta-primary touch-target flex items-center justify-center rounded-full px-8 py-4 text-sm font-bold uppercase tracking-wider text-white"
           >
             Request a quote
-          </a>
-          <a
-            href="#portfolio"
+          </Link>
+          <Link
+            href="/portfolio"
             className="tech-cta-secondary touch-target flex items-center justify-center rounded-full border border-white/20 px-8 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-sm transition hover:border-air-red/50 hover:bg-white/5"
           >
             View portfolio
-          </a>
+          </Link>
         </div>
       </div>
     </section>

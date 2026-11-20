@@ -102,23 +102,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </Link>
           </li>
           <li>
-            <Link href="/services/real-estate-photography" className="text-air-red hover:underline">
-              Real estate photography
+            <Link href="/services/real-estate" className="text-air-red hover:underline">
+              Real estate listing media
+            </Link>
+          </li>
+          <li>
+            <Link href="/services/aviation-facilities" className="text-air-red hover:underline">
+              FBO, hangar, and flight school media
             </Link>
           </li>
           <li>
             <Link href="/services/drone-aerial" className="text-air-red hover:underline">
-              Drone aerial photography services
-            </Link>
-          </li>
-          <li>
-            <Link href="/services/general-photography" className="text-air-red hover:underline">
-              General photography services
-            </Link>
-          </li>
-          <li>
-            <Link href="/services/website-development" className="text-air-red hover:underline">
-              Website development
+              Drone aerial photography
             </Link>
           </li>
           <li>
@@ -135,7 +130,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           Tell us about your property, timeline, and deliverables. We typically respond within one business day.
         </p>
         <Link
-          href="/#contact"
+          href="/contact"
           className="touch-target inline-flex items-center justify-center rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white"
         >
           Get Quote

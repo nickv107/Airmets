@@ -26,11 +26,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.airmets.com"),
   title: {
-    default: "Airmets | Aircraft, Aerial & Listing Media — Southern California",
+    default: "Airmets | Aircraft, Listing, and Aerial Photography",
     template: "%s | Airmets",
   },
   description:
-    "Aircraft listing photography, real estate photography, drone media, and website development across Los Angeles, the Inland Empire, Orange County, San Diego, and Palm Springs.",
+    "Aircraft listing photography, real estate listing media, FBO and hangar photography, and FAA Part 107 drone work across Southern California.",
   keywords: [
     "drone photography Southern California",
     "aerial videography Los Angeles",
@@ -42,15 +42,15 @@ export const metadata: Metadata = {
     "aircraft for sale photography Southern California",
     "real estate photographer Inland Empire",
     "FBO photography Southern California",
-    "general photography Southern California",
-    "website development Southern California",
-    "custom website design Inland Empire",
-    "business website developer Los Angeles",
+    "FBO photography Southern California",
+    "flight school photography",
+    "hangar photography Inland Empire",
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Airmets — Elevating Perspectives",
-    description: "Aircraft, real estate, and aerial media, plus website development, for clients across Southern California.",
+    title: "Airmets | Aircraft, listing, and aerial photography",
+    description:
+      "Aircraft listing photography, real estate listing media, aviation facilities, and FAA Part 107 drone work across Southern California.",
     type: "website",
     url: "https://www.airmets.com",
     siteName: "Airmets",
@@ -60,14 +60,15 @@ export const metadata: Metadata = {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "Airmets — aircraft, listing, and aerial media in Southern California",
+        alt: "Airmets aircraft, listing, and aerial photography in Southern California",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Airmets — Elevating Perspectives",
-    description: "Aircraft, real estate, and aerial media, plus website development, for clients across Southern California.",
+    title: "Airmets | Aircraft, listing, and aerial photography",
+    description:
+      "Aircraft listing photography, real estate listing media, aviation facilities, and FAA Part 107 drone work across Southern California.",
     images: ["/og.jpg"],
   },
   icons: {

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS } from "@/lib/data";
@@ -45,7 +46,7 @@ export function Navbar() {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
-        <a href="#home" className="group inline-flex items-center" onClick={closeMenu}>
+        <Link href="/" className="group inline-flex items-center" onClick={closeMenu}>
           <Image
             src="/logo-full.png"
             alt="Airmets"
@@ -54,11 +55,11 @@ export function Navbar() {
             className="h-10 w-auto transition-transform group-hover:scale-105 sm:h-12 lg:h-14"
             priority
           />
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-white ${
@@ -66,17 +67,17 @@ export function Navbar() {
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="rounded-full bg-air-red px-5 py-2.5 text-sm font-semibold text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow"
           >
             Request a quote
-          </a>
+          </Link>
         </div>
 
         <button
@@ -107,22 +108,22 @@ export function Navbar() {
           >
             <div className="flex flex-col gap-2 px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6 sm:py-6">
               {NAV_LINKS.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className="touch-target flex items-center rounded-lg px-2 text-lg font-medium text-air-silver transition hover:text-white"
                   onClick={closeMenu}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 className="touch-target mt-2 flex items-center justify-center rounded-full bg-air-red px-5 py-3 text-center text-sm font-semibold text-white"
                 onClick={closeMenu}
               >
                 Request a quote
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

@@ -71,21 +71,21 @@ export function TechAbout() {
             viewport={{ once: true }}
           >
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">About</p>
-            <h2 className="font-display mb-6 text-3xl font-bold sm:text-4xl">Born from Aviation. Built for Vision.</h2>
+            <h2 className="font-display mb-6 text-3xl font-bold sm:text-4xl">Aircraft, listings, and the fields they live on.</h2>
             <p className="mb-4 leading-relaxed text-air-silver">
-              Airmets was founded at the intersection of aviation precision and cinematic storytelling. The same
-              care goes into aircraft listing photos, FBO and hangar coverage, and luxury estate work across
-              Corona, the Inland Empire, Palm Springs, and Joshua Tree.
+              Airmets photographs aircraft for sale, homes and estates, and FBOs, hangars, and flight schools.
+              Ground photos and Part 107 drone flights are planned as one job.
             </p>
-            <p className="mb-4 leading-relaxed text-air-silver">
-              We combine FAA Part 107–compliant drone operations with professional ground photography, delivering
-              media that doesn&apos;t just document — it elevates. Agents, aircraft brokers, FBOs, developers, and
-              brands get visual assets planned around how the pictures will actually be used.
+            <p className="mb-6 leading-relaxed text-air-muted">
+              You get a written quote before the shoot. A flight is confirmed only when the airspace, the airport,
+              and the weather allow it.
             </p>
-            <p className="leading-relaxed text-air-muted">
-              Serving Southern California with same-week turnaround, transparent pricing, and white-glove
-              collaboration from pre-flight planning to final delivery.
-            </p>
+            <a
+              href="/about"
+              className="touch-target inline-flex items-center justify-center rounded-full border border-air-red/50 px-6 py-3 text-sm font-semibold text-white transition hover:bg-air-red"
+            >
+              About Airmets
+            </a>
           </motion.div>
 
           <motion.div
@@ -101,11 +101,11 @@ export function TechAbout() {
               <div className="space-y-4 border-t border-air-border pt-6">
                 <div>
                   <p className="text-xs uppercase tracking-wider text-air-muted">Coverage</p>
-                  <p className="font-semibold">Inland Empire · Corona · LA · Palm Springs · Joshua Tree</p>
+                  <p className="font-semibold">Inland Empire, Corona, LA, Palm Springs, Joshua Tree, Temecula</p>
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-wider text-air-muted">Specialties</p>
-                  <p className="font-semibold">Aircraft · Real Estate · Facilities · Websites</p>
+                  <p className="font-semibold">Aircraft · Listings · Facilities · Drone</p>
                 </div>
               </div>
             </div>

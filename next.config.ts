@@ -5,6 +5,15 @@ const isStaticExport = process.env.STATIC_EXPORT === "1";
 const nextConfig: NextConfig = {
   output: isStaticExport ? "export" : "standalone",
   ...(isStaticExport ? { trailingSlash: true } : {}),
+  async redirects() {
+    return [
+      {
+        source: "/services/real-estate-photography",
+        destination: "/services/real-estate",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     // Standalone Alpine deploys lack a working sharp binary for /_next/image.
     unoptimized: true,

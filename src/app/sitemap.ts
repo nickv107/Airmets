@@ -7,6 +7,9 @@ const SITE_URL = "https://www.airmets.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/portfolio`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/service-area`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.85 },
     { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
@@ -16,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const servicePages = SERVICE_DETAILS.map((service) => ({
     url: `${SITE_URL}/services/${service.id}`,
     changeFrequency: "monthly" as const,
-    priority: service.id === "website-development" ? 0.9 : 0.8,
+    priority: service.primary ? 0.85 : 0.4,
   }));
 
   const blogPages = BLOG_POSTS.map((post) => ({

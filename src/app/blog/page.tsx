@@ -99,7 +99,7 @@ export default function BlogIndexPage() {
           or request a quote for your property.
         </p>
         <Link
-          href="/#contact"
+          href="/contact"
           className="touch-target inline-flex items-center justify-center rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white"
         >
           Get Quote

@@ -19,24 +19,27 @@ export type ServiceDetail = {
   quoteTitle?: string;
   quoteBody?: string;
   related?: { href: string; label: string }[];
+  /** Shown in the main menu, homepage, and quote form. */
+  primary?: boolean;
 };
 
 export const SERVICE_DETAILS: ServiceDetail[] = [
   {
     id: "drone-aerial",
     title: "Drone Aerial Photography & Videography",
-    tagline: "Cinematic 4K capture for campaigns that need altitude and impact.",
+    primary: true,
+    tagline: "The aerial layer for aircraft, listings, and facilities, flown only when the site allows it.",
     description:
-      "Cinematic 4K aerial capture with precision flight planning, color-graded delivery, and web-optimized assets for marketing campaigns.",
+      "FAA Part 107 drone stills and 4K video that support the listing and facility work, plus standalone aerials when a Southern California site can be flown.",
     image: SITE_MEDIA.services.drone,
     icon: "camera",
     overview:
-      "Airmets delivers FAA Part 107–compliant drone photography and videography for brands, developers, and production teams that need elevated perspectives without compromising safety or quality. Every mission is planned around your location, airspace restrictions, and creative goals — from single hero shots to full campaign asset packages.",
+      "Drone work at Airmets supports the aircraft, listing, and facility jobs. It is also available on its own when a Southern California site can be flown. Every flight is planned under FAA Part 107, with the airspace check finished before the day is confirmed. If the location cannot be flown, we say so before you book.",
     idealFor: [
-      "Marketing teams launching location-based campaigns",
-      "Developers documenting sites before and during construction",
-      "Hospitality and venue operators showcasing property scale",
-      "Agencies needing web-ready photo and video deliverables",
+      "Aircraft, listing, and facility clients who need an aerial pass on the same job",
+      "Developers documenting a site from above",
+      "Agents who need lot, view, and neighborhood context",
+      "Teams who need 4K aerial video and stills for the web",
     ],
     deliverables: [
       "4K HDR aerial video (edited and color-graded)",
@@ -78,11 +81,12 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     related: [
       { href: "/services/aircraft-for-sale", label: "Aircraft for sale photography" },
       { href: "/services/aviation-facilities", label: "FBO, hangar, and flight school media" },
-      { href: "/services/real-estate", label: "Real estate aerial tours" },
+      { href: "/services/real-estate", label: "Real estate listing media" },
     ],
   },
   {
     id: "aircraft-for-sale",
+    primary: true,
     title: "Aircraft for Sale Photography",
     seoTitle: "Aircraft for Sale Photography in Southern California",
     tagline: "Ramp and hangar listing photos that show the aircraft the way a buyer needs to see it.",
@@ -110,11 +114,11 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       "Charter operators and flight departments updating fleet photos",
     ],
     deliverables: [
-      "Exterior walkaround edited for listing sites and print",
-      "Cabin, galley, and seating coverage",
-      "Flight-deck photos with avionics powered when you want them shown",
-      "Detail stills of paint, interior materials, and maintenance-relevant areas you ask us to include",
-      "Web and social crops, with RAW files available on request",
+      "Exterior walkaround stills, edited and sized for broker pages and print",
+      "Cabin, galley, and seating stills when that scope is booked",
+      "Flight-deck stills, with avionics powered when you want them shown",
+      "Detail stills of paint, materials, and the areas you ask us to include",
+      "Web files and vertical social crops from the same edit",
     ],
     process: [
       {
@@ -162,68 +166,70 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     related: [
       { href: "/services/aviation-facilities", label: "FBO, hangar, and flight school media" },
       { href: "/services/drone-aerial", label: "Drone aerial photography" },
-      { href: "/services/website-development", label: "Website development" },
-      { href: "/#contact", label: "Request a quote" },
+      { href: "/services/website-development", label: "Website for the photos (add-on)" },
+      { href: "/contact", label: "Request a quote" },
     ],
   },
   {
-    id: "real-estate-photography",
-    title: "Real Estate Photography",
-    seoTitle: "Real Estate Photography in Southern California",
-    tagline: "Interior, exterior, and twilight listing photos, with aerial added when the property needs both.",
+    id: "real-estate",
+    title: "Real Estate Listing Media",
+    primary: true,
+    seoTitle: "Real Estate Listing Media in Southern California",
+    tagline: "Ground listing photos and aerial coverage, booked as one visit when the address allows both.",
     seoDescription:
-      "Real estate photography for Southern California listings. Interiors, exteriors, details, and twilight, with drone aerials available in the same booking.",
+      "Real estate listing media in Southern California. Interiors, exteriors, twilight, and FAA Part 107 aerial stills and 4K video for agents and builders.",
     description:
-      "Ground listing photography for homes and estates — interiors, exteriors, details, and twilight — with aerial added when the listing needs both.",
+      "Interior, exterior, and twilight listing photos, plus aerial stills and 4K video when the property can be flown.",
     keywords: [
       "real estate photographer Inland Empire",
       "listing photography Corona",
       "luxury home photographer Temecula",
       "twilight real estate photography",
-      "interior listing photos Los Angeles",
+      "real estate drone Los Angeles",
       "real estate photography Palm Springs",
     ],
-    image: SITE_MEDIA.services.realEstatePhotography,
-    imageAlt: "Hillside homes and pools in Diamond Bar",
-    icon: "frame",
+    image: SITE_MEDIA.services.realEstate,
+    imageAlt: "Estate frontage from the air",
+    icon: "home",
     overview:
-      "Airmets photographs listings from the ground so buyers can judge the rooms, the finishes, and the approach before they book a showing. The set covers interiors, exteriors, and the details that carry a luxury listing. Twilight is available when it is scheduled in advance. Aerial coverage lives with the luxury aerial tour and can share the same visit when the address can be flown.",
+      "Airmets builds the listing set from the ground and from the air. Ground photos cover interiors, exteriors, and the details a buyer uses to judge the house. Twilight is available when it is on the schedule. Aerial stills and a short 4K clip show the lot, the approach, and the surroundings, and they are included only after the airspace check says the address can be flown. One booking can cover both when daylight and access allow.",
     idealFor: [
       "Agents preparing a listing for the MLS and their own marketing",
-      "Brokerages that want one team for interior photos and aerials",
-      "Luxury and view properties that need twilight",
-      "Builders and model-home teams documenting a new release",
+      "Brokerages that want interiors and aerials from one team",
+      "View properties that need twilight",
+      "Builders documenting a model or a new release",
     ],
     deliverables: [
-      "Edited interior and exterior photo sets",
-      "Detail coverage of kitchens, primary suites, and other selling spaces you flag",
+      "Edited interior and exterior stills, named for listing upload",
+      "Detail stills of the rooms and finishes you flag",
       "Twilight exteriors when scheduled",
-      "MLS-friendly exports when you tell us which board you use",
-      "Vertical crops for agent social posts",
+      "Aerial stills and a short 4K listing clip when the address can be flown",
+      "MLS-sized exports when you tell us which board you use",
+      "Vertical crops for agent posts",
     ],
     process: [
       {
         title: "Listing Intake",
-        body: "Share the address, the go-live date, occupancy, and whether the booking is photos only or photos plus aerial. Note HOA rules and any rooms that should stay out of frame.",
+        body: "Share the address, the go-live date, occupancy, and whether you want interiors, twilight, aerials, or all three. Note HOA rules and any rooms that should stay out of frame.",
       },
       {
         title: "Shot Plan",
-        body: "We plan interiors, exteriors, and twilight around the light. If aerial is included, we check airspace before we promise a same-day flight.",
+        body: "We plan the ground set around the light. If aerial is requested, we check airspace before we confirm a flight, so the photo day does not depend on a flight that cannot happen.",
       },
       {
         title: "On-Site Capture",
-        body: "Ground photos are made with professional cameras and lighting suited to the rooms. The visit is coordinated with the agent or seller so the home is photo-ready.",
+        body: "Ground photos are made with professional cameras and lighting suited to the rooms. A cleared drone pass is flown under Part 107 during the same visit when the schedule allows.",
       },
       {
         title: "Agent-Ready Delivery",
-        body: "You receive a culled, color-graded set named for listing upload, email, and social. Active listings can request the turnaround stated in the proposal.",
+        body: "You receive a culled, color-graded set for the listing, email, and social. The proposal states the turnaround before you book.",
       },
     ],
     faqs: [
       {
-        question: "How is this different from the aerial tour?",
+        question: "Is the aerial a separate service?",
         answer:
-          "This service is the ground set: interiors, exteriors, details, and twilight. The aerial tour shows lot position, views, and the neighborhood from above. Most listings book both.",
+          "No. Ground photos and aerial coverage are one listing offer. The drone portion is confirmed only when FAA rules and the property allow it. If they do not, you still receive the ground set.",
       },
       {
         question: "Do you photograph twilight?",
@@ -233,86 +239,28 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       {
         question: "Will my MLS accept the files?",
         answer:
-          "Tell us which MLS you use and we will export sizes and compression that match that board's published photo rules.",
+          "Tell us which MLS you use and we export sizes and compression that match that board's published photo rules. We do not promise that a board will accept a file.",
       },
       {
-        question: "Can interior photos and the drone happen on one visit?",
+        question: "Can interiors and the drone happen on one visit?",
         answer:
-          "Often yes, when daylight and airspace allow. We confirm the flight before shoot day so the ground set is never waiting on a flight that cannot happen.",
+          "Often yes, when daylight and airspace allow. We confirm the flight before shoot day.",
       },
     ],
     quoteTitle: "Ready to photograph a listing?",
     quoteBody:
-      "Share the address, the listing date, and whether you want interiors, twilight, or a combined aerial package. We typically respond within one business day.",
+      "Share the address, the listing date, and whether you want interiors, twilight, or aerials. We reply with a written quote, usually within one business day.",
     related: [
-      { href: "/services/real-estate", label: "Luxury real estate aerial tours" },
-      { href: "/services/website-development", label: "Website development" },
-      { href: "/service-area", label: "Southern California service area" },
-      { href: "/#contact", label: "Request a quote" },
-    ],
-  },
-  {
-    id: "real-estate",
-    title: "Luxury Real Estate Aerial Tours",
-    tagline: "Listing media that shows context, curb appeal, and neighborhood lifestyle.",
-    description:
-      "Virtual property showcases for listings across Corona, Temecula, Palm Springs, and the Inland Empire — formatted for agent and brokerage marketing workflows.",
-    image: SITE_MEDIA.services.realEstate,
-    icon: "home",
-    overview:
-      "Luxury listings deserve more than ground-level photos. Airmets creates aerial photo and video packages that highlight lot position, architectural scale, nearby amenities, and the surrounding neighborhood — helping buyers understand value before they schedule a showing. Interiors, exteriors, and twilight are booked with real estate photography and can share the same visit.",
-    idealFor: [
-      "Luxury agents marketing hillside estates and view properties",
-      "Brokerages needing consistent aerial branding across listings",
-      "New construction and model home marketing",
-      "Property managers showcasing community amenities",
-    ],
-    deliverables: [
-      "Exterior aerial photo sets (multiple angles and elevations)",
-      "Cinematic listing video with smooth orbit and reveal shots",
-      "MLS-compatible still image exports where supported by your board",
-      "Social-ready vertical clips for Instagram and TikTok",
-      "Optional twilight or golden-hour capture when scheduled in advance",
-    ],
-    process: [
-      {
-        title: "Listing Intake",
-        body: "Share the property address, listing status, HOA or community rules, and your MLS or brokerage delivery requirements so we align formats from the start.",
-      },
-      {
-        title: "Shot List & Access",
-        body: "We plan exterior coverage that respects privacy boundaries and highlights selling features — pools, views, lot size, and neighborhood context.",
-      },
-      {
-        title: "On-Site Capture",
-        body: "Flights are conducted with minimal on-site disruption. We coordinate with agents or sellers for property access and timing.",
-      },
-      {
-        title: "Agent-Ready Delivery",
-        body: "You receive edited media packaged for listing uploads, email campaigns, and social promotion — with fast turnaround for active listings.",
-      },
-    ],
-    faqs: [
-      {
-        question: "Can you fly over gated communities or HOA properties?",
-        answer:
-          "Yes, with proper access permission from the seller, agent, or HOA. Share any community drone policies when booking so we can plan accordingly.",
-      },
-      {
-        question: "Will my MLS accept the file sizes you deliver?",
-        answer:
-          "We export MLS-friendly dimensions and compression when your board supports it. Tell us your MLS name and we will match their published media guidelines.",
-      },
-    ],
-    related: [
-      { href: "/services/real-estate-photography", label: "Real estate photography" },
       { href: "/services/drone-aerial", label: "Drone aerial photography" },
-      { href: "/#contact", label: "Request a quote" },
+      { href: "/services/website-development", label: "Website for the photos (add-on)" },
+      { href: "/service-area", label: "Southern California service area" },
+      { href: "/contact", label: "Request a quote" },
     ],
   },
   {
     id: "aviation-facilities",
     title: "FBO, Hangar & Flight School Media",
+    primary: true,
     seoTitle: "FBO and Hangar Photography in Southern California",
     tagline: "Facility photography for the ramp, the lobby, the training floor, and the shop.",
     seoDescription:
@@ -339,11 +287,11 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       "Maintenance shops documenting the floor, the team space, and the ramp",
     ],
     deliverables: [
-      "Exterior and ramp photography",
-      "Lobby, customer, and office coverage",
-      "Hangar, classroom, or shop-floor sets, as access allows",
-      "Detail stills of the spaces you want a visitor to remember",
+      "Ramp and exterior stills",
+      "Lobby, office, and customer-area stills",
+      "Hangar, classroom, or shop-floor stills, as access allows",
       "Web, print, and social crops from the same edit",
+      "Drone stills or 4K only when the FAA and the airport both allow the flight",
     ],
     process: [
       {
@@ -391,8 +339,8 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     related: [
       { href: "/services/aircraft-for-sale", label: "Aircraft for sale photography" },
       { href: "/services/drone-aerial", label: "Drone aerial photography" },
-      { href: "/services/website-development", label: "Website development" },
-      { href: "/#contact", label: "Request a quote" },
+      { href: "/services/website-development", label: "Website for the photos (add-on)" },
+      { href: "/contact", label: "Request a quote" },
     ],
   },
   {
@@ -637,10 +585,10 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
       "Tell us about the business, the pages you need, and when you want to launch. We typically respond within one business day.",
     related: [
       { href: "/service-area", label: "Southern California service area" },
-      { href: "/services/real-estate-photography", label: "Real estate photography" },
+      { href: "/services/real-estate", label: "Real estate listing media" },
       { href: "/services/aircraft-for-sale", label: "Aircraft for sale photography" },
       { href: "/services/drone-aerial", label: "Drone aerial photography" },
-      { href: "/#contact", label: "Request a quote" },
+      { href: "/contact", label: "Request a quote" },
     ],
   },
 ];

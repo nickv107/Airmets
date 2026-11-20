@@ -2,154 +2,137 @@ import { SITE_MEDIA } from "@/lib/media";
 import { SERVICE_DETAILS } from "@/lib/services";
 
 export const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/#services" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Service Area", href: "/service-area" },
   { label: "Blog", href: "/blog" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
 ] as const;
 
-export const SERVICES = SERVICE_DETAILS.map((service) => ({
-  id: service.id,
-  title: service.title,
-  description: service.description,
-  image: service.image,
-  imageAlt: service.imageAlt,
-  icon: service.icon,
-  href: `/services/${service.id}`,
-}));
+const PRIMARY_SERVICE_IDS = [
+  "aircraft-for-sale",
+  "real-estate",
+  "aviation-facilities",
+  "drone-aerial",
+] as const;
+
+export const SERVICES = PRIMARY_SERVICE_IDS.map((id) => {
+  const service = SERVICE_DETAILS.find((item) => item.id === id);
+  if (!service) {
+    throw new Error(`Missing primary service: ${id}`);
+  }
+  return {
+    id: service.id,
+    title: service.title,
+    description: service.description,
+    image: service.image,
+    imageAlt: service.imageAlt,
+    icon: service.icon,
+    href: `/services/${service.id}`,
+  };
+});
+
+export const QUOTE_SERVICES = [
+  ...SERVICES.map((service) => service.title),
+  "Website development (add-on)",
+] as const;
 
 export const PORTFOLIO_ITEMS = [
   {
     id: "townhomes-corona",
-    title: "Solar Townhomes — Community Overview",
-    category: "Real Estate",
+    title: "Townhome community",
+    category: "Listings",
     image: SITE_MEDIA.portfolio.townhomesCorona,
     location: "Corona, CA",
   },
   {
+    id: "diamond-bar-homes",
+    title: "Hillside homes and pools",
+    category: "Listings",
+    image: SITE_MEDIA.portfolio.diamondBarHomes,
+    location: "Diamond Bar, CA",
+  },
+  {
     id: "diamond-bar-wide",
-    title: "Hillside Streets — Neighborhood Aerial",
-    category: "Real Estate",
+    title: "Hillside streets",
+    category: "Listings",
     image: SITE_MEDIA.portfolio.diamondBarWide,
     location: "Diamond Bar, CA",
   },
   {
-    id: "graybar-campus",
-    title: "Office Campus — Aerial Survey",
-    category: "Commercial",
-    image: SITE_MEDIA.portfolio.graybarCampus,
-    location: "Diamond Bar, CA",
-  },
-  {
-    id: "playground",
-    title: "Playground & Recreation Area",
-    category: "Events",
-    image: SITE_MEDIA.portfolio.playgroundCorona,
-    location: "Corona, CA",
-  },
-  {
-    id: "mountain-lake",
-    title: "Mountain Lake — Aerial Vista",
-    category: "Landscape",
-    image: SITE_MEDIA.portfolio.mountainLake,
-    location: "High Desert, CA",
-  },
-  {
     id: "planned-community",
-    title: "Planned Community — Aerial Overview",
-    category: "Real Estate",
+    title: "Planned community",
+    category: "Listings",
     image: SITE_MEDIA.portfolio.plannedCommunity,
     location: "Inland Empire, CA",
   },
   {
     id: "valley-grid",
-    title: "Residential Grid — Valley Aerial",
-    category: "Real Estate",
+    title: "Residential grid",
+    category: "Listings",
     image: SITE_MEDIA.portfolio.valleyGrid,
     location: "Inland Empire, CA",
   },
   {
     id: "curved-streets",
-    title: "Curved Streets — Neighborhood Aerial",
-    category: "Real Estate",
+    title: "Neighborhood streets",
+    category: "Listings",
     image: SITE_MEDIA.portfolio.curvedStreets,
     location: "Southern California",
   },
   {
+    id: "graybar-campus",
+    title: "Office campus",
+    category: "Aerial",
+    image: SITE_MEDIA.portfolio.graybarCampus,
+    location: "Diamond Bar, CA",
+  },
+  {
+    id: "playground",
+    title: "Community recreation area",
+    category: "Aerial",
+    image: SITE_MEDIA.portfolio.playgroundCorona,
+    location: "Corona, CA",
+  },
+  {
     id: "park-pathways",
-    title: "Community Park — Trail Aerial",
-    category: "Landscape",
+    title: "Community park",
+    category: "Aerial",
     image: SITE_MEDIA.portfolio.parkPathways,
     location: "Southern California",
   },
   {
-    id: "jiufen-tea-house",
-    title: "Heritage Architecture — Jiufen",
-    category: "Photography",
-    image: SITE_MEDIA.portfolio.jiufenTeaHouse,
-    location: "Jiufen, Taiwan",
-  },
-  {
-    id: "moraine-lake",
-    title: "Moraine Lake — Sunrise Reflection",
-    category: "Photography",
-    image: SITE_MEDIA.portfolio.moraineLake,
-    location: "Banff, Canada",
-  },
-  {
-    id: "alpine-lake-island",
-    title: "Alpine Lake — Island Reflection",
-    category: "Photography",
-    image: SITE_MEDIA.portfolio.alpineLakeIsland,
-    location: "Canadian Rockies",
-  },
-  {
-    id: "monument-valley-road",
-    title: "Desert Road — Monument Valley",
-    category: "Photography",
-    image: SITE_MEDIA.portfolio.monumentValleyRoad,
-    location: "Monument Valley, AZ",
-  },
-  {
-    id: "misty-lake",
-    title: "Misty Lake — Kayak Morning",
-    category: "Photography",
-    image: SITE_MEDIA.portfolio.mistyLake,
-    location: "On Location",
-  },
-  {
-    id: "desert-arch",
-    title: "Canyon Arch — Desert Vista",
-    category: "Photography",
-    image: SITE_MEDIA.portfolio.desertArch,
-    location: "Utah Desert",
-  },
-  {
-    id: "maternity-portrait",
-    title: "Maternity Portrait — Forest Light",
-    category: "Photography",
-    image: SITE_MEDIA.portfolio.maternityPortrait,
-    location: "On Location",
+    id: "mountain-lake",
+    title: "High-desert aerial",
+    category: "Aerial",
+    image: SITE_MEDIA.portfolio.mountainLake,
+    location: "High Desert, CA",
   },
 ] as const;
 
-export const PORTFOLIO_FILTERS = [
-  "All",
-  "Real Estate",
-  "Commercial",
-  "Events",
-  "Landscape",
-  "Photography",
+export const PORTFOLIO_FILTERS = ["All", "Listings", "Aerial"] as const;
+
+export const CASE_STUDIES = [
+  {
+    title: "Aircraft listing",
+    body: "A written case study is added here after the owner approves public use. Tail numbers and model names stay off the site.",
+  },
+  {
+    title: "Home listing",
+    body: "A written case study is added here after the agent approves public use of the address and the photos.",
+  },
+  {
+    title: "FBO or hangar",
+    body: "A written case study is added here after the facility approves public use of the spaces.",
+  },
 ] as const;
 
 export const TECH_SPECS = [
   { label: "Flight Platform", value: "Professional Commercial UAS" },
   { label: "Certification", value: "FAA Part 107 Certificated Remote Pilot" },
-  { label: "Coverage Area", value: "Inland Empire · Corona · LA · Palm Springs · Joshua Tree" },
-  { label: "Deliverables", value: "4K Video · Aircraft & Listing Photo Sets · MLS-Ready Stills" },
+  { label: "Coverage Area", value: "Inland Empire · Corona · LA · Palm Springs · Joshua Tree · Temecula" },
+  { label: "Deliverables", value: "MLS-ready stills · 4K aerial video · Aircraft and facility sets" },
 ] as const;
 
 export const SERVICE_STANDARDS = [
@@ -169,11 +152,11 @@ export const SERVICE_STANDARDS = [
 
 export const FOOTER_LINKS = [
   { label: "Services", href: "/#services" },
-  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Service Area", href: "/service-area" },
   { label: "Blog", href: "/blog" },
-  { label: "About", href: "/#about" },
-  { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
 ] as const;

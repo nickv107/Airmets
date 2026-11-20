@@ -42,13 +42,13 @@ export function Services() {
           viewport={{ once: true }}
           className="font-display text-3xl font-bold sm:text-4xl md:text-5xl"
         >
-          Aviation, Listing & Aerial Media
+          Four ways to book Airmets
         </motion.h2>
         <p className="mx-auto mt-4 max-w-2xl text-air-muted">
-          Aircraft sales photography, real estate listings, FBO and hangar media, drone capture, and
-          marketing websites for clients across Southern California.
+          Aircraft for sale, real estate listings, and aviation facilities. Drone coverage supports
+          those jobs when the site can be flown.
         </p>
-        <nav aria-label="Jump to a service" className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <nav aria-label="Jump to a service" className="mx-auto mt-10 grid max-w-5xl gap-3 sm:grid-cols-2">
           {SERVICES.map((service, index) => (
             <a
               key={service.id}
@@ -66,7 +66,7 @@ export function Services() {
         </nav>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 sm:grid-cols-2 sm:px-6 sm:py-16 lg:grid-cols-3 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-12 sm:grid-cols-2 sm:px-6 sm:py-16 lg:px-8">
         {SERVICES.map((service, index) => (
           <article
             key={service.id}

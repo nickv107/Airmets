@@ -31,7 +31,7 @@ export function ContentPageLayout({
             ← {backLabel ?? BUSINESS.name}
           </Link>
           <Link
-            href="/#contact"
+            href="/contact"
             className="touch-target inline-flex items-center text-sm font-semibold text-air-silver transition hover:text-white"
           >
             Get Quote

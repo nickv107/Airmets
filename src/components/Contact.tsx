@@ -6,16 +6,22 @@ import { useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { ServiceAreaMap } from "@/components/ServiceAreaMap";
 import { BUSINESS } from "@/lib/legal";
-import { SERVICE_DETAILS } from "@/lib/services";
+import { QUOTE_SERVICES } from "@/lib/data";
 
 type FormStatus = "idle" | "submitting" | "success" | "error" | "mailto";
 
 export function Contact() {
   const searchParams = useSearchParams();
   const requestedService = searchParams.get("service");
-  const defaultService =
-    SERVICE_DETAILS.find((service) => service.title === requestedService)?.title ??
-    SERVICE_DETAILS[0].title;
+  const serviceAliases: Record<string, (typeof QUOTE_SERVICES)[number]> = {
+    "Real Estate Photography": "Real Estate Listing Media",
+    "Luxury Real Estate Aerial Tours": "Real Estate Listing Media",
+    "Website Development": "Website development (add-on)",
+  };
+  const requested =
+    (requestedService && serviceAliases[requestedService]) ||
+    QUOTE_SERVICES.find((service) => service === requestedService);
+  const defaultService = requested ?? QUOTE_SERVICES[0];
 
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -30,7 +36,7 @@ export function Contact() {
     service: string;
     message: string;
   }) => {
-    const subject = encodeURIComponent(`Airmets inquiry — ${payload.service}`);
+    const subject = encodeURIComponent(`Airmets inquiry: ${payload.service}`);
     const body = encodeURIComponent(
       `Name: ${payload.name}\nEmail: ${payload.email}\nPhone: ${payload.phone}\nService: ${payload.service}\n\nProject details:\n${payload.message}`,
     );
@@ -101,9 +107,10 @@ export function Contact() {
           className="mb-12 text-center"
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.3em] text-air-red">Contact</p>
-          <h2 className="font-display text-3xl font-bold sm:text-4xl">Launch Your Next Mission</h2>
+          <h2 className="font-display text-3xl font-bold sm:text-4xl">Tell us about the job</h2>
           <p className="mx-auto mt-4 max-w-xl text-air-muted">
-            Ready for a quote or booking? Tell us about your project and we&apos;ll respond within 24 hours.
+            Aircraft, a listing, a facility, or a drone pass. We reply about the quote, usually within one
+            business day.
           </p>
         </motion.div>
 
@@ -215,9 +222,9 @@ export function Contact() {
                     disabled={status === "submitting"}
                     className="field"
                   >
-                    {SERVICE_DETAILS.map((service) => (
-                      <option key={service.id} value={service.title}>
-                        {service.title}
+                    {QUOTE_SERVICES.map((service) => (
+                      <option key={service} value={service}>
+                        {service}
                       </option>
                     ))}
                   </select>

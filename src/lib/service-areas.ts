@@ -6,7 +6,7 @@ export type ServiceRegion = {
 };
 
 export const SERVICE_AREA_INTRO =
-  "Airmets provides aircraft listing photography, real estate photography, FBO and hangar media, and FAA Part 107–compliant drone photography across Southern California. Flight availability depends on FAA airspace rules, local ordinances, weather, property access, and permits for each location.";
+  "Airmets provides aircraft listing photography, real estate listing media, FBO and hangar photography, and FAA Part 107 drone work across Southern California. A flight depends on FAA airspace rules, local rules, weather, property access, and permits for that location.";
 
 export const SERVICE_REGIONS: ServiceRegion[] = [
   {

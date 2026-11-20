@@ -129,10 +129,10 @@ export function ServicePageLayout({ service, children }: ServicePageLayoutProps)
             </p>
             <div className="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
               <Link
-                href={`/?service=${encodeURIComponent(service.title)}#contact`}
+                href={`/contact?service=${encodeURIComponent(service.title)}`}
                 className="touch-target flex items-center justify-center rounded-full bg-air-red px-8 py-3 text-sm font-bold uppercase tracking-wider text-white shadow-[0_0_24px_rgba(255,0,0,0.35)] transition hover:bg-air-red-glow"
               >
-                Get Quote
+                Request a quote
               </Link>
               <Link
                 href={`tel:${BUSINESS.phoneTel}`}
