@@ -6,7 +6,7 @@ export const SITE_MEDIA = {
   heroVideos: [
     { src: "/videos/solar.mp4", holdMs: 5000 },
     { src: "/videos/drone-flying-up.mp4", holdMs: 5000 },
-    { src: "/videos/hillside-neighborhood.mp4", holdMs: 8000 },
+    { src: "/videos/hillside-neighborhood-2.mp4", holdMs: 9600 },
     { src: "/videos/baseball-game-high.mp4", holdMs: 3700 },
     { src: "/videos/park-roll.mp4", holdMs: 5000 },
     { src: "/videos/diamond-bar-ca.mp4", holdMs: 5000 },
